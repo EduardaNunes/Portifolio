@@ -1,0 +1,138 @@
+@font-face {
+    font-family: "Joystix Monospace";
+    src: url("Fonts/joystix\ monospace.ttf");
+    }
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Joystix Monospace';
+    color: var(--white);
+    text-align: center;
+}
+
+:root{
+    --white:#F9EFE4;
+    --black:#2D2C28;
+    --strong:cadetblue;
+    --btn_play:#B8AFA5;
+    --btn_play_border:#36332A;
+    --btn_play_shadow:#6D6964;
+    --btn_play_highlight:#E0D4C7;
+    --btn_play_shine:#EDEEE8;
+
+
+}
+
+body{
+    background-color: var(--strong);
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header{
+    width: 100%;
+    min-height: 100vh;
+    gap: 5em;
+
+}
+
+h1{
+    font-size: 4rem;
+}
+
+h2{
+    font-size: 1.4rem;
+}
+
+h3{
+    font-size: 1rem;
+}
+
+p{
+    font-size: 0.8rem;
+}
+
+strong{
+    color: var(--white);
+}
+
+.btn-play{
+    position: relative;
+    width: 220px;
+    background-color: var(--btn_play);
+    height: 110px;
+    box-shadow: 10px 0px var(--btn_play_border), -10px 0px var(--btn_play_border) ;
+}
+
+.btn-play::after{
+    content:'';
+    display: block;
+    position: absolute;
+    background-color: var(--btn_play_shadow);
+    width: 15px;
+    height: 110px;
+    right: -25px;
+    box-shadow: 10px 0px var(--btn_play_border);
+}
+
+.btn-play-center{
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    top:10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-play-center p{
+    font-size: 2.3rem;
+    text-shadow: -3px -3px var(--btn_play_border), -3px 3px var(--btn_play_border), 3px -3px var(--btn_play_border), 3px 3px var(--btn_play_border);
+}
+
+.border{
+    background-color: var(--btn_play_border);
+    width: 220px;
+    height: 10px;
+}
+
+.border-top{
+    position: absolute;
+    top:-10px;
+    box-shadow: 0px 10px var(--btn_play_highlight);
+
+}
+
+.border-top:after{
+    content:'';
+    display: block;
+    position: absolute;
+    background-color: var(--btn_play_border);
+    width: 25px;
+    height: 10px;
+    right: -25px;
+}
+
+.border-bottom{
+    position: absolute;
+    bottom:-10px;
+    box-shadow: 0px -10px var(--btn_play_shadow);
+}
+
+.border-bottom:after{
+    content:'';
+    display: block;
+    position: absolute;
+    background-color: var(--btn_play_border);
+    width: 25px;
+    height: 10px;
+    right: -25px;
+}
+
