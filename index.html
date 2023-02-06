@@ -1,43 +1,111 @@
 <!DOCTYPE html>
-<html lang="Pt-br">
+<html lang="Pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="portifolio.css" rel="stylesheet">
     <title>Eduarda Nunes - Portifólio</title>
+    <link rel="icon" href='/Imgs/Logo EN Black.png'>
 </head>
 <body class="">
 
     <nav>
-        <div>
+        <div class="btn btn-light-dark">
+            <div class="btn-border btn-border-top"></div>
+            <div class="btn-highlight"></div>
             
+            <div class="btn-center">
+
+                <div class="dark">
+                    <div class="btn-content flex-row language-pt">
+                        <img src="Imgs/Moon.ico">
+                        <p class="btn-light-dark-text">Escuro</p>
+                    </div>
+
+                    <div class="btn-content flex-row language-eng hide">
+                        <img src="Imgs/Moon.ico">
+                        <p class="btn-light-dark-text">Dark</p>
+                    </div>
+                </div>
+
+                <div class="light hide">
+                    <div class="btn-content flex-row language-pt">
+                        <img src="Imgs/Sun.ico">
+                        <p class="btn-light-dark-text">Claro</p>
+                    </div>
+
+                    <div class="btn-content flex-row language-eng hide">
+                        <img src="Imgs/Sun.ico">
+                        <p class="btn-light-dark-text">Light</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="btn-border btn-border-bottom"></div>
+        </div>
+
+        <div class="btn btn-language">
+            <div class="btn-border btn-border-top"></div>
+            <div class="btn-highlight"></div>
+
+            <div class="btn-center">
+
+                <div class="btn-content flex-row language-pt">
+                    <img alt="PixelArt do Território Brasileiro" src="Imgs/Brasil.ico">
+                    <p class="btn-language-text">Pt-pt</p>
+                </div>
+
+                <div class="btn-content flex-row language-eng hide">
+                    <img alt="PixelArt do Território Brasileiro" src="Imgs/USA.ico">
+                    <p class="btn-language-text">Eng</p>
+                </div>
+
+            </div>
+
+            <div class="btn-border btn-border-bottom"></div>
         </div>
     </nav>
 
     <header class="flex-column">
-        <div>
+        <div class="language-pt">
             <h2>Opa, bão? Meu nome é </h2>
             <h1>Eduarda Nunes</h1>
             <h2>E sou <strong>Desenvolvedora Front End</strong></h2>
         </div>
 
-        <div>
+        <div class="language-eng hide">
+            <h2>Hey! My Name is </h2>
+            <h1>Eduarda Nunes</h1>
+            <h2>I'm a <strong>Front End Developer</strong></h2>
+        </div>
+
+        <div class="language-pt">
             <h3>Clique no Play</h3>
             <p>Para conhecer mais sobre mim e o meu trabalho :)</p>
         </div>
+        
+        <div class="language-eng hide">
+            <h3>Click on Play</h3>
+            <p>To discover more about me and my work :)</p>
+        </div>
 
-        <div class="btn-play">
-            <div class="border border-top"></div>
-            <div class="btn-play-highlight"></div>
-            <div class="btn-play-center">
-                <p>PLAY</p>
+        <div class="btn btn-play">
+            <div class="btn-border btn-border-top"></div>
+            <div class="btn-highlight"></div>
+            <div class="btn-center">
+                <p>Play</p>
             </div>
-            <div class="border border-bottom"></div>
+            <div class="btn-border btn-border-bottom"></div>
         </div>
 
         <canvas></canvas>
         
     </header>
+
+    <script src="lightmode.js"></script>
+    <script src="language_switch.js"></script>
 </body>
 </html>
