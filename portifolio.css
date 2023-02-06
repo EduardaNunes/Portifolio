@@ -8,31 +8,41 @@
     padding: 0;
     border: 0;
     font-family: 'Joystix Monospace';
-    color: var(--white);
+    color: var(--text-color);
     text-align: center;
 }
 
 :root{
-    --white:#F9EFE4;
-    --black:#1a1917;
+    --text-color:#F9EFE4;
+    --bg-color:#1a1917;
     --strong:cadetblue;
-    --btn_text:var(--btn_play_highlight);
-    /* --btn_play:#B8AFA5; */
-    --btn_play:#9dc4cb;
-    /*--btn_play_border:#36332A;*/
-    --btn_play_border:#17616d;
-    /*--btn_play_shadow:#6D6964;*/
-    --btn_play_shadow:#6396a1;
-    /*--btn_play_highlight:#E0D4C7;*/
-    --btn_play_highlight:#cee3e6;
-    /* --btn_play_highlight2:#9b9187; */
-    --btn_play_highlight2:#8eb7c2; 
-    /* --btn_play_shine:#EDEEE8; */
-    --btn_play_shine:#ffffff; 
+    --btn-text:var(--btn-play-highlight);
+
+    --btn-play:#9dc4cb;
+    --btn-play-border:#17616d;
+    --btn-play-shadow:#6396a1;
+    --btn-play-highlight:#cee3e6;
+    --btn-play-highlight2:#8eb7c2; 
+    --btn-play-shine:#ffffff; 
+}
+
+.lightMode{
+    --bg-color:#F9EFE4;
+    --text-color:#1a1917;
+    --h1-color:cadetblue;
+    --strong:rgb(216, 127, 11);
+
+    --btn-play:#B8AFA5;
+    --btn-text:#F9EFE4;
+    --btn-play-border:#36332A;
+    --btn-play-shadow:#6D6964;
+    --btn-play-highlight:#E0D4C7;
+    --btn-play-highlight2:#9b9187;
+    --btn-play-shine:#FFFFFF;
 }
 
 body{
-    background-color: var(--black);
+    background-color: var(--bg-color);
 }
 
 .flex-column{
@@ -50,6 +60,7 @@ header{
 
 h1{
     font-size: 4rem;
+    color: var(--h1-color);
 }
 
 h2{
@@ -92,7 +103,7 @@ strong{
 }
 
 .btn-play-center{
-    background-color: var(--btn_play);
+    background-color: var(--btn-play);
     display: flex;
     position: relative;
     width: 220px;
@@ -101,28 +112,28 @@ strong{
     left:10px;
     align-items: center;
     justify-content: center;
-    box-shadow: 10px 0px var(--btn_play_border), -10px 0px var(--btn_play_border);
+    box-shadow: 10px 0px var(--btn-play-border), -10px 0px var(--btn-play-border);
 }
 
 .btn-play-center::after{
     content:'';
     display: block;
     position: absolute;
-    background-color: var(--btn_play_shadow);
+    background-color: var(--btn-play-shadow);
     width: 15px;
     height: 110px;
     right: -25px;
-    box-shadow: 10px 0px var(--btn_play_border);
+    box-shadow: 10px 0px var(--btn-play-border);
 }
 
 .btn-play-center p{
-    font-size: 2.3rem;
-    color: var(--btn_text);
-    text-shadow: -3px -3px var(--btn_play_border), -3px 3px var(--btn_play_border), 3px -3px var(--btn_play_border), 3px 3px var(--btn_play_border);
+    font-size: 2.5rem;
+    color: var(--btn-text);
+    text-shadow: -3px -3px var(--btn-play-border), -3px 3px var(--btn-play-border), 3px -3px var(--btn-play-border), 3px 3px var(--btn-play-border);
 }
 
 .border{
-    background-color: var(--btn_play_border);
+    background-color: var(--btn-play-border);
     width: 220px;
     height: 10px;
 }
@@ -132,14 +143,14 @@ strong{
     position: absolute;
     top:10px;
     left: 10px;
-    box-shadow: 0px 10px var(--btn_play_highlight);
+    box-shadow: 0px 10px var(--btn-play-highlight);
 }
 
 .border-top::after{
     content:'';
     display: block;
     position: absolute;
-    background-color: var(--btn_play_border);
+    background-color: var(--btn-play-border);
     width: 25px;
     height: 10px;
     right: -25px;
@@ -150,7 +161,7 @@ strong{
     position: absolute;
     width: 30px;
     height: 10px;
-    background-color: var(--btn_play_shine);
+    background-color: var(--btn-play-shine);
     top:20px;
     right:35px;
 }
@@ -159,7 +170,7 @@ strong{
     content: '';
     display: block;
     position: absolute;
-    background-color: var(--btn_play_shine);
+    background-color: var(--btn-play-shine);
     width: 10px;
     height: 10px; 
     left:-20px;
@@ -169,7 +180,7 @@ strong{
     content: '';
     display: block;
     position: absolute;
-    background-color: var(--btn_play_highlight2);
+    background-color: var(--btn-play-highlight2);
     width: 15px;
     height: 10px; 
     left:40px;
@@ -179,17 +190,24 @@ strong{
     position: absolute;
     bottom:10px;
     left: 10px;
-    box-shadow: 0px -10px var(--btn_play_shadow);
+    box-shadow: 0px -10px var(--btn-play-shadow);
 }
 
 .border-bottom::after{
     content:'';
     display: block;
     position: absolute;
-    background-color: var(--btn_play_border);
+    background-color: var(--btn-play-border);
     width: 25px;
     height: 10px;
     right: -25px;
-    box-shadow: 0px -10px var(--btn_play_border);
+    box-shadow: 0px -10px var(--btn-play-border);
+}
+
+canvas{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
 }
 
