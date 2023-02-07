@@ -264,6 +264,66 @@ strong::selection{
     box-shadow: 0px -10px var(--btn-play-border);
 }
 
+.clouds{
+    z-index: -1;
+    position: absolute;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.cloud{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color:#9b9187;
+    animation: updown 3s ease-in-out infinite, across 30s linear infinite;
+    border-radius: 50% 50% 0% 0;
+}
+.cloud::after{
+    content: '';
+    display:block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color:#9b9187 ;
+    border-radius: 50%;
+    bottom: 0;
+    left:-30px;
+}
+
+.cloud::before{
+    content: '';
+    display:block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color:#9b9187;
+    border-radius: 50%;
+    bottom: 0;
+    right:-30px;
+}
+
+ @keyframes updown{
+    0%{
+        transform:translateY(5vh) translateX(0);
+    }
+    50%{
+        transform:translateY(0vh) translateX(0);
+    }
+    100%{
+        transform:translateY(5vh) translateX(0);
+    }
+}
+
+@keyframes across{
+    0%{
+    }
+    100%{
+        transform:translateX(100vw)
+    }
+}
+
 main{
     display:none;
     background-color: #1a1917;
