@@ -26,7 +26,7 @@
     --btn-text:var(--btn-play-shine);
     --btn-play-border:#145053;
     --btn-play-shadow:#26696d;
-    --btn-play-highlight:#99C0C2;
+    --btn-play-highlight:#80bbbd;
     --btn-play-highlight2:#3a8386; 
     --btn-play-shine:#c6e2e4; 
 }
@@ -265,14 +265,16 @@ strong::selection{
 }
 
 main{
-    display:none;
-    background-color: #1a1917;
     width: 100%;
     height: 100vh;
 }
 
+canvas{
+    background-color: #145053;
+    width: 100%;
+    min-height: 100vh;
+}
 
 .hide{
     display: none;
 }
-

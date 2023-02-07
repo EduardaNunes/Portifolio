@@ -3,10 +3,10 @@ var btn_light_Dark = document.querySelector('.btn-light-dark');
 btn_light_Dark.addEventListener('click',lightMode);
 
 function lightMode(){
-    var light = document.querySelector('.light') 
-    var dark = document.querySelector('.dark')
+    var lightDark = document.querySelectorAll('.light, .dark') 
 
     document.body.classList.toggle('lightmode')
-    light.classList.toggle('hide')
-    dark.classList.toggle('hide')
+
+    for (var i = 0; i < lightDark.length; i++)
+    lightDark[i].classList.toggle('hide')
 }

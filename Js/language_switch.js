@@ -4,13 +4,9 @@ btn_lang.addEventListener('click',languageSwitch)
 
 function languageSwitch(){
 
-    var lang_pt = document.querySelectorAll('.language-pt')
-    var lang_eng = document.querySelectorAll('.language-eng')
-    var i = 0;
+    var languages = document.querySelectorAll('.language-pt, .language-eng')
 
-    while (i < lang_pt.length && i < lang_eng.length){
-    lang_pt[i].classList.toggle('hide')
-    lang_eng[i].classList.toggle('hide')
-    i++
+    for (var i = 0; i < languages.length; i++){
+    languages[i].classList.toggle('hide')
     }
 }
