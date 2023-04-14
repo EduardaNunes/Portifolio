@@ -51,6 +51,7 @@
 
 body{
     background-color: var(--bg-color);
+    overflow: hidden;
 }
 
 .flex-column{
@@ -99,7 +100,22 @@ nav{
 header{
     width: 100%;
     min-height: 90vh;
+    justify-content: space-evenly;
+}
+
+header img{
+    width: 300px;
+    animation: btn-play 3s infinite ease-in-out;
+    margin-bottom: 200px;
+}
+
+img::selection{
+    user-select: none;
+}
+
+.header-text{
     gap: 5em;
+    margin-right: 200px;
 }
 
 h1{
