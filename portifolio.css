@@ -28,7 +28,10 @@
     --btn-play-shadow:#26696d;
     --btn-play-highlight:#99C0C2;
     --btn-play-highlight2:#3a8386; 
-    --btn-play-shine:#c6e2e4; 
+    --btn-play-shine:#c6e2e4;
+
+    --cloud-img:url(Imgs/CloudBlack.png);
+    --profile-img:url(Imgs/ProfileBlack.png);
 }
 
 .lightmode{
@@ -47,6 +50,9 @@
     --btn-play-highlight:#E0D4C7;
     --btn-play-highlight2:#9b9187;
     --btn-play-shine:#FFFFFF;
+
+    --cloud-img:url(Imgs/CloudWhite.png);
+    --profile-img:url(Imgs/ProfileWhite.png);
 }
 
 body{
@@ -107,6 +113,7 @@ header img{
     width: 300px;
     animation: btn-play 3s infinite ease-in-out;
     margin-bottom: 200px;
+    content: var(--profile-img);
 }
 
 img::selection{
@@ -290,34 +297,11 @@ strong::selection{
 
 .cloud{
     position: absolute;
-    width: 80px;
-    height: 80px;
-    background-color:#9b9187;
-    animation: updown 3s ease-in-out infinite, across 30s linear infinite;
-    border-radius: 50% 50% 0% 0;
-}
-.cloud::after{
-    content: '';
-    display:block;
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background-color:#9b9187 ;
-    border-radius: 50%;
-    bottom: 0;
-    left:-30px;
-}
-
-.cloud::before{
-    content: '';
-    display:block;
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background-color:#9b9187;
-    border-radius: 50%;
-    bottom: 0;
-    right:-30px;
+    top:0;
+    left: -10vh;
+    width: 10vh;
+    animation: updown 3s ease-in-out infinite;
+    content: var(--cloud-img);
 }
 
  @keyframes updown{
@@ -336,7 +320,7 @@ strong::selection{
     0%{
     }
     100%{
-        transform:translateX(100vw)
+        transform:translateX(calc(100vw + 10vh))
     }
 }
 
@@ -346,7 +330,6 @@ main{
     width: 100%;
     height: 100vh;
 }
-
 
 .hide{
     display: none;
