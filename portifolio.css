@@ -298,10 +298,14 @@ strong::selection{
 .cloud{
     position: absolute;
     top:0;
-    left: -10vh;
     width: 10vh;
-    animation: updown 3s ease-in-out infinite;
     content: var(--cloud-img);
+    filter: opacity(0.9);
+}
+
+.cloud:nth-child(even){
+    width: 8vh;
+    filter: opacity(0.4);
 }
 
  @keyframes updown{
@@ -318,6 +322,7 @@ strong::selection{
 
 @keyframes across{
     0%{
+        transform: translateX(-100vw);
     }
     100%{
         transform:translateX(calc(100vw + 10vh))

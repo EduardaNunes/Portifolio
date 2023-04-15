@@ -1,15 +1,41 @@
 const cloudsSection = document.querySelector('.clouds')
+createClouds();
 
-for (var i = 0; i < 12; i++){
-    let cloudCreate = document.createElement('img');
-    cloudCreate.classList.add('cloud');
-    cloudsSection.appendChild(cloudCreate)
+function createClouds(){
 
-    var cloud = document.querySelectorAll('.cloud');
-    var randomAnimation = Math.floor(Math.random()*10)+ 25;
-    var randomPosition = Math.floor(Math.random()*101);
+    for (var i = 0; i < 12; i++){
 
-    cloud[i].style.top = (8.3*i) + 'vh';
-    cloud[i].style.left = randomPosition + 'vw';
-    cloud[i].style.animation = 'across ' + randomAnimation + 's linear infinite';
+        let cloudCreate = document.createElement('img');
+        cloudCreate.classList.add('cloud');
+        cloudsSection.appendChild(cloudCreate)
+    
+        let randomAnimation = Math.floor(Math.random()*20)+ 40;
+        let randomPosition = Math.floor(Math.random()*101);
+        let cloud = document.querySelectorAll('.cloud');
+    
+        cloud[i].style.top = (8.3*i) + 'vh';
+        cloud[i].style.left = randomPosition + 'vw';
+        cloud[i].style.animation = 'across ' + randomAnimation + 's linear infinite';
+    }
+
+    setInterval(comparePosition, 500);
+}
+
+function comparePosition(){
+
+    let cloud = document.querySelectorAll('.cloud');
+
+    for (var i = 0; i < 12; i++){
+        
+        let position = cloud[i].getBoundingClientRect();
+
+        if (position.right >= window.innerWidth + cloud[i].offsetWidth || position.right >= document.documentElement.clientWidth + cloud[i].offsetWidth){
+
+            let randomAnimation = Math.floor(Math.random()*20)+ 40;
+
+            cloud[i].style.animation = 'none';
+            cloud[i].offsetHeight; /* trigger reflow */
+            cloud[i].style.animation = 'across ' + randomAnimation + 's linear infinite';
+        }
+    }
 }
