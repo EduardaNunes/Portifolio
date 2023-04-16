@@ -3,6 +3,8 @@
     src: url("Fonts/joystix\ monospace.ttf");
     }
 
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -10,13 +12,14 @@
     font-family: 'Joystix Monospace';
     color: var(--text-color);
     text-align: center;
+    transition: background-color .5s ease-in-out;
 }
 
 :root{
     --bg-color:#1a1917;
     --text-color:#F9EFE4;
     --text-selection:cadetblue;
-    --h1-color:#F9EFE4;
+    --h1-color:rgb(241, 153, 37);
     --h1-selection:#5f9ea0;
     --strong:cadetblue;
     --strong-selection:#F9EFE4;
@@ -32,6 +35,8 @@
 
     --cloud-img:url(Imgs/CloudBlack.png);
     --profile-img:url(Imgs/ProfileBlack.png);
+    --light-switch-img:url(Imgs/SwitchBlack.png);
+    --switch-arrow-img:url(Imgs/ArrowBlack.png);
 }
 
 .lightmode{
@@ -40,7 +45,7 @@
     --text-selection:cadetblue;
     --h1-color:cadetblue;
     --h1-selection:#1a1917;
-    --strong:rgb(216, 127, 11);
+    --strong:#d87f0b;
     --strong-selection:#1a1917;
 
     --btn-play:#B8AFA5;
@@ -53,6 +58,8 @@
 
     --cloud-img:url(Imgs/CloudWhite.png);
     --profile-img:url(Imgs/ProfileWhite.png);
+    --light-switch-img:url(Imgs/SwitchWhite.png);
+    --switch-arrow-img:url(Imgs/ArrowWhite.png);
 }
 
 body{
@@ -83,7 +90,50 @@ nav{
     background-color:var(--nav-color);
 }
 
-.btn-language, .btn-light-dark{
+.light-switch-group{
+    gap:10px;
+}
+
+.switch-text p{
+    color: var(--strong);
+    font-size: 10px;
+}
+
+.switch-text img{
+    content: var(--switch-arrow-img);
+    width: 20px;
+    animation: arrow 2s ease-in-out infinite;
+}
+
+@keyframes arrow{
+    0%{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(4px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.light-dark-switch{
+    position: relative;
+    width: 20px;
+    height: 150px;
+    top:-50px;
+    content: var(--light-switch-img);
+}
+
+.light-dark-switch:hover{
+    cursor: grab;
+}
+
+.light-dark-switch:active{
+    cursor:grabbing;
+}
+
+.btn-language{
     transform: scale(0.5);
 }
 
@@ -98,7 +148,7 @@ nav{
     user-select: none;
 }
 
-.btn-light-dark-text, .btn-language-text{
+.btn-language-text{
     font-size: 1.7rem !important;
     user-select: none;
 }
@@ -293,6 +343,7 @@ strong::selection{
     top:0;
     width: 100vw;
     height: 100vh;
+    animation: updown 5s ease-in-out infinite;
 }
 
 .cloud{
@@ -310,13 +361,13 @@ strong::selection{
 
  @keyframes updown{
     0%{
-        transform:translateY(5vh) translateX(0);
+        transform:translateY(2vh) translateX(0);
     }
     50%{
         transform:translateY(0vh) translateX(0);
     }
     100%{
-        transform:translateY(5vh) translateX(0);
+        transform:translateY(2vh) translateX(0);
     }
 }
 

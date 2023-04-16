@@ -1,7 +1,4 @@
 const cloudsSection = document.querySelector('.clouds')
-createClouds();
-
-function createClouds(){
 
     for (var i = 0; i < 12; i++){
 
@@ -19,14 +16,14 @@ function createClouds(){
     }
 
     setInterval(comparePosition, 500);
-}
+
 
 function comparePosition(){
 
     let cloud = document.querySelectorAll('.cloud');
 
     for (var i = 0; i < 12; i++){
-        
+
         let position = cloud[i].getBoundingClientRect();
 
         if (position.right >= window.innerWidth + cloud[i].offsetWidth || position.right >= document.documentElement.clientWidth + cloud[i].offsetWidth){
