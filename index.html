@@ -4,35 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="portifolio.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
     <title>Eduarda Nunes - Portifólio</title>
     <link rel="icon" href='/Imgs/Logo EN Black.png'>
 </head>
 <body class="">
 
     <nav>
-
-        <div class="btn btn-language">
-            <div class="btn-border btn-border-top"></div>
-            <div class="btn-highlight"></div>
-
-            <div class="btn-center">
-
-                <div class="btn-content flex-row language-pt">
-                    <img alt="PixelArt do Território Brasileiro" src="Imgs/Brasil.ico">
-                    <p class="btn-language-text">Pt-br</p>
-                </div>
-
-                <div class="btn-content flex-row language-eng hide">
-                    <img alt="PixelArt do Território Brasileiro" src="Imgs/USA.ico">
-                    <p class="btn-language-text">Eng</p>
-                </div>
-
-            </div>
-
-            <div class="btn-border btn-border-bottom"></div>
-        </div>
-
         <div class="light-switch-group flex-row">
 
             <div class="switch-text flex-column">
@@ -46,13 +24,16 @@
             <img class="light-dark-switch" alt="Light Switch">
 
         </div>
-
-
     </nav>
 
     <header class="flex-row">
 
-        <img alt="My PixelArt Profile Image">
+        <div class="flex-column profile-group">
+            <img class='btn-language profile-pixelart' alt="My PixelArt Profile Image">
+            <img class="profile-arrow" alt="pixelart styled arrow pointing to my profile image">
+            <p class="language-pt">Clique aqui!</p>
+            <p class="language-eng hide">Click me!</p>
+        </div>
 
         <div class="header-text flex-column">
             <div class="language-pt">
@@ -77,23 +58,22 @@
                 <p>To discover more about me and my work :)</p>
             </div>
 
-            <div class="btn btn-play">
-                <div class="btn-border btn-border-top"></div>
-                <div class="btn-highlight"></div>
-                <div class="btn-center">
-                    <p>Play</p>
+            <button onclick="window.location.href='game.html'" class="btn-animation">
+                <div class="btn btn-play">
+                    <div class="btn-border btn-border-top"></div>
+                    <div class="btn-highlight"></div>
+                    <div class="btn-center">
+                        <p>Play</p>
+                    </div>
+                    <div class="btn-border btn-border-bottom"></div>
                 </div>
-                <div class="btn-border btn-border-bottom"></div>
-            </div>
+            </button>
+
         </div>
         
     </header>
 
         <section class="clouds"></section>
-
-    <main>
-        <canvas></canvas>
-    </main>
 
     <script src="Js/lightmode.js"></script>
     <script src="Js/language_switch.js"></script>

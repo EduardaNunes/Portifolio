@@ -1,4 +1,4 @@
-const images = ['Imgs/CloudBlack.png', 'Imgs/ProfileBlack.png', 'Imgs/SwitchBlack.png', 'Imgs/CloudWhite.png', 'Imgs/ProfileWhite.png', 'Imgs/SwitchWhite.png'];
+const images = ['Imgs/CloudBlack.png', 'Imgs/ProfileBlack.png', 'Imgs/SwitchBlack.png', 'Imgs/CloudWhite.png', 'Imgs/ProfileWhite.png', 'Imgs/SwitchWhite.png', 'Imgs/ArrowWhite.png', 'Imgs/ArrowBlack.png', 'Imgs/ProfileWhiteHover.png', 'Imgs/ProfileBlackHover.png'];
 
 images.forEach((imageUrl) => {
   const img = new Image();

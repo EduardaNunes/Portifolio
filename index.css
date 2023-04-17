@@ -8,7 +8,7 @@
 *{
     margin: 0;
     padding: 0;
-    border: 0;
+    border: none;
     font-family: 'Joystix Monospace';
     color: var(--text-color);
     text-align: center;
@@ -35,6 +35,7 @@
 
     --cloud-img:url(Imgs/CloudBlack.png);
     --profile-img:url(Imgs/ProfileBlack.png);
+    --profile-hover-imr:url(Imgs/ProfileBlackHover.png);
     --light-switch-img:url(Imgs/SwitchBlack.png);
     --switch-arrow-img:url(Imgs/ArrowBlack.png);
 }
@@ -58,6 +59,7 @@
 
     --cloud-img:url(Imgs/CloudWhite.png);
     --profile-img:url(Imgs/ProfileWhite.png);
+    --profile-hover-imr:url(Imgs/ProfileWhiteHover.png);
     --light-switch-img:url(Imgs/SwitchWhite.png);
     --switch-arrow-img:url(Imgs/ArrowWhite.png);
 }
@@ -82,12 +84,11 @@ body{
 
 nav{
     display: flex;
-    justify-content: space-around;
+    justify-content:end;
     align-items: center;
-    width: 100%;
+    width: 85%;
     height: 10vh;
     box-sizing: border-box;
-    background-color:var(--nav-color);
 }
 
 .light-switch-group{
@@ -159,15 +160,50 @@ header{
     justify-content: space-evenly;
 }
 
-header img{
+.profile-group{
+    gap: 1em;
+    margin-bottom: 10em;
+}
+
+.profile-pixelart{
     width: 300px;
     animation: btn-play 3s infinite ease-in-out;
-    margin-bottom: 200px;
+    margin-bottom: 1em;
     content: var(--profile-img);
 }
 
-img::selection{
+.profile-pixelart:hover{
+    content: var(--profile-hover-imr);
+    cursor: pointer;
+}
+
+.profile-pixelart::selection{
     user-select: none;
+}
+
+.profile-arrow{
+    content: var(--switch-arrow-img);
+    width: 15px;
+    width: 20px;
+    animation: arrow2 2s ease-in-out infinite;
+}
+
+.profile-group p{
+    color: var(--strong);
+    font-size: 10px;
+}
+
+
+@keyframes arrow2{
+    0%{
+        transform: translateY(0) rotate(-90deg);
+    }
+    50%{
+        transform: translateY(4px) rotate(-90deg);
+    }
+    100%{
+        transform: translateY(0) rotate(-90deg);
+    }
 }
 
 .header-text{
@@ -213,9 +249,9 @@ strong::selection{
     width: 265px;;
     height: 150px;
 }
-
-.btn-play{
+.btn-animation{
     animation: btn-play 2s infinite ease-in-out;
+    background-color: transparent;
 }
 
 @keyframes btn-play{
@@ -232,6 +268,7 @@ strong::selection{
 
 .btn-play:hover{
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 .btn-center{
@@ -378,13 +415,6 @@ strong::selection{
     100%{
         transform:translateX(calc(100vw + 10vh))
     }
-}
-
-main{
-    display:none;
-    background-color: #1a1917;
-    width: 100%;
-    height: 100vh;
 }
 
 .hide{
