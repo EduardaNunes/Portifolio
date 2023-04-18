@@ -1,6 +1,6 @@
 const cloudsSection = document.querySelector('.clouds')
 
-    for (var i = 0; i < 12; i++){
+    for (var i = 0; i < 20; i++){
 
         let cloudCreate = document.createElement('img');
         cloudCreate.classList.add('cloud');
@@ -10,7 +10,7 @@ const cloudsSection = document.querySelector('.clouds')
         let randomPosition = Math.floor(Math.random()*101);
         let cloud = document.querySelectorAll('.cloud');
     
-        cloud[i].style.top = (8.3*i) + 'vh';
+        cloud[i].style.top = ((100/20)*i) + 'vh';
         cloud[i].style.left = randomPosition + 'vw';
         cloud[i].style.animation = 'across ' + randomAnimation + 's linear infinite';
     }
