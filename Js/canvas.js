@@ -6,11 +6,20 @@ canvas.height = window.innerHeight
 
 const gravity = 0.5
 
+const playerImg = new Image()
+playerImg.src = '../Imgs/PlayerImg.png'
+
+const platformImg = new Image()
+platformImg.src = '../Imgs/PlatformImg.png'
+
+const teste = new Image()
+teste.src = '../Imgs/tileset_a.png'
+
 class Player {
     constructor(){
 
         this.position = {
-            x:100,
+            x:500,
             y:100
         }
 
@@ -19,14 +28,14 @@ class Player {
             y: 25
         }
 
+        this.image = playerImg
         this.width = 100
         this.height = 100
         this.jump = 0
     }
 
     draw(){
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
     }
 
     update() {
@@ -49,52 +58,107 @@ class Player {
 }
 
 class Platform {
-    constructor(){
-        this.position = {
-            x: 600,
-            y: 600
-        }
+    constructor({x, y, w , h}){
+        this.position = {x, y}
 
-        this.width = 400
-        this.height = 40
+        this.image = teste
+        this.width = w
+        this.height = h
     }
 
     draw(){
-        c.fillStyle = 'black'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.image, 0, 0, 800, 3200, this.position.x, this.position.y - 100, 100, 400)
+        c.drawImage(this.image, 800, 0, 800, 3200, this.position.x+100, this.position.y - 100, 100, 400)
+        c.drawImage(this.image, 800, 0, 800, 3200, this.position.x+200, this.position.y - 100, 100, 400)
+        c.drawImage(this.image, 800, 0, 800, 3200, this.position.x+300, this.position.y - 100, 100, 400)
+        c.drawImage(this.image, 800, 0, 800, 3200, this.position.x+400, this.position.y - 100, 100, 400)
+        c.drawImage(this.image, 1600, 0, 800, 3200, this.position.x+500, this.position.y - 100, 100, 400)
     }
 }
 
 const player = new Player()
-const platform = new Platform()
+
+const platforms = [
+
+    new Platform({
+        x:0, 
+        y:650, 
+        w:600, 
+        h:100
+    }), 
+    new Platform({
+        x:1000, 
+        y:650, 
+        w:600, 
+        h:100
+    }),
+    new Platform({
+        x:2000, 
+        y:650, 
+        w:600, 
+        h:100
+    }),
+    new Platform({
+        x:3000, 
+        y:650, 
+        w:600, 
+        h:100
+    }),   
+
+    ]
+
 const keys = {
     right: {
-        pressed: false
+        pressed: false,
     },
     left: {
-        pressed: false
+        pressed: false,
     },
     up: {
         pressed: false
+    },
+    speed: {
+        bonus: 1
     }
 }
+
+let mapScroll = 0
 
 // Essa função limpa o canvas para que não fique uma linha desenhada por onde o player passou visto que ele é redesenhado a cada update()
 
 function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
-    platform.draw()
+    platforms.forEach( (platform) => {
+        platform.draw()
+    })
     player.update()
 
     // Movimentação lateral do Player quando a tecla estiver pressionada e parando quando a mesma não está mais pressionada
 
-    if(keys.left.pressed == true){
-        player.velocity.x = -7
-    }else if(keys.right.pressed == true){
-        player.velocity.x = 7
+    if(keys.left.pressed == true && player.position.x >= canvas.width/5 ){
+        player.velocity.x = -7 *  keys.speed.bonus
+
+    }else if(keys.right.pressed == true && player.position.x <= canvas.width/2){
+        player.velocity.x = 7 *  keys.speed.bonus
+
     }else{
-        player.velocity.x = 0
+        player.velocity.x *= 0.5
+
+        if (keys.left.pressed == true) {
+
+            platforms.forEach((platform) => {
+                mapScroll += 7 * keys.speed.bonus
+                platform.position.x += 7 * keys.speed.bonus
+            })
+
+        }else if (keys.right.pressed == true) {
+
+            platforms.forEach((platform) => {
+                mapScroll -= 7 * keys.speed.bonus
+                platform.position.x -= 7 * keys.speed.bonus
+            })
+        }
     }
 
     // Permitindo apenas 1 Pulo por vez que é resetado quando encostado no chão ou em uma plataforma
@@ -106,10 +170,13 @@ function animate() {
 
     // Colizão com as plataformas de cima para baixo
 
-    if(player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width){
-        player.velocity.y = 0
-        player.jump = 0
-    }
+    platforms.forEach((platform) =>{
+        if(player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width){
+            player.velocity.y = 0
+            player.jump = 0
+        }
+    })
+
 }
 
 animate()
@@ -117,7 +184,6 @@ animate()
 // Com esses Event Listeners de Keydown e Keyup nós verificamos as teclas de movimentação do player
 
 window.addEventListener('keydown', ({keyCode}) => {
-    console.log(keyCode)
     
     switch (keyCode){
 
@@ -138,6 +204,11 @@ window.addEventListener('keydown', ({keyCode}) => {
         case 32:
         case 38:
             keys.up.pressed = true
+            break
+
+        // SPEED (SHIFT)
+        case 16:
+            keys.speed.bonus = 2
             break
     }
 })
@@ -163,6 +234,11 @@ window.addEventListener('keyup', ({keyCode}) => {
         case 32:
         case 38:
             keys.up.pressed = false
+            break
+
+        // SPEED (SHIFT)
+        case 16:
+            keys.speed.bonus = 1
             break
     }
 })
