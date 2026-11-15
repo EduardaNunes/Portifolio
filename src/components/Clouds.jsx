@@ -15,7 +15,7 @@ function createClouds() {
 }
 
 export default function Clouds() {
-  // Inicializador "lazy": as nuvens são sorteadas só uma vez.
+
   const [clouds] = useState(createClouds)
 
   return (
