@@ -2,25 +2,25 @@
 
 ## Purpose
 
-Renders the notebook component with page-turning animations, left sidebar navigation markers that toggle invisibility on selection, right category tabs for project filtering, and swipe gesture support for page flipping. Each page occupies exactly 100% viewport width (100vw) in a horizontal flex container, with the About Me initial page showing its content areas side-by-side within the single viewport after opening.
+Renders the notebook component with page-turning animations, left sidebar navigation markers that toggle invisibility on selection, right category tabs for project filtering, and swipe gesture support for page flipping. Each page occupies approximately 80% viewport width (80vw) in a centered container that maintains aspect ratio (~80vw by ~80vh max-height), without distortion on wide or narrow screens. The About Me initial page shows its content areas side-by-side within the single centered page after opening.
 
 ## ADDED Requirements
 
 ### Requirement: Notebook layout structure
 **When** the notebook component renders  
-**THEN** it displays pages in a horizontal flex container where each page occupies exactly 100% of viewport width (100vw) and the content height (minus header space)  
+**THEN** it displays pages in a horizontal flex container where each page occupies approximately 80% of viewport width (max-width: 80vw) and maintains aspect ratio, centered within a container that has ~80% dimensions (~80vw max-width by ~80vh max-height), without distortion on wide or narrow screens
 
 #### Scenario: Single page view
 - **WHEN** only one page exists or current page is first/last in navigation order
-- **THEN** notebook displays single centered page with no side pages visible
+- **THEN** notebook displays single centered page with no side pages visible, maintaining the 80% container aspect ratio
 
 #### Scenario: Multiple adjacent pages
 - **WHEN** current page has both previous and next siblings
-- **THEN** each page is sized exactly to fill viewport width with no gaps or overlaps
+- **THEN** each page is sized to fill 80vw of container width with no gaps or overlaps
 
 #### Scenario: About Me page layout after opening
 - **WHEN** notebook opens to first page ("Sobre Mim" / "About Me")
-- **THEN** the page displays with left and right content areas visible side-by-side within the single 100vw page, showing combined skills/soft-skills/results content across both visual regions
+- **THEN** the page displays with left and right content areas visible side-by-side within the single centered 80vw page, showing combined skills/soft-skills/results content across both visual regions
 
 ### Requirement: Notebook starts closed, opens on click in second section
 **When** the notebook component renders  

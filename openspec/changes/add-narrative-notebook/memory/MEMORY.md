@@ -1,0 +1,1 @@
+- [centered-notebook-layout](notebook-component/spec.md) — Notebook dimensionado para ~80% da tela com aspect ratio preservado

@@ -25,8 +25,8 @@ See [proposal.md](../proposal.md) - Why for motivation. The current portfolio ha
 **Rationale**: Native browser API, no dependencies, handles momentum scrolling naturally. Alternatives (IntersectionObserver for scroll detection) would add complexity without improving user experience.
 
 ### Page Layout Structure
-**Decision**: Each page = exactly 100% viewport width, rendered horizontally in flex container  
-**Rationale**: Ensures consistent full-screen snap behavior and predictable animations. Alternative: single-page scrolls would break the notebook metaphor.
+**Decision**: Notebook container centers at ~80% viewport dimensions (max-width: 80vw, max-height: 80vh) maintaining aspect ratio; each page within = 100% of container width  
+**Rationale**: Provides a more readable presentation that doesn't dominate the entire screen while preserving consistent behavior. Alternative: full-screen pages would feel overwhelming on wide screens and not preserve proportional balance.
 
 ### Marker Visibility Toggle Pattern
 **Decision**: Only ONE marker invisible at a time - the current page's marker, all others visible  
@@ -37,8 +37,8 @@ See [proposal.md](../proposal.md) - Why for motivation. The current portfolio ha
 **Rationale**: Follows common UI patterns for action buttons (top-right for secondary actions), maintains visual hierarchy on demo pages. Alternative: bottom-left would compete with corner navigation zone.
 
 ### Navigation via Corner Clicks
-**Decision**: Left 15% × bottom 60px = previous page, Right 15% × bottom 60px = next page  
-**Rationale**: Clear affordance that doesn't interfere with content (top portion displays projects/contacts), respects viewport boundaries. Alternative: full-edge detection would be fragile across different device sizes.
+**Decision**: Left 15% of notebook width × bottom 60px = previous page, Right 15% of notebook width × bottom 60px = next page  
+**Rationale**: Clear affordance relative to the centered notebook container that doesn't interfere with content (top portion displays projects/contacts), respects container boundaries within ~80% viewport. Alternative: full-screen edge detection would need to account for new centered layout.
 
 ### Two-Page Project Layout
 **Decision**: Left page = metadata (title, description, tech stack, repo link); Right page = demo (video/image thumbnail + PLAY button overlay + EXPLICIT DEPLOY LINK)  
@@ -61,10 +61,10 @@ See [proposal.md](../proposal.md) - Why for motivation. The current portfolio ha
 ## Migration Plan
 
 ### Deployment Steps
-1. Create new React components in `src/components/NarrativeNotebook.jsx` and sub-components
-2. Update `App.jsx` to include scroll container and notebook section below Clouds component
+1. Create new React components in `src/components/NarrativeNotebook.jsx` with centered ~80% container and sub-components
+2. Update `App.jsx` to include scroll container with `scroll-snap-type: y mandatory` and notebook section below Clouds component
 3. Create project data structure in `src/data/projects.js` with category assignments
-4. Style notebook container with CSS scroll-snap and page animations (CSS module or styled-component)
+4. Style notebook container with CSS scroll-snap, centered layout (max-width: 80vw, max-height: 80vh), and page animations (CSS module or styled-component)
 5. Update translations for new content areas if needed
 
 ### Rollback Strategy
