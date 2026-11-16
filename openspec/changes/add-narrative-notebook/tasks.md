@@ -13,9 +13,9 @@
 
 ## 2. Data Structure
 
-- [ ] 2.1 Create `src/data/projects.js` with project array containing: id, title, description, tech stack tags, repo link, thumbnailUrl, deployUrl, categoryId
-- [ ] 2.2 Define categories: IA e Automações, Jogos, WebDev, BackEnd with their respective projects
-- [ ] 2.3 Add translation keys for new content (Sobre Mim, Carreira, Estudos, Projetos, Contato markers and tooltips)
+- [x] 2.1 Create `src/data/projects.js` with project array containing: id, title, description, tech stack tags, repo link, thumbnailUrl, deployUrl, categoryId
+- [x] 2.2 Define categories: IA e Automações, Jogos, WebDev, BackEnd with their respective projects
+- [x] 2.3 Add translation keys for new content (Sobre Mim, Carreira, Estudos, Projetos, Contato markers and tooltips)
 
 ## 3. Styling
 
