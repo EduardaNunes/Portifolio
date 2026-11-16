@@ -30,5 +30,5 @@
 ## 5. Integration verification
 
 - [x] 5.1 Run `npm run build` and fix any build failures; verify the production build completes successfully.
-- [ ] 5.2 Manually validate both themes on desktop and the established narrow viewport: approved palette compliance, instant active/inactive tab placement, black icons, keyboard focus, category filtering with page turns, page-turn sound, corner-arrow navigation, reduced motion, long-content reading, and project/contact actions.
+- [x] 5.2 Manually validate both themes on desktop and the established narrow viewport: approved palette compliance, instant active/inactive tab placement, black icons, keyboard focus, category filtering with page turns, page-turn sound, corner-arrow navigation, reduced motion, long-content reading, and project/contact actions.
 - [x] 5.3 Run `openspec validate refine-notebook-page-stack --strict` and resolve all validation errors and warnings.
