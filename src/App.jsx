@@ -4,6 +4,7 @@ import HeaderText from './components/HeaderText'
 import LightSwitch from './components/LightSwitch'
 import ProfileGroup from './components/ProfileGroup'
 import Notebook from './components/narrative-notebook-component/NarrativeNotebook'
+import VolumeControlButton from './components/VolumeControlButton'
 import { useLanguage } from './hooks/useLanguage'
 import { useSectionSnap } from './hooks/useSectionSnap'
 import { useTheme } from './hooks/useTheme'
@@ -39,23 +40,26 @@ export default function App() {
   }
 
   return (
-    <div className={`app-scroll${isUnlocked ? '' : ' is-scroll-locked'}`} ref={scrollRef}>
-      <section className="hero-section" data-snap-section>
-        <nav><LightSwitch hint={texts.switchHint} onToggle={toggleTheme} /></nav>
-        <header className="flex-row">
-          <ProfileGroup hint={texts.profileHint} onClick={toggleLanguage} isLightMode={isLightMode} />
-          <HeaderText texts={texts} onPlay={openNotebook} />
-        </header>
-        <Clouds />
-      </section>
-      <Notebook
-        markers={notebook.markers}
-        spreads={notebook.spreads}
-        isOpen={isOpen}
-        previousLabel={content.labels.ui.previous}
-        nextLabel={content.labels.ui.next}
-        sectionsLabel={content.labels.ui.sectionsLabel}
-      />
-    </div>
+    <>
+      <VolumeControlButton />
+      <div className={`app-scroll${isUnlocked ? '' : ' is-scroll-locked'}`} ref={scrollRef}>
+        <section className="hero-section" data-snap-section>
+          <nav><LightSwitch hint={texts.switchHint} onToggle={toggleTheme} /></nav>
+          <header className="flex-row">
+            <ProfileGroup hint={texts.profileHint} onClick={toggleLanguage} isLightMode={isLightMode} />
+            <HeaderText texts={texts} onPlay={openNotebook} />
+          </header>
+          <Clouds />
+        </section>
+        <Notebook
+          markers={notebook.markers}
+          spreads={notebook.spreads}
+          isOpen={isOpen}
+          previousLabel={content.labels.ui.previous}
+          nextLabel={content.labels.ui.next}
+          sectionsLabel={content.labels.ui.sectionsLabel}
+        />
+      </div>
+    </>
   )
 }

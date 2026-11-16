@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { SWITCH_SOUND_URL } from '../data/constants'
 
 const RESTING_TOP = -50 // px, posição de repouso do interruptor
 const MAX_PULL = 70 // px, o quanto dá para puxar para baixo
@@ -7,17 +6,13 @@ const TOGGLE_PULL = 50 // px, puxão mínimo para acionar
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
-function playSwitchSound() {
-  new Audio(SWITCH_SOUND_URL).play().catch(() => {
-    /* o navegador pode bloquear áudio; o tema deve mudar mesmo assim */
-  })
-}
-
 /**
  * Controla o arrasto vertical do interruptor.
- * Ao soltar após puxar o suficiente, chama `onToggle` e volta ao repouso.
+ * Ao soltar após puxar o suficiente, chama `onToggle` e `onToggleSound` (se fornecido), e volta ao repouso.
+ * @param {Function} onToggle - Callback quando o toggle é acionado
+ * @param {Function} [onToggleSound] - Callback opcional para tocar som do toggle
  */
-export function useDraggableSwitch(onToggle) {
+export function useDraggableSwitch(onToggle, onToggleSound) {
   const [top, setTop] = useState(RESTING_TOP)
   const [isDragging, setIsDragging] = useState(false)
   const startY = useRef(0)
@@ -40,7 +35,9 @@ export function useDraggableSwitch(onToggle) {
     const handleRelease = () => {
       if (pull.current >= TOGGLE_PULL) {
         onToggle()
-        playSwitchSound()
+        if (onToggleSound) {
+          onToggleSound()
+        }
       }
       setIsDragging(false)
       setTop(RESTING_TOP)
@@ -55,7 +52,7 @@ export function useDraggableSwitch(onToggle) {
       document.removeEventListener('pointerup', handleRelease)
       document.body.style.cursor = ''
     }
-  }, [isDragging, onToggle])
+  }, [isDragging, onToggle, onToggleSound])
 
   return { top, startDragging }
 }

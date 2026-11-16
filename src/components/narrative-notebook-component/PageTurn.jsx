@@ -15,12 +15,21 @@
  */
 import React, { useEffect, useRef } from 'react'
 import { PAGE_TURN_SOUND_URL } from '../../data/constants'
+import { useAudioManager } from '../../context/AudioManagerContext'
 
 const TURN_EASING = 'cubic-bezier(0.45, 0, 0.15, 1)'
 
 export default function PageTurn({ front, back, direction, duration = 420, onFinish }) {
   const turnRef = useRef(null)
   const onFinishRef = useRef(onFinish)
+  const { registerSound, unregisterSound } = useAudioManager()
+
+  // Register page turn sound effect
+  const playPageTurn = useRef(null)
+  useEffect(() => {
+    playPageTurn.current = registerSound('page-turn', PAGE_TURN_SOUND_URL, 'sfx')
+    return () => unregisterSound('page-turn')
+  }, [registerSound, unregisterSound])
 
   useEffect(() => {
     onFinishRef.current = onFinish
@@ -68,11 +77,10 @@ export default function PageTurn({ front, back, direction, duration = 420, onFin
     )
     animation.onfinish = finish
 
-    // Play page turn sound at the start of the animated turn
-    const audio = new Audio(PAGE_TURN_SOUND_URL)
-    audio.play().catch(() => {
-      /* ignore autoplay/permission errors */
-    })
+    // Play page turn sound at the start of the animated turn via AudioManager
+    if (playPageTurn.current) {
+      playPageTurn.current()
+    }
 
     return () => animation.cancel()
   }, [direction, duration])
