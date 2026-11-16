@@ -94,22 +94,6 @@ The system SHALL change the volume button icon to a crossed-out speaker (mute ic
 - **WHEN** either Background Music or Sound Effects slider is above 0%
 - **THEN** the volume button displays a regular speaker icon
 
-### Requirement: Volume sliders use theme-appropriate colors
-
-The system SHALL render volume sliders with blue accent color in dark mode and orange accent color in light mode.
-
-#### Scenario: Slider color in dark mode
-- **WHEN** theme is dark mode
-- **THEN** volume slider tracks and thumbs use blue accent color
-
-#### Scenario: Slider color in light mode
-- **WHEN** theme is light mode
-- **THEN** volume slider tracks and thumbs use orange accent color
-
-#### Scenario: Slider color updates on theme toggle
-- **WHEN** user toggles theme while volume panel is open
-- **THEN** slider colors update immediately to match new theme
-
 ### Requirement: Volume settings persist across page loads
 
 The system SHALL save volume settings to localStorage and restore them on page load.
@@ -145,21 +129,3 @@ The system SHALL provide a registration API that allows new sounds/music to be a
 #### Scenario: Unregister sound removes it from volume control
 - **WHEN** a component unregisters a sound
 - **THEN** the sound no longer responds to volume changes
-
-## MODIFIED Requirements
-
-### Requirement: Page turn sound plays at controlled volume
-
-The narrative notebook component SHALL play page turn sounds through the Audio Manager at the current Sound Effects volume level.
-
-#### Scenario: Page turn uses Audio Manager
-- **WHEN** user turns a page in the notebook
-- **THEN** the page turn sound is played via Audio Manager with "sfx" category at current SFX volume
-
-### Requirement: Theme toggle sound plays at controlled volume
-
-The light switch component SHALL play the toggle sound through the Audio Manager at the current Sound Effects volume level.
-
-#### Scenario: Theme toggle uses Audio Manager
-- **WHEN** user toggles theme via light switch
-- **THEN** the switch sound is played via Audio Manager with "sfx" category at current SFX volume

@@ -351,3 +351,11 @@ The previous and next corner controls MUST retain their existing navigation beha
 #### Scenario: Approved palette only
 - **WHEN** the cover and page stack are inspected in either theme
 - **THEN** every opaque interface color used is listed in the documented approved palette
+
+### Requirement: Page turn sound plays at controlled volume
+
+The narrative notebook component SHALL play page turn sounds through the Audio Manager at the current Sound Effects volume level.
+
+#### Scenario: Page turn uses Audio Manager
+- **WHEN** user turns a page in the notebook
+- **THEN** the page turn sound is played via Audio Manager with "sfx" category at current SFX volume
