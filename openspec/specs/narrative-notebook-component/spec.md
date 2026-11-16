@@ -26,8 +26,8 @@ The notebook MUST render as an open double-page spread inside a centered contain
 
 ### Requirement: Notebook starts closed, opens on click in second section
 **When** the notebook component renders  
-**THEN** it MUST start collapsed (not displaying any pages) until Play button triggers auto-scroll  
-**WHEN** Play is clicked and auto-scroll animation completes  
+**THEN** it MUST start collapsed (not displaying any pages) until the start control triggers auto-scroll  
+**WHEN** start is activated and auto-scroll animation completes  
 **THEN** notebook MUST open by flipping to first spread ("Sobre Mim" / About Me), displaying its two facing leaves
 
 #### Scenario: Notebook initially closed
@@ -35,7 +35,7 @@ The notebook MUST render as an open double-page spread inside a centered contain
 - **THEN** notebook area shows collapsed state (no leaves or tabs rendered)
 
 #### Scenario: Notebook opens on first play click
-- **WHEN** Play button clicked and scroll snap completes at second section
+- **WHEN** start is activated and scroll snap completes at second section
 - **THEN** notebook flips open to display the "Sobre Mim" spread with left/right content areas after the flip animation completes
 
 ### Requirement: Shared mirrored page tab component
@@ -154,7 +154,7 @@ The left and right sides of the notebook MUST act as pixel-art cover boards usin
 - **THEN** the cover boards and intervening page stacks remain visible on both sides of the white leaves
 
 #### Scenario: Closed notebook keeps the cover
-- **WHEN** the notebook is closed before Play
+- **WHEN** the notebook is closed before start
 - **THEN** the collapsed notebook still presents the pixel-art cover in the current theme colors
 
 #### Scenario: No new colors
@@ -325,7 +325,6 @@ Project-category markers MUST use the same forward/backward page-turn transactio
 - **THEN** the selected category remains active and the project spread reflects that category's filtered content
 
 ### Requirement: Corner navigation uses directional arrow affordances
-
 The previous and next corner controls MUST retain their existing navigation behavior, localized accessible names, and first/last-page disabled limits. Their hover treatment MUST use the existing arrow artwork instead of a dark rectangular hover fill. The left affordance MUST point left, the right affordance MUST point right, and each MUST scale up slightly on hover or keyboard focus.
 
 #### Scenario: Directional corner affordances
@@ -341,7 +340,7 @@ The previous and next corner controls MUST retain their existing navigation beha
 - **THEN** the unavailable previous or next control remains non-operable and its directional affordance is not presented as available
 
 #### Scenario: Closed notebook keeps the cover
-- **WHEN** the notebook is closed before Play
+- **WHEN** the notebook is closed before start
 - **THEN** the collapsed notebook still presents the pixel-art cover in the current theme colors
 
 #### Scenario: No new colors
@@ -353,7 +352,6 @@ The previous and next corner controls MUST retain their existing navigation beha
 - **THEN** every opaque interface color used is listed in the documented approved palette
 
 ### Requirement: Page turn sound plays at controlled volume
-
 The narrative notebook component SHALL play page turn sounds through the Audio Manager at the current Sound Effects volume level.
 
 #### Scenario: Page turn uses Audio Manager

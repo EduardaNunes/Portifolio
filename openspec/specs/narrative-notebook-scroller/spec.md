@@ -6,11 +6,11 @@ Controls the two-section scroll experience: the document stays locked until the 
 ## Requirements
 
 ### Requirement: Auto-scroll on play button click with full-snap transition
-**When** user clicks the Play button in the header section  
+**When** user clicks the start control in the header section  
 **Then** the document MUST unlock and the page MUST scroll downward by exactly 100vh to the notebook content section, using smooth ease-out transition (300-500ms duration), snapping to viewport boundary so only ONE section is visible at a time - never overlapping  
 
 #### Scenario: Initial scroll to content section
-- **WHEN** the page has only the header/clouds section visible and user clicks Play
+- **WHEN** the page has only the header/clouds section visible and user clicks start
 - **THEN** the document unlocks and viewport scrolls down 100vh to reveal the top of the notebook content section, with snap ensuring full-screen transition
 
 #### Scenario: Scroll transition completes at boundary
@@ -22,23 +22,23 @@ Controls the two-section scroll experience: the document stays locked until the 
 - **THEN** only one section is ever fully visible; previous section fades out before new one fades in
 
 ### Requirement: Initial scroll lock until Play
-Before the first Play activation, the document MUST NOT scroll in any direction. Play is the only entry point to the content section. After the first activation, scrolling stays unlocked for the rest of the session.
+Before the first start activation, the document MUST NOT scroll in any direction. Start is the only entry point to the content section. After the first activation, scrolling stays unlocked for the rest of the session.
 
 #### Scenario: Page loads locked at the top
 - **WHEN** the page loads for the first time
 - **THEN** the document is positioned at the top and attempts to scroll with wheel, keyboard or touch do not move it
 
 #### Scenario: Play unlocks scrolling
-- **WHEN** the user clicks Play for the first time
+- **WHEN** the user clicks start for the first time
 - **THEN** scrolling is unlocked and the page scrolls to the notebook section
 
 #### Scenario: Unlocked scrolling is permanent for the session
 - **WHEN** the user scrolls back up to the header after opening the notebook
-- **THEN** the page can scroll down and up again as many times as desired, without pressing Play again
+- **THEN** the page can scroll down and up again as many times as desired, without pressing start again
 
 #### Scenario: Reload restores the lock
 - **WHEN** the page is reloaded
-- **THEN** the document starts locked at the top until Play is clicked again
+- **THEN** the document starts locked at the top until start is clicked again
 
 ### Requirement: Viewport snap scrolling
 **When** user scrolls or programmatically scrolls the page  
@@ -80,7 +80,7 @@ The document scroll container MUST hide its scrollbars at all times, MUST clip h
 - **THEN** the document does not move sideways and the vertical snap remains intact
 
 ### Requirement: Mouse wheel moves one section per gesture
-When the document is unlocked, a mouse-wheel gesture MUST move to the next or previous section using the same smooth movement as Play. A gesture moves exactly one section, and a leaf that can still scroll in that direction keeps its internal scroll until the leaf reaches its edge.
+When the document is unlocked, a mouse-wheel gesture MUST move to the next or previous section using the same smooth movement as start. A gesture moves exactly one section, and a leaf that can still scroll in that direction keeps its internal scroll until the leaf reaches its edge.
 
 #### Scenario: Wheel down advances one section
 - **WHEN** the user performs a downward wheel gesture on the header or on a leaf already at its bottom edge
