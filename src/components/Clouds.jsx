@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { randomInt } from '../utils/random'
 
-const CLOUD_COUNT = 20
+const CLOUD_COUNT = 35
 const MIN_DURATION_S = 40
 const MAX_DURATION_S = 59
 
 function createClouds() {
   return Array.from({ length: CLOUD_COUNT }, (_, index) => ({
     id: index,
-    top: `${(100 / CLOUD_COUNT) * index}vh`,
+    top: `${(200 / CLOUD_COUNT) * index}vh`,
     left: `${randomInt(0, 100)}vw`,
     animation: `across ${randomInt(MIN_DURATION_S, MAX_DURATION_S)}s linear infinite`,
   }))

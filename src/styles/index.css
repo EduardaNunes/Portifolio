@@ -436,7 +436,7 @@ header {
   position: absolute;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
   animation: updown 5s ease-in-out infinite;
 }
 

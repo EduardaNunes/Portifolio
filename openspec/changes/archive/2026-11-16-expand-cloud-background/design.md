@@ -22,8 +22,8 @@ The cloud background is currently implemented in `src/components/Clouds.jsx` and
 
 - **Change `.clouds` height from `100vh` to `200vh`**: This extends the cloud layer to cover approximately two viewport heights, sufficient to span the header and notebook sections. The exact height may need adjustment based on total document height.
 - **Keep `position: absolute; top: 0; width: 100vw`**: Maintain the existing positioning strategy so clouds remain fixed at the top of the document and span full width.
-- **Adjust cloud top positions**: The individual cloud `top` values in `Clouds.jsx` are calculated as `${(100 / CLOUD_COUNT) * index}vh`. With the extended height, these will naturally distribute clouds across the taller background.
-- **No change to cloud count**: Keep `CLOUD_COUNT = 20` to maintain the same visual density; clouds will be spread across a taller area.
+- **Adjust cloud top positions**: The individual cloud `top` values in `Clouds.jsx` are calculated as `${(200 / CLOUD_COUNT) * index}vh`. With CLOUD_COUNT increased to 35, each cloud spans approximately 5.7vh, maintaining good distribution across the extended height.
+- **Change cloud count from 20 to 35**: Increase cloud count to 35 to maintain visual density across the extended 200vh height. With 35 clouds spread across 200vh, each cloud spans approximately 5.7vh, providing better coverage than 20 clouds across the same height.
 
 ## Risks / Trade-offs
 
