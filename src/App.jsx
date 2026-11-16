@@ -18,7 +18,7 @@ export default function App() {
 
   const content = profileData[language]
 
-  const pages = useMemo(
+  const spreads = useMemo(
     () => buildNotebookPages({ content, projects, activeCategory }),
     [content, activeCategory],
   )
@@ -71,7 +71,7 @@ export default function App() {
       </section>
 
       <Notebook
-        pages={pages}
+        spreads={spreads}
         sections={sections}
         categories={categories}
         activeCategory={activeCategory}

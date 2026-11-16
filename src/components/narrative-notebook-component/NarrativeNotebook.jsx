@@ -1,13 +1,13 @@
 /**
  * NarrativeNotebook Component
  *
- * Renders a centered notebook (about 80vw x 80vh) with a horizontal track of
- * pages. Each page is a snap point; navigation happens through the left
- * section markers, the right category tabs (Projects only) or the bottom
- * corner zones.
+ * Renders a centered notebook (about 80vw x 80vh) as an open book: the
+ * horizontal track holds one spread per view, and each spread shows two
+ * facing leaves (left and right). Navigation happens through the left section
+ * markers, the right category tabs (Projects only) or the bottom corner zones.
  *
  * @param {Object} props
- * @param {Array} props.pages Flat page descriptors: { id, section, element }
+ * @param {Array} props.spreads Spread descriptors: { id, section, left, right }
  * @param {Array} props.sections Left marker descriptors: { id, label }
  * @param {Array} props.categories Right category tabs: { id, label, count }
  * @param {string|null} props.activeCategory
@@ -22,7 +22,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import ProjectsSection from './ProjectsSection'
 
 const NarrativeNotebook = ({
-  pages = [],
+  spreads = [],
   sections = [],
   categories = [],
   activeCategory = null,
@@ -33,40 +33,40 @@ const NarrativeNotebook = ({
   nextLabel = 'Próxima página',
   emptyCategoryLabel = 'Nenhum projeto nesta categoria',
 }) => {
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentSpread, setCurrentSpread] = useState(0)
   const [direction, setDirection] = useState(null)
   const previousCategory = useRef(activeCategory)
-  const totalPages = pages.length
-  const safePage = totalPages === 0 ? 0 : Math.min(currentPage, totalPages - 1)
-  const current = pages[safePage]
+  const totalSpreads = spreads.length
+  const safeSpread = totalSpreads === 0 ? 0 : Math.min(currentSpread, totalSpreads - 1)
+  const current = spreads[safeSpread]
   const currentSection = current?.section
   const isProjects = currentSection === 'projects'
 
-  const goToPage = useCallback(
+  const goToSpread = useCallback(
     (index) => {
-      if (totalPages === 0) return
-      const clamped = Math.max(0, Math.min(index, totalPages - 1))
-      if (clamped === safePage) return
-      setDirection(clamped > safePage ? 'forward' : 'backward')
-      setCurrentPage(clamped)
+      if (totalSpreads === 0) return
+      const clamped = Math.max(0, Math.min(index, totalSpreads - 1))
+      if (clamped === safeSpread) return
+      setDirection(clamped > safeSpread ? 'forward' : 'backward')
+      setCurrentSpread(clamped)
       onNavigation?.(clamped)
     },
-    [safePage, totalPages, onNavigation],
+    [safeSpread, totalSpreads, onNavigation],
   )
 
   useEffect(() => {
-    setCurrentPage((previous) => Math.min(previous, Math.max(0, totalPages - 1)))
-  }, [totalPages])
+    setCurrentSpread((previous) => Math.min(previous, Math.max(0, totalSpreads - 1)))
+  }, [totalSpreads])
 
   useEffect(() => {
     if (previousCategory.current === activeCategory) return
     previousCategory.current = activeCategory
-    const firstProject = pages.findIndex((page) => page.section === 'projects')
+    const firstProject = spreads.findIndex((spread) => spread.section === 'projects')
     if (firstProject >= 0) {
       setDirection('forward')
-      setCurrentPage(firstProject)
+      setCurrentSpread(firstProject)
     }
-  }, [activeCategory, pages])
+  }, [activeCategory, spreads])
 
   useEffect(() => {
     if (!direction) return undefined
@@ -75,37 +75,58 @@ const NarrativeNotebook = ({
   }, [direction])
 
   const handleMarkerClick = (sectionId) => {
-    const index = pages.findIndex((page) => page.section === sectionId)
-    if (index >= 0) goToPage(index)
+    const index = spreads.findIndex((spread) => spread.section === sectionId)
+    if (index >= 0) goToSpread(index)
   }
 
-  if (!isOpen) {    return (
+  if (!isOpen) {
+    return (
       <section id="notebook-section" className="notebook-section">
-        <div className="notebook-shell is-closed" aria-hidden="true" />
+        <div className="notebook-frame">
+          <div className="notebook-shell is-closed" aria-hidden="true" />
+        </div>
       </section>
     )
   }
 
   return (
     <section id="notebook-section" className="notebook-section">
-      <div className="notebook-shell" data-direction={direction || undefined}>
-        <div
-          className="notebook-track"
-          style={{ transform: `translateX(-${safePage * 100}%)` }}
-          onTransitionEnd={(event) => {
-            if (event.propertyName === 'transform') setDirection(null)
-          }}
-        >
-          {pages.map((page, index) => (
-            <div
-              key={page.id}
-              className="notebook-page"
-              data-active={index === safePage ? 'true' : undefined}
-              aria-hidden={index === safePage ? undefined : 'true'}
-            >
-              {page.element}
-            </div>
-          ))}
+      <div className="notebook-frame">
+        <div className="notebook-shell" data-direction={direction || undefined}>
+          <div
+            className="notebook-track"
+            style={{ transform: `translateX(-${safeSpread * 100}%)` }}
+            onTransitionEnd={(event) => {
+              if (event.propertyName === 'transform') setDirection(null)
+            }}
+          >
+            {spreads.map((spread, index) => (
+              <article
+                key={spread.id}
+                className="notebook-spread"
+                data-active={index === safeSpread ? 'true' : undefined}
+                aria-hidden={index === safeSpread ? undefined : 'true'}
+              >
+                <div className="notebook-leaf left">{spread.left}</div>
+                <div className="notebook-leaf right">{spread.right}</div>
+              </article>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="corner-zone left"
+            onClick={() => goToSpread(safeSpread - 1)}
+            aria-label={previousLabel}
+            disabled={safeSpread === 0}
+          />
+          <button
+            type="button"
+            className="corner-zone right"
+            onClick={() => goToSpread(safeSpread + 1)}
+            aria-label={nextLabel}
+            disabled={safeSpread >= totalSpreads - 1}
+          />
         </div>
 
         <div className="sidebar-markers">
@@ -132,21 +153,6 @@ const NarrativeNotebook = ({
             emptyCategoryLabel={emptyCategoryLabel}
           />
         )}
-
-        <button
-          type="button"
-          className="corner-zone left"
-          onClick={() => goToPage(safePage - 1)}
-          aria-label={previousLabel}
-          disabled={safePage === 0}
-        />
-        <button
-          type="button"
-          className="corner-zone right"
-          onClick={() => goToPage(safePage + 1)}
-          aria-label={nextLabel}
-          disabled={safePage >= totalPages - 1}
-        />
       </div>
     </section>
   )

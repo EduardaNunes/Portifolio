@@ -1,14 +1,32 @@
 /**
  * CareerPage Component
  *
- * Displays the Career section with professional trajectory, current role focus
- * and career goals. All text is received already localized.
+ * Displays one leaf of the Career spread. The left leaf holds the current role
+ * and professional timeline; the right leaf holds the future goals.
+ *
+ * @param {Object} props
+ * @param {'left'|'right'} [props.side='left']
  */
 import React from 'react'
 
-const CareerPage = ({ heading, labels = {}, currentRole, timeline = [], goals = [] }) => {
+const CareerPage = ({ side = 'left', heading, labels = {}, currentRole, timeline = [], goals = [] }) => {
+  if (side === 'right') {
+    return (
+      <div className="career-page career-page-right">
+        <section className="goals-section">
+          <h3>{labels.goals}</h3>
+          <ul className="goals-list">
+            {goals.map((goal, index) => (
+              <li key={index} className="goal-item">{goal}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    )
+  }
+
   return (
-    <div className="career-page">
+    <div className="career-page career-page-left">
       <h2>{heading}</h2>
 
       <section className="current-role-section">
@@ -25,15 +43,6 @@ const CareerPage = ({ heading, labels = {}, currentRole, timeline = [], goals = 
               <span className="position-duration">{position.duration}</span>
               <p className="position-desc">{position.description}</p>
             </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="goals-section">
-        <h3>{labels.goals}</h3>
-        <ul className="goals-list">
-          {goals.map((goal, index) => (
-            <li key={index} className="goal-item">{goal}</li>
           ))}
         </ul>
       </section>

@@ -429,10 +429,16 @@ header {
 
 /* ---------- Notebook Styling ---------- */
 
+.notebook-frame {
+  position: relative;
+  width: min(80vw, 1100px);
+  height: 80vh;
+}
+
 .notebook-shell {
   position: relative;
-  width: 80vw;
-  height: 80vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   border: 2px solid var(--text-color);
   border-radius: 14px;
@@ -459,67 +465,140 @@ header {
   will-change: transform;
 }
 
-.notebook-page {
+.notebook-spread {
+  position: relative;
   flex: 0 0 100%;
+  display: flex;
   width: 100%;
   height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Center spine between the two facing leaves */
+.notebook-spread::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-1px);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.02) 45%,
+    rgba(0, 0, 0, 0.2)
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+.notebook-leaf {
+  /* Paper always reads as paper, regardless of the site theme */
+  --paper-bg: #ffffff;
+  --paper-text: #1a1917;
+  --paper-muted: #5c564e;
+  --paper-border: #d9d0c4;
+  --paper-accent: #145053;
+
+  /* Re-point the theme tokens so existing components inherit contrast */
+  --bg-color: var(--paper-bg);
+  --text-color: var(--paper-text);
+  --strong: #26696d;
+  --h1-color: #b45309;
+
+  flex: 1 1 50%;
+  min-width: 0;
+  height: 100%;
   overflow-y: auto;
-  padding: 2.5rem 3.5rem;
+  padding: 1.1rem 1rem 1.4rem;
   box-sizing: border-box;
-  scroll-snap-align: start;
+  background: var(--paper-bg);
+  color: var(--paper-text);
+  font-size: clamp(0.55rem, 1.5vw, 0.72rem);
+  line-height: 1.55;
+  text-align: left;
 }
 
-.notebook-page h2 {
-  margin-bottom: 1rem;
+.notebook-leaf.left {
+  box-shadow: inset -14px 0 18px -16px rgba(0, 0, 0, 0.55);
 }
 
-.notebook-page h3 {
-  margin: 1rem 0 0.5rem;
+.notebook-leaf.right {
+  box-shadow: inset 14px 0 18px -16px rgba(0, 0, 0, 0.55);
+}
+
+.notebook-leaf,
+.notebook-leaf * {
+  text-align: left;
+}
+
+.notebook-leaf h2 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(0.9rem, 2.4vw, 1.3rem);
+  line-height: 1.2;
+  color: var(--paper-text);
+}
+
+.notebook-leaf h3 {
+  margin: 0.8rem 0 0.35rem;
+  font-size: clamp(0.62rem, 1.7vw, 0.8rem);
   color: var(--strong);
 }
 
-.notebook-page ul {
+.notebook-leaf p {
+  margin: 0.2rem 0;
+  font-size: inherit;
+}
+
+.notebook-leaf ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
-.notebook-page li {
-  padding: 0.4rem 0.6rem;
+.notebook-leaf li {
+  padding: 0.15rem 0;
 }
 
-.notebook-page p {
-  margin: 0.25rem 0;
+.notebook-leaf a {
+  color: var(--paper-accent);
+  text-decoration: underline;
 }
 
-/* Page turning animation */
-.notebook-shell[data-direction='forward'] .notebook-page[data-active='true'] {
-  animation: page-turn-forward 320ms ease-in-out;
+.notebook-leaf .icon {
+  width: 1rem;
+  height: 1rem;
 }
 
-.notebook-shell[data-direction='backward'] .notebook-page[data-active='true'] {
-  animation: page-turn-backward 320ms ease-in-out;
+/* Page turning animation (the spread turns as a whole) */
+.notebook-shell[data-direction='forward'] .notebook-spread[data-active='true'] {
+  animation: spread-turn-forward 320ms ease-in-out;
 }
 
-@keyframes page-turn-forward {
+.notebook-shell[data-direction='backward'] .notebook-spread[data-active='true'] {
+  animation: spread-turn-backward 320ms ease-in-out;
+}
+
+@keyframes spread-turn-forward {
   from {
-    transform: rotateY(-10deg) translateX(2%);
-    opacity: 0.55;
+    transform: perspective(1400px) rotateY(-6deg);
+    opacity: 0.7;
   }
   to {
-    transform: rotateY(0deg) translateX(0);
+    transform: perspective(1400px) rotateY(0deg);
     opacity: 1;
   }
 }
 
-@keyframes page-turn-backward {
+@keyframes spread-turn-backward {
   from {
-    transform: rotateY(10deg) translateX(-2%);
-    opacity: 0.55;
+    transform: perspective(1400px) rotateY(6deg);
+    opacity: 0.7;
   }
   to {
-    transform: rotateY(0deg) translateX(0);
+    transform: perspective(1400px) rotateY(0deg);
     opacity: 1;
   }
 }
@@ -528,7 +607,7 @@ header {
 
 .sidebar-markers {
   position: absolute;
-  left: 12px;
+  left: -30px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -539,8 +618,8 @@ header {
 
 .sidebar-marker {
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2px solid var(--text-color);
   background: transparent;
@@ -589,28 +668,43 @@ header {
 
 .category-tabs {
   position: absolute;
-  right: 12px;
+  right: -128px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
+  gap: 6px;
   z-index: 20;
 }
 
 .category-tab {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
+  gap: 5px;
+  padding: 4px 7px;
   background: transparent;
   border: 1px solid var(--text-color);
   border-radius: 6px;
   color: var(--text-color);
   cursor: pointer;
-  font-size: 0.6rem;
+  font-size: 0.52rem;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@media (max-width: 1300px) {
+  .category-tabs {
+    right: 50%;
+    top: auto;
+    bottom: -46px;
+    transform: translateX(50%);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    max-width: 92vw;
+  }
 }
 
 .category-tab:hover {
@@ -682,16 +776,59 @@ header {
   min-height: 100%;
 }
 
+.project-right-page {
+  padding-top: 1.7rem;
+}
+
+/* Stack metadata blocks so narrow leaves stay readable */
+.notebook-leaf .skill-item,
+.notebook-leaf .soft-skill-item,
+.notebook-leaf .result-item,
+.notebook-leaf .timeline-item,
+.notebook-leaf .education-item,
+.notebook-leaf .course-item,
+.notebook-leaf .academic-project-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.notebook-leaf .position-title,
+.notebook-leaf .result-title,
+.notebook-leaf .skill-name,
+.notebook-leaf .course-name,
+.notebook-leaf .project-title,
+.notebook-leaf .institution,
+.notebook-leaf .soft-skill-name {
+  color: var(--paper-text);
+}
+
+.notebook-leaf .position-company,
+.notebook-leaf .position-duration,
+.notebook-leaf .dates,
+.notebook-leaf .provider,
+.notebook-leaf .completion,
+.notebook-leaf .skill-tags,
+.notebook-leaf .soft-skill-desc,
+.notebook-leaf .result-desc,
+.notebook-leaf .position-desc,
+.notebook-leaf .project-desc,
+.notebook-leaf .description {
+  color: var(--paper-muted);
+}
+
 .thumbnail-container {
   position: relative;
-  display: inline-block;
+  display: block;
   max-width: 100%;
 }
 
 .project-thumbnail {
-  max-width: 100%;
-  max-height: 55vh;
-  border-radius: 8px;
+  width: 100%;
+  max-height: 40vh;
+  border-radius: 6px;
+  object-fit: contain;
+  background: #f3efe8;
 }
 
 .play-overlay {
@@ -703,47 +840,79 @@ header {
   justify-content: center;
   gap: 0.4rem;
   background: rgba(0, 0, 0, 0.35);
-  border-radius: 8px;
+  border-radius: 6px;
   pointer-events: none;
 }
 
 .play-icon {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   color: #fff;
 }
 
 .play-text {
   color: #fff;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
 .tech-tags-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 0.5rem;
+  justify-content: flex-start;
+  gap: 4px;
+  margin-top: 0.35rem;
 }
 
 .tech-tag {
-  padding: 3px 8px;
+  padding: 2px 6px;
   border: 1px solid var(--text-color);
   border-radius: 999px;
-  font-size: 0.6rem;
+  font-size: 0.52rem;
+}
+
+/* ---------- Contact page ---------- */
+
+.social-links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.contact-email {
+  word-break: break-word;
+}
+
+.contact-actions {
+  margin-top: 0.9rem;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--paper-accent);
+  border-radius: 999px;
+  color: var(--paper-accent);
+  text-decoration: none;
 }
 
 /* ---------- Deploy Link Styling ---------- */
 
 .prominent-deploy-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 0;
+  right: 0;
+  max-width: calc(100% - 0.5rem);
   background: var(--btn-play);
   color: var(--bg-color);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.52rem;
   font-weight: bold;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -757,8 +926,8 @@ header {
 }
 
 .prominent-deploy-btn .icon {
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
   vertical-align: middle;
-  margin-right: 4px;
+  margin-right: 3px;
 }

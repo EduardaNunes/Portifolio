@@ -1,14 +1,53 @@
 /**
  * StudiesPage Component
  *
- * Displays the Studies section with academic background, courses and academic
- * projects. All text is received already localized.
+ * Displays one leaf of the Studies spread. The left leaf holds the academic
+ * background; the right leaf holds courses and academic projects.
+ *
+ * @param {Object} props
+ * @param {'left'|'right'} [props.side='left']
  */
 import React from 'react'
 
-const StudiesPage = ({ heading, labels = {}, education = [], courses = [], projects = [] }) => {
+const StudiesPage = ({ side = 'left', heading, labels = {}, education = [], courses = [], projects = [] }) => {
+  if (side === 'right') {
+    return (
+      <div className="studies-page studies-page-right">
+        <section className="courses-section">
+          <h3>{labels.courses}</h3>
+          <ul className="courses-list">
+            {courses.map((course, index) => (
+              <li key={index} className="course-item">
+                <span className="course-name">{course.name}</span>
+                <span className="provider">{course.provider}</span>
+                <span className="completion">{course.completion ? '✓' : '…'}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="projects-section">
+          <h3>{labels.projects}</h3>
+          <ul className="academic-projects-list">
+            {projects.map((project, index) => (
+              <li key={index} className="academic-project-item">
+                <span className="project-title">{project.title}</span>
+                <span className="project-desc">{project.description}</span>
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                    →
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    )
+  }
+
   return (
-    <div className="studies-page">
+    <div className="studies-page studies-page-left">
       <h2>{heading}</h2>
 
       <section className="education-section">
@@ -20,36 +59,6 @@ const StudiesPage = ({ heading, labels = {}, education = [], courses = [], proje
               <span className="degree">{item.degree}</span>
               <span className="dates">{item.dates}</span>
               {item.description && <p className="description">{item.description}</p>}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="courses-section">
-        <h3>{labels.courses}</h3>
-        <ul className="courses-list">
-          {courses.map((course, index) => (
-            <li key={index} className="course-item">
-              <span className="course-name">{course.name}</span>
-              <span className="provider">{course.provider}</span>
-              <span className="completion">{course.completion ? '✓' : '…'}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="projects-section">
-        <h3>{labels.projects}</h3>
-        <ul className="academic-projects-list">
-          {projects.map((project, index) => (
-            <li key={index} className="academic-project-item">
-              <span className="project-title">{project.title}</span>
-              <span className="project-desc">{project.description}</span>
-              {project.link && (
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                  →
-                </a>
-              )}
             </li>
           ))}
         </ul>

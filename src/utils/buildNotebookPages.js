@@ -1,10 +1,14 @@
 /**
- * Builds the flat notebook page list.
+ * Builds the notebook spread list.
  *
- * Order is fixed by the spec:
- *   About Me -> Career -> Studies -> [Projects: 2 pages per project] -> Contact
- * Therefore the total is 4 + 2N, where N is the number of projects visible in
- * the active category (all projects when no category is selected).
+ * A spread is an open book unit with two facing leaves:
+ *   { id, section, left, right }
+ *
+ * Order is fixed:
+ *   About Me -> Career -> Studies -> [Projects: 1 spread per project] -> Contact
+ * Therefore the total is 4 + N spreads, or 8 + 2N leaves, where N is the
+ * number of projects visible in the active category (all projects when no
+ * category is selected).
  */
 import React from 'react'
 import AboutMePage from '../components/narrative-notebook-component/AboutMePage'
@@ -22,49 +26,67 @@ export function buildNotebookPages({ content, projects = [], activeCategory = nu
     : projects
 
   const { labels } = content
-  const pages = []
+  const spreads = []
 
-  pages.push({
+  spreads.push({
     id: 'about',
     section: 'about',
-    element: h(AboutMePage, {
+    left: h(AboutMePage, {
+      side: 'left',
       heading: content.about.heading,
       labels: labels.about,
       skills: content.about.skills,
       softSkills: content.about.softSkills,
+    }),
+    right: h(AboutMePage, {
+      side: 'right',
+      heading: content.about.heading,
+      labels: labels.about,
       results: content.about.results,
     }),
   })
 
-  pages.push({
+  spreads.push({
     id: 'career',
     section: 'career',
-    element: h(CareerPage, {
+    left: h(CareerPage, {
+      side: 'left',
       heading: content.career.heading,
       labels: labels.career,
       currentRole: content.career.currentRole,
       timeline: content.career.timeline,
+    }),
+    right: h(CareerPage, {
+      side: 'right',
+      heading: content.career.heading,
+      labels: labels.career,
       goals: content.career.goals,
     }),
   })
 
-  pages.push({
+  spreads.push({
     id: 'studies',
     section: 'studies',
-    element: h(StudiesPage, {
+    left: h(StudiesPage, {
+      side: 'left',
       heading: content.studies.heading,
       labels: labels.studies,
       education: content.studies.education,
+    }),
+    right: h(StudiesPage, {
+      side: 'right',
+      heading: content.studies.heading,
+      labels: labels.studies,
       courses: content.studies.courses,
       projects: content.studies.projects,
     }),
   })
 
   filteredProjects.forEach((project) => {
-    pages.push({
-      id: `${project.id}-left`,
+    spreads.push({
+      id: project.id,
       section: 'projects',
-      element: h(ProjectLeftPage, {
+      left: h(ProjectLeftPage, {
         title: project.title,
         description: project.description,
         techStack: project.techStack,
@@ -72,12 +94,7 @@ export function buildNotebookPages({ content, projects = [], activeCategory = nu
         sourceCodeLink: project.repoLink,
         labels: labels.project,
       }),
-    })
-
-    pages.push({
-      id: `${project.id}-right`,
-      section: 'projects',
-      element: h(ProjectRightPage, {
+      right: h(ProjectRightPage, {
         thumbnailUrl: project.thumbnailUrl,
         deployUrl: project.deployUrl,
         projectTitle: project.title,
@@ -86,10 +103,17 @@ export function buildNotebookPages({ content, projects = [], activeCategory = nu
     })
   })
 
-  pages.push({
+  spreads.push({
     id: 'contact',
     section: 'contact',
-    element: h(ContactPage, {
+    left: h(ContactPage, {
+      side: 'left',
+      heading: content.contact.heading,
+      labels: labels.contact,
+      email: content.contact.email,
+    }),
+    right: h(ContactPage, {
+      side: 'right',
       heading: content.contact.heading,
       labels: labels.contact,
       linkedinUrl: content.contact.linkedinUrl,
@@ -99,12 +123,12 @@ export function buildNotebookPages({ content, projects = [], activeCategory = nu
     }),
   })
 
-  return pages
+  return spreads
 }
 
-export function getPageSectionCounts(pages = []) {
-  return pages.reduce((counts, page) => {
-    counts[page.section] = (counts[page.section] || 0) + 1
+export function getPageSectionCounts(spreads = []) {
+  return spreads.reduce((counts, spread) => {
+    counts[spread.section] = (counts[spread.section] || 0) + 1
     return counts
   }, {})
 }
