@@ -41,6 +41,7 @@ export const profileData = {
         previous: 'Página anterior',
         next: 'Próxima página',
         emptyCategory: 'Nenhum projeto nesta categoria',
+        sectionsLabel: 'Seções do caderno',
       },
     },
     about: {
@@ -159,6 +160,7 @@ export const profileData = {
         previous: 'Previous page',
         next: 'Next page',
         emptyCategory: 'No projects in this category',
+        sectionsLabel: 'Notebook sections',
       },
     },
     about: {

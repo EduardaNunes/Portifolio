@@ -74,10 +74,23 @@ body {
 /* ---------- Document scroll / section snap ---------- */
 
 .app-scroll {
+  position: relative;
   height: 100dvh;
   overflow-y: auto;
+  overflow-x: hidden;
+  overflow-x: clip;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y pinch-zoom;
+}
+
+.app-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .hero-section {
@@ -110,6 +123,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---------- Typography ---------- */
@@ -458,20 +483,82 @@ header {
   background-size: 40px 40px;
 }
 
-.notebook-track {
-  display: flex;
+.notebook-stage {
+  position: relative;
+  width: 100%;
   height: 100%;
-  transition: transform 320ms ease-in-out;
-  will-change: transform;
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
 }
 
 .notebook-spread {
-  position: relative;
-  flex: 0 0 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
+}
+
+/* Half-page that rotates around the spine while changing spreads */
+.notebook-turn {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.notebook-turn-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  background: var(--paper-bg, #ffffff);
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 0 26px rgba(0, 0, 0, 0.3);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.notebook-turn-face.back {
+  transform: rotateY(180deg);
+}
+
+.notebook-turn-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0) 58%);
+  animation: page-turn-shade 420ms cubic-bezier(0.45, 0, 0.15, 1) both;
+}
+
+.notebook-turn-face.back::after {
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0) 62%);
+}
+
+.notebook-turn .notebook-leaf {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes page-turn-shade {
+  0% {
+    opacity: 0.12;
+  }
+  45% {
+    opacity: 0.62;
+  }
+  100% {
+    opacity: 0.08;
+  }
 }
 
 /* Center spine between the two facing leaves */
@@ -511,6 +598,12 @@ header {
   min-width: 0;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   padding: 1.1rem 1rem 1.4rem;
   box-sizing: border-box;
   background: var(--paper-bg);
@@ -518,6 +611,12 @@ header {
   font-size: clamp(0.55rem, 1.5vw, 0.72rem);
   line-height: 1.55;
   text-align: left;
+}
+
+.notebook-leaf::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .notebook-leaf.left {
@@ -572,83 +671,80 @@ header {
   height: 1rem;
 }
 
-/* Page turning animation (the spread turns as a whole) */
-.notebook-shell[data-direction='forward'] .notebook-spread[data-active='true'] {
-  animation: spread-turn-forward 320ms ease-in-out;
-}
+/* ---------- Left Page Tabs ---------- */
 
-.notebook-shell[data-direction='backward'] .notebook-spread[data-active='true'] {
-  animation: spread-turn-backward 320ms ease-in-out;
-}
-
-@keyframes spread-turn-forward {
-  from {
-    transform: perspective(1400px) rotateY(-6deg);
-    opacity: 0.7;
-  }
-  to {
-    transform: perspective(1400px) rotateY(0deg);
-    opacity: 1;
-  }
-}
-
-@keyframes spread-turn-backward {
-  from {
-    transform: perspective(1400px) rotateY(6deg);
-    opacity: 0.7;
-  }
-  to {
-    transform: perspective(1400px) rotateY(0deg);
-    opacity: 1;
-  }
-}
-
-/* ---------- Left Sidebar Markers ---------- */
-
-.sidebar-markers {
+.page-tabs {
   position: absolute;
-  left: -30px;
+  left: clamp(-58px, -4.4vw, -36px);
   top: 50%;
+  width: auto;
+  height: auto;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  z-index: 20;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 8px;
+  z-index: 25;
 }
 
-.sidebar-marker {
+.page-tab {
+  --tab-bg: #f6efe3;
+  --tab-border: #b7a88e;
+  --tab-text: #4a3f30;
+
   position: relative;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 2px solid var(--text-color);
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 46px;
+  padding: 0 0 0 3px;
+  border: 2px solid var(--tab-border);
+  border-right: none;
+  border-radius: 9px 0 0 9px;
+  background:
+    linear-gradient(100deg, rgba(255, 255, 255, 0.55), rgba(0, 0, 0, 0.04)),
+    var(--tab-bg);
+  color: var(--tab-accent, var(--tab-text));
+  box-shadow:
+    inset 3px 0 0 var(--tab-accent, var(--tab-border)),
+    -3px 4px 8px rgba(0, 0, 0, 0.35);
   cursor: pointer;
-  padding: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.sidebar-marker.current {
-  opacity: 0;
-  pointer-events: none;
+/* Notch where the tab meets the cover */
+.page-tab::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 2px solid var(--tab-border);
+  border-left-color: transparent;
+  background: var(--bg-color);
 }
 
-.sidebar-marker:not(.current):hover {
-  transform: scale(1.2);
-}
-
-.sidebar-marker::after {
+/* Tooltip remains on the non-current tabs */
+.page-tab::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 28px;
+  left: calc(100% + 12px);
   top: 50%;
   transform: translateY(-50%);
-  background: var(--bg-color);
-  color: var(--text-color);
-  border: 1px solid var(--text-color);
   padding: 4px 8px;
-  font-size: 0.6rem;
+  border: 1px solid var(--tab-border);
   border-radius: 4px;
+  background: var(--tab-bg);
+  color: var(--tab-text);
+  font-size: 0.6rem;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -656,11 +752,43 @@ header {
   z-index: 30;
 }
 
-.sidebar-marker:hover::after {
+.page-tab-icon {
+  width: 19px;
+  height: 19px;
+  flex: none;
+}
+
+.page-tab.current {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-10px);
+}
+
+.page-tab:not(.current):hover {
+  transform: translateX(-4px);
+  box-shadow:
+    inset 3px 0 0 var(--tab-accent, var(--tab-border)),
+    -5px 6px 12px rgba(0, 0, 0, 0.42);
+}
+
+.page-tab:not(.current):focus-visible {
+  outline: 2px solid var(--h1-color);
+  outline-offset: 3px;
+}
+
+/* Keep the active tab visible while it still owns keyboard focus */
+.page-tab.current:focus-visible {
+  opacity: 1;
+  transform: none;
+  outline: 2px solid var(--h1-color);
+  outline-offset: 3px;
+}
+
+.page-tab:not(.current):hover::after {
   opacity: 1;
 }
 
-.sidebar-marker.current::after {
+.page-tab.current::after {
   display: none;
 }
 
@@ -930,4 +1058,41 @@ header {
   height: 11px;
   vertical-align: middle;
   margin-right: 3px;
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 600px) {
+  .page-tabs {
+    left: -30px;
+    gap: 6px;
+  }
+
+  .page-tab {
+    width: 34px;
+    height: 40px;
+  }
+
+  .page-tab-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .app-scroll {
+    scroll-behavior: auto;
+  }
+
+  .notebook-turn-face::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .page-tab,
+  .page-tab::after {
+    transition: none;
+  }
 }

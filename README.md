@@ -35,14 +35,24 @@ O conteúdo principal é um notebook em formato de caderno aberto, centralizado
   - Estudos: formação × cursos/projetos;
   - Projetos: metadados × demo/deploy;
   - Contato: CTA/e-mail × links sociais.
-- As folhas usam papel branco e texto escuro em ambos os temas; a capa, os
-  marcadores e as tabs seguem o esquema claro/escuro do site.
-- Marcadores à esquerda: apenas o marcador da seção atual fica oculto.
+- As folhas usam papel branco e texto escuro em ambos os temas; a capa, as
+  abas de página e as tabs seguem o esquema claro/escuro do site.
+- Abas de página físicas à esquerda (ícone + entalhe + sombra): apenas a aba da
+  seção atual fica oculta; as demais mostram o nome da seção no tooltip.
+- A troca de spread usa uma folha 3D de duas faces girando em torno da lombada
+  (~420ms, frente/verso, sombra móvel). Cliques rápidos não sobrepõem viradas.
 - Tabs de categoria (só em Projetos): filtram por categoria; a categoria
   selecionada tem o marcador oculto e continua clicável para voltar a "todas".
   Em telas estreitas elas ficam em uma linha abaixo do caderno.
 - Cantos inferiores esquerdo/direito navegam para o spread anterior/seguinte.
 - O botão Play abre o notebook e rola suavemente até ele.
+- Rolagem: as barras verticais e horizontais ficam ocultas, o eixo horizontal
+  é travado e o snap vertical continua parando em cada seção.
+- A roda do mouse reaproveita o mesmo scroll suave do Play e move exatamente
+  uma seção por gesto, para cima e para baixo. Dentro de uma folha longa, a
+  roda primeiro rola a folha e só então troca de seção no limite.
+- Com `prefers-reduced-motion`, a troca de spread é direta (sem rotação) e o
+  scroll deixa de ser animado.
 
 ### Placeholders de imagem
 
