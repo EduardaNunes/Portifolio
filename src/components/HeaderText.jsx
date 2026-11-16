@@ -1,4 +1,4 @@
-import PlayButton from './PlayButton'
+import StartButton from './StartButton'
 
 export default function HeaderText({ texts, onPlay }) {
   return (
@@ -16,7 +16,7 @@ export default function HeaderText({ texts, onPlay }) {
         <p>{texts.playSubtitle}</p>
       </div>
 
-      <PlayButton label={texts.playButton} onPlay={onPlay} />
+      <StartButton label={texts.playButton} onPlay={onPlay} />
     </div>
   )
 }

@@ -19,9 +19,9 @@ export const translations = {
     name: 'Eduarda Nunes',
     roleIntro: 'E sou',
     role: 'Engenheira de Software Trainee',
-    playTitle: 'Clique no Play',
+    playTitle: 'Clique no Start',
     playSubtitle: 'Para conhecer mais sobre mim e o meu trabalho :)',
-    playButton: 'Play',
+    playButton: 'start',
 
     // Navigation markers and labels (left sidebar)
     navigationMarkers: {
@@ -56,9 +56,9 @@ export const translations = {
     name: 'Eduarda Nunes',
     roleIntro: "I'm a",
     role: 'Software Engineer Trainee',
-    playTitle: 'Click on Play',
+    playTitle: 'Click on Start',
     playSubtitle: 'To discover more about me and my work :)',
-    playButton: 'Play',
+    playButton: 'start',
 
     // Navigation markers and labels (left sidebar)
     navigationMarkers: {

@@ -64,13 +64,13 @@
   --strong: #d87f0b;
   --strong-selection: #1a1917;
 
-  --btn-play: #b8afa5;
-  --btn-text: #f9efe4;
-  --btn-play-border: #36332a;
-  --btn-play-shadow: #6d6964;
-  --btn-play-highlight: #e0d4c7;
-  --btn-play-highlight2: #9b9187;
-  --btn-play-shine: #ffffff;
+  --btn-play: var(--cover-base);
+  --btn-text: var(--cover-shine);
+  --btn-play-border: var(--cover-dark);
+  --btn-play-shadow: var(--cover-shadow);
+  --btn-play-highlight: var(--cover-light);
+  --btn-play-highlight2: #f5e0c0;
+  --btn-play-shine: var(--cover-shine);
 
   --cover-base: #d87f0b;
   --cover-dark: #b45309;
@@ -350,6 +350,7 @@ header {
 
 .btn-center {
   background-color: var(--btn-play);
+  transition: background-color 0.2s ease-out;
   display: flex;
   position: relative;
   width: 220px;
@@ -370,6 +371,7 @@ header {
   height: 110px;
   right: -25px;
   box-shadow: 10px 0 var(--btn-play-border);
+  transition: background-color 0.2s ease-out;
 }
 
 .btn-center p {
@@ -384,6 +386,7 @@ header {
   background-color: var(--btn-play-border);
   width: 220px;
   height: 10px;
+  transition: background-color 0.2s ease-out;
 }
 
 .btn-border-top {
@@ -402,6 +405,7 @@ header {
   width: 25px;
   height: 10px;
   right: -25px;
+  transition: background-color 0.2s ease-out;
 }
 
 .btn-border-bottom {
@@ -420,6 +424,7 @@ header {
   height: 10px;
   right: -25px;
   box-shadow: 0 -10px var(--btn-play-border);
+  transition: background-color 0.2s ease-out;
 }
 
 .btn-highlight {
@@ -430,6 +435,7 @@ header {
   background-color: var(--btn-play-shine);
   top: 20px;
   right: 35px;
+  transition: background-color 0.2s ease-out;
 }
 
 .btn-highlight::before,
@@ -438,6 +444,7 @@ header {
   display: block;
   position: absolute;
   height: 10px;
+  transition: background-color 0.2s ease-out;
 }
 
 .btn-highlight::before {

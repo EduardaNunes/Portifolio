@@ -1,4 +1,4 @@
-export default function PlayButton({ label, onPlay }) {
+export default function StartButton({ label, onPlay }) {
   return (
     <button className="btn-animation" onClick={() => onPlay?.()}>
       <div className="btn btn-play">
