@@ -75,7 +75,10 @@ const NarrativeNotebook = ({
     (index, options = {}) => {
       if (totalSpreads === 0 || turningRef.current) return
       const clamped = Math.max(0, Math.min(index, totalSpreads - 1))
-      if (clamped === safeSpread) return
+      // When force is true, allow the turn even if the clamped index equals
+      // the current safeSpread (e.g., category change reconstructs spreads and
+      // indices collide but visual content has changed).
+      if (clamped === safeSpread && !options.force) return
 
       const targetSection = spreads[clamped]?.section
       if (targetSection) setPendingSection(targetSection)
@@ -119,8 +122,10 @@ const NarrativeNotebook = ({
     setTurn(null)
     const firstProject = spreads.findIndex((spread) => spread.section === 'projects')
     if (firstProject >= 0) {
-      // Use the visually current spread as the turn origin for category changes
-      goToSpread(firstProject, { fromSpread: visualSpreadRef.current })
+      // Use the visually current spread as the turn origin for category changes.
+      // Force the turn even if the clamped index equals the current spread,
+      // because the category change means the visual content has changed.
+      goToSpread(firstProject, { force: true, fromSpread: visualSpreadRef.current })
     }
   }, [activeCategory, spreads, goToSpread])
 
@@ -198,22 +203,25 @@ const NarrativeNotebook = ({
                 }
               />
             )}
-          </div>
 
-          <button
-            type="button"
-            className="corner-zone left"
-            onClick={() => goToSpread(safeSpread - 1)}
-            aria-label={previousLabel}
-            disabled={safeSpread === 0 || Boolean(turn)}
-          />
-          <button
-            type="button"
-            className="corner-zone right"
-            onClick={() => goToSpread(safeSpread + 1)}
-            aria-label={nextLabel}
-            disabled={safeSpread >= totalSpreads - 1 || Boolean(turn)}
-          />
+            {/* Corner navigation arrows - positioned on the white leaf */}
+            <button
+              type="button"
+              className="corner-zone left"
+              onClick={() => goToSpread(safeSpread - 1)}
+              aria-label={previousLabel}
+              disabled={safeSpread === 0 || Boolean(turn)}
+              aria-hidden={safeSpread === 0 || Boolean(turn)}
+            />
+            <button
+              type="button"
+              className="corner-zone right"
+              onClick={() => goToSpread(safeSpread + 1)}
+              aria-label={nextLabel}
+              disabled={safeSpread >= totalSpreads - 1 || Boolean(turn)}
+              aria-hidden={safeSpread >= totalSpreads - 1 || Boolean(turn)}
+            />
+          </div>
         </div>
 
         <nav className="page-tabs" aria-label={sectionsLabel}>

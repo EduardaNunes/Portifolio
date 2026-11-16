@@ -36,12 +36,15 @@
   --cover-light: #99c0c2;
   --cover-shine: #c6e2e4;
 
+  /* Inverted hover colors for corner arrows: dark theme gets orange, light gets blue */
+  /* Darker orange for visibility in dark mode */
+  --corner-hover-color: #e88d00;
+
   --cloud-img: url(/Imgs/CloudBlack.png);
   --profile-img: url(/Imgs/ProfileBlack.png);
   --profile-hover-img: url(/Imgs/ProfileBlackHover.png);
   --light-switch-img: url(/Imgs/SwitchBlack.png);
   --switch-arrow-img: url(/Imgs/ArrowBlack.png);
-  --corner-arrow-img: url(/Imgs/ArrowBlack.png);
 }
 
 .lightmode {
@@ -67,12 +70,14 @@
   --cover-light: #f19925;
   --cover-shine: #f9efe4;
 
+  /* Inverted hover colors for corner arrows: light theme gets blue */
+  --corner-hover-color: #99c0c2;
+
   --cloud-img: url(/Imgs/CloudWhite.png);
   --profile-img: url(/Imgs/ProfileWhite.png);
   --profile-hover-img: url(/Imgs/ProfileWhiteHover.png);
   --light-switch-img: url(/Imgs/SwitchWhite.png);
   --switch-arrow-img: url(/Imgs/ArrowWhite.png);
-  --corner-arrow-img: url(/Imgs/ArrowWhite.png);
 }
 
 html,
@@ -712,7 +717,8 @@ header {
   -ms-overflow-style: none;
   overscroll-behavior: contain;
   touch-action: pan-y;
-  padding: 1.1rem 1rem 1.4rem;
+  /* Extra bottom padding (60px corner zone + 12px buffer) so content doesn't overlap arrows */
+  padding: 1.1rem 1rem calc(1.4rem + 72px);
   box-sizing: border-box;
   background: var(--paper-bg);
   color: var(--paper-text);
@@ -974,55 +980,69 @@ header {
   border: 0;
   padding: 0;
   cursor: pointer;
-  z-index: 15;
+  z-index: 10;
+  /* Use arrow image as mask, background color shows through */
+  mask-size: 24px 24px;
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  -webkit-mask-size: 24px 24px;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+  background-color: currentColor;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+/* Arrow image masks - original colors at rest */
+.corner-zone.left {
+  left: 0;
+  mask-image: url(/Imgs/ArrowBlack.png);
+  -webkit-mask-image: url(/Imgs/ArrowBlack.png);
+  /* Dark theme: black arrow; light theme overrides to white */
+  color: #1a1917;
+  /* Mirror left arrow to point outward (left) */
+  transform: scaleX(-1);
+}
+
+.corner-zone.right {
+  right: 0;
+  mask-image: url(/Imgs/ArrowBlack.png);
+  -webkit-mask-image: url(/Imgs/ArrowBlack.png);
+  color: #1a1917;
+}
+
+/* Light theme: white arrows at rest */
+.lightmode .corner-zone.left {
+  mask-image: url(/Imgs/ArrowWhite.png);
+  -webkit-mask-image: url(/Imgs/ArrowWhite.png);
+  color: #f9efe4;
+  /* Mirror left arrow to point outward (left) */
+  transform: scaleX(-1);
+}
+
+.lightmode .corner-zone.right {
+  mask-image: url(/Imgs/ArrowWhite.png);
+  -webkit-mask-image: url(/Imgs/ArrowWhite.png);
+  color: #f9efe4;
 }
 
 .corner-zone:disabled {
   cursor: default;
   opacity: 0;
-}
-
-.corner-zone.left {
-  left: 0;
-}
-
-.corner-zone.right {
-  right: 0;
-}
-
-/* Directional arrow affordance replaces rectangular hover shading */
-.corner-zone::after {
-  content: '';
-  position: absolute;
-  bottom: 12px;
-  width: 24px;
-  height: 24px;
-  background-image: var(--corner-arrow-img);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 0.15s ease, transform 0.15s ease;
   pointer-events: none;
 }
 
-.corner-zone.left::after {
-  left: 8px;
-  transform: scaleX(-1);
-}
-
-.corner-zone.right::after {
-  right: 8px;
-}
-
-.corner-zone:not(:disabled):hover::after,
-.corner-zone:not(:disabled):focus-visible::after {
-  opacity: 1;
+/* Hover/focus: theme-inverted accent color (orange in dark, blue in light) */
+/* Use a darker orange for visibility in dark mode */
+.corner-zone.right:not(:disabled):hover,
+.corner-zone.right:not(:disabled):focus-visible {
+  color: var(--corner-hover-color);
   transform: scale(1.15);
 }
 
-.corner-zone.left:not(:disabled):hover::after,
-.corner-zone.left:not(:disabled):focus-visible::after {
+.corner-zone.left:not(:disabled):hover,
+.corner-zone.left:not(:disabled):focus-visible {
+  color: var(--corner-hover-color);
+  /* Combine mirroring with hover scale */
   transform: scaleX(-1) scale(1.15);
 }
 
