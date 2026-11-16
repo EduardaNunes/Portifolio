@@ -2,14 +2,14 @@
 
 ## 1. Setup and Project Structure
 
-- [ ] 1.1 Create `src/components/NarrativeNotebook.jsx` with scroll-snap container wrapper for notebook section
-- [ ] 1.2 Create `src/components/AboutMePage.jsx` component for About Me page content (skills, soft skills, results)
-- [ ] 1.3 Create `src/components/CareerPage.jsx` component for Career page content
-- [ ] 1.4 Create `src/components/StudiesPage.jsx` component for Studies page content
-- [ ] 1.5 Create `src/components/ContactPage.jsx` component with LinkedIn, GitHub, email links
-- [ ] 1.6 Create `src/components/ProjectLeftPage.jsx` component for project metadata (title, description, tech stack, repo link)
-- [ ] 1.7 Create `src/components/ProjectRightPage.jsx` component for project demo with video/image thumbnail and EXPLICIT DEPLOY LINK
-- [ ] 1.8 Create `src/components/ProjectsSection.jsx` container for project section with category filter sidebar
+- [x] 1.1 Create `src/components/NarrativeNotebook.jsx` with scroll-snap container wrapper for notebook section
+- [x] 1.2 Create `src/components/AboutMePage.jsx` component for About Me page content (skills, soft skills, results)
+- [x] 1.3 Create `src/components/CareerPage.jsx` component for Career page content
+- [x] 1.4 Create `src/components/StudiesPage.jsx` component for Studies page content
+- [x] 1.5 Create `src/components/ContactPage.jsx` component with LinkedIn, GitHub, email links
+- [x] 1.6 Create `src/components/ProjectLeftPage.jsx` component for project metadata (title, description, tech stack, repo link)
+- [x] 1.7 Create `src/components/ProjectRightPage.jsx` component for project demo with video/image thumbnail and EXPLICIT DEPLOY LINK
+- [x] 1.8 Create `src/components/ProjectsSection.jsx` container for project section with category filter sidebar
 
 ## 2. Data Structure
 
