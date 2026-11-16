@@ -14,9 +14,9 @@ export default function NarrativeNotebook({
   markers = [],
   isOpen = false,
   onNavigation,
-  previousLabel = 'Página anterior',
-  nextLabel = 'Próxima página',
-  sectionsLabel = 'Seções do caderno',
+  previousLabel = 'Previous page',
+  nextLabel = 'Next page',
+  sectionsLabel = 'Notebook sections',
 }) {
   const [currentSpread, setCurrentSpread] = useState(0)
   const [turn, setTurn] = useState(null)

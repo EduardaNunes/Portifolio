@@ -21,8 +21,8 @@ const MARKER_META = {
 }
 
 const CATEGORY_MARKERS = {
-  'IA e Automações': 'ai-automation',
-  Jogos: 'games',
+  'AI & Automations': 'ai-automation',
+  Games: 'games',
   WebDev: 'webdev',
   BackEnd: 'backend',
 }
@@ -48,7 +48,7 @@ function projectPair(project, labels) {
 }
 
 function overviewPair(content, projects, labels) {
-  const categories = ['IA e Automações', 'Jogos', 'WebDev', 'BackEnd']
+  const categories = ['AI & Automations', 'Games', 'WebDev', 'BackEnd']
   return {
     id: 'projects-overview',
     left: h(ProjectLeftPage, {

@@ -8,8 +8,8 @@
  */
 
 export const PROJECT_CATEGORIES = {
-  IA_AUTOMACAOES: 'IA e Automações',
-  JOGOS: 'Jogos',
+  IA_AUTOMACAOES: 'AI & Automations',
+  JOGOS: 'Games',
   WEBDEV: 'WebDev',
   BACKEND: 'BackEnd',
 }
@@ -25,12 +25,12 @@ const GITHUB = 'https://github.com/EduardaNunes'
  * All projects with their category assignments
  */
 export const projects = [
-  // IA e Automações
+  // AI & Automations
   {
     id: 'proj-chatbot-whatsapp',
-    title: 'Chatbot para WhatsApp',
+    title: 'Chatbot for WhatsApp',
     description:
-      'Automação de atendimento via WhatsApp com fluxos conversacionais para organizar mensagens e responder dúvidas recorrentes.',
+      'WhatsApp attendance automation with conversational flows to organize messages and answer recurring questions.',
     techStack: ['JavaScript', 'Node.js', 'WhatsApp API'],
     repoLink: `${GITHUB}/chatbot-whatsapp`,
     thumbnailUrl: '/images/projects/chatbot-whatsapp.svg',
@@ -38,9 +38,9 @@ export const projects = [
   },
   {
     id: 'proj-automation-spreadsheet',
-    title: 'Automação de Planilhas',
+    title: 'Spreadsheet Automation',
     description:
-      'Automação de tarefas repetitivas em planilhas para transformar dados, reduzir trabalho manual e manter relatórios atualizados.',
+      'Spreadsheet automation to transform data, reduce manual work and keep reports updated.',
     techStack: ['Python', 'Pandas', 'Automação'],
     repoLink: `${GITHUB}/automation-spreadsheet`,
     thumbnailUrl: '/images/projects/automation-spreadsheet.svg',
@@ -52,7 +52,7 @@ export const projects = [
     id: 'proj-programadas',
     title: 'ProgramADAs',
     description:
-      'Problema: algoritmos são abstratos para quem começa, e poucas mulheres persistem em computação. Solução: RPG universitário em Unity (C#) com minigames que transformam lógica em mecânicas. Resultado: jogo jogável no navegador (WebGL), liderado por mim da ideia ao código.',
+      'Problem: algorithms feel abstract to beginners. Solution: college RPG in Unity (C#) with mini-games that transform logic into mechanics. Result: playable web game (WebGL) led from idea to code.',
     techStack: ['Unity', 'C#', 'WebGL', 'Game Design'],
     repoLink: `${GITHUB}/ProgramADAs-Playtest`,
     thumbnailUrl: '/images/projects/programadas.svg',
@@ -63,7 +63,7 @@ export const projects = [
     id: 'proj-esbugalhado',
     title: 'Esbugalhado: o Jogo',
     description:
-      'Jogo em JavaScript desenvolvido para a disciplina DCC202 (UFJF). Exercitei estado de jogo, regras e interação no navegador a partir de um repositório-base da turma.',
+      'JavaScript game developed for the DCC202 (UFJF) course. Exercised game state, rules and interaction in the browser starting from a base repository from the class.',
     techStack: ['JavaScript', 'HTML', 'CSS'],
     repoLink: `${GITHUB}/esbugalhado-o-jogo`,
     thumbnailUrl: '/images/projects/esbugalhado.svg',
@@ -75,7 +75,7 @@ export const projects = [
     id: 'proj-productive-tracking',
     title: 'Productive Tracking',
     description:
-      'Problema: listas de tarefas comuns não mostram constância. Solução: To-Do com login, banco em tempo real e calendário de produtividade. Resultado: formulário único de cadastro/login com animação e dados sincronizados automaticamente no Firebase.',
+      "Problem: common to-do lists don't show consistency. Solution: To-Do with real-time database and productivity calendar. Result: single login/form with animation and data automatically synced to Firebase.",
     techStack: ['JavaScript', 'HTML', 'CSS', 'Firebase'],
     repoLink: `${GITHUB}/Productive-Tracking`,
     thumbnailUrl: '/images/projects/productive-tracking.svg',
@@ -86,7 +86,7 @@ export const projects = [
     id: 'proj-pixel-paint',
     title: 'Pixel Paint',
     description:
-      'Editor de pixel art no navegador, feito em JavaScript puro para treinar manipulação do DOM e eventos de interface.',
+      'Pixel art editor in the browser, made with pure JavaScript to practice DOM manipulation and interface events.',
     techStack: ['JavaScript', 'HTML', 'CSS'],
     repoLink: `${GITHUB}/Pixel-Paint`,
     thumbnailUrl: '/images/projects/pixel-paint.svg',
@@ -96,7 +96,7 @@ export const projects = [
     id: 'proj-portfolio',
     title: 'Portfólio em Caderno',
     description:
-      'Portfólio React com tema claro/escuro, PT/EN e navegação em caderno 3D. Aplico acessibilidade (teclado, reduced motion) e design system pixel art próprio.',
+      'React portfolio with light/dark mode, PT/EN, and 3D notebook navigation. Applies accessibility (keyboard, reduced motion) and custom pixel art design system.',
     techStack: ['React', 'Vite', 'CSS', 'Web Animations API'],
     repoLink: `${GITHUB}/Portifolio`,
     thumbnailUrl: '/images/projects/portfolio-web.svg',
@@ -108,7 +108,7 @@ export const projects = [
     id: 'proj-student-housing',
     title: 'App de Moradia Estudantil',
     description:
-      'Problema: estudantes têm dificuldade para achar moradia perto da universidade. Solução: app mobile do GET com mapa e preenchimento automático de endereço por CEP. Resultado: autenticação e dados em Supabase, integrados ao Google Maps e ViaCEP.',
+      'Problem: students have difficulty finding housing near the university. Solution: mobile app with map and automatic address lookup by CEP. Result: authentication and data in Supabase, integrated with Google Maps and ViaCEP.',
     techStack: ['React Native', 'TypeScript', 'Expo', 'Supabase'],
     thumbnailUrl: '/images/projects/student-housing.svg',
     categoryId: PROJECT_CATEGORIES.BACKEND,
