@@ -84,8 +84,8 @@ export default function NotebookTab({
       className={`notebook-tab ${side}${active ? ' is-active' : ''}`}
       style={accent ? { '--tab-accent': accent } : undefined}
       aria-label={label}
-      aria-current={!isCategory && active ? 'page' : undefined}
-      aria-pressed={isCategory ? active : undefined}
+      aria-current={active ? 'page' : undefined}
+      aria-pressed={active}
       onClick={onSelect}
     >
       <span className="notebook-tab-icon" aria-hidden="true">

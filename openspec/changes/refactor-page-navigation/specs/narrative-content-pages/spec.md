@@ -2,106 +2,71 @@
 
 ## MODIFIED Requirements
 
-### Requirement: Spread ordering and counting convention
-The notebook MUST order spreads as: Sobre Mim → Carreira → Estudos → Projetos → IA e Automações → Jogos → WebDev → BackEnd → Contato (9 fixed spreads, 18 leaves). Each of the 9 sections occupies exactly one spread (2 pages). The variable project spreads within Projects are removed - the 4 right-side sections replace category filtering.
-
-#### Scenario: Page order from left to right
-- **WHEN** notebook opens after Play click
-- **THEN** spreads appear in this exact sequence: Sobre Mim → Carreira → Estudos → Projetos → IA e Automações → Jogos → WebDev → BackEnd → Contato
-
-#### Scenario: First spread is always Sobre Mim
-- **WHEN** the notebook first opens or navigates from the beginning
-- **THEN** the visible spread shows Sobre Mim content split across both leaves
-
-#### Scenario: Fixed 9-spread structure
-- **WHEN** navigating through the notebook
-- **THEN** there are exactly 9 spreads (18 pages) in fixed order, no variable-length sections
-
-#### Scenario: Last spread is always Contato
-- **WHEN** user reaches the end of sequential navigation
-- **THEN** the final spread shows Contato content
-
 ### Requirement: Projects section category tabs
-**REMOVED** - Replaced by right-side sections as first-class notebook sections. The four categories (IA e Automações, Jogos, WebDev, BackEnd) are now permanent sections with their own spreads at positions 5-8, not filters within a Projects section.
+The Projects section SHALL no longer filter notebook content by category. IA e Automações, Jogos, WebDev, and BackEnd SHALL instead be independent right-side markers that navigate directly to their own configured page pairs.
 
 #### Scenario: Category selection filters projects
-- **WHEN** the user selects WebDev from the right tabs
-- **THEN** only WebDev project spreads render across the notebook
-**REMOVED** - Right tabs now navigate to fixed section spreads, not filter projects
+- **WHEN** the user selects WebDev from the right-side tabs
+- **THEN** the notebook navigates to WebDev's first configured page pair without filtering other markers
 
 #### Scenario: Active category remains visible
-- **WHEN** a category is selected
-- **THEN** its tab expands and shows its name instead of disappearing
-**REMOVED** - Right tabs now have dual active state with Projetos (see narrative-right-sections spec)
+- **WHEN** a right-side marker is selected
+- **THEN** its tab expands and remains visible as the active project-domain marker
 
 #### Scenario: Project navigation preserves category filter
-- **WHEN** the user flips between spreads within a selected category
-- **THEN** the category filter remains active until another selection or reselection
-**REMOVED** - No category filtering; sequential navigation moves through fixed spreads
+- **WHEN** the user navigates away from a project-domain marker
+- **THEN** no category-filter state changes which page pairs are available in other markers
 
 #### Scenario: Category tabs do not show counts
-- **WHEN** category tabs render
+- **WHEN** right-side marker tabs render
 - **THEN** no project count badge or number appears
-**REMOVED** - Right tabs are now section tabs, not category filters
+
+### Requirement: Spread ordering and counting convention
+The notebook MUST use one ordered marker collection: Sobre Mim → Carreira → Estudos → Projetos → IA e Automações → Jogos → WebDev → BackEnd → Contato. Each marker MUST contain at least one two-page pair and MAY contain additional pairs; the global spread count equals the total configured pairs rather than a fixed number.
+
+#### Scenario: Page order from left to right
+- **WHEN** the default content configuration is generated
+- **THEN** its markers use the stated order regardless of whether a marker's tab is rendered on the left or right
+
+#### Scenario: First spread is always About Me
+- **WHEN** the notebook opens
+- **THEN** it displays Sobre Mim's first configured page pair
+
+#### Scenario: Projects section variable length
+- **WHEN** IA e Automações contains two page pairs and every other initial marker contains one pair
+- **THEN** the notebook contains ten global page pairs in the configured traversal order
+
+#### Scenario: Empty category handling
+- **WHEN** a maintainer adds a page pair to WebDev
+- **THEN** both WebDev pairs appear consecutively between Jogos and BackEnd during arrow navigation
 
 ## ADDED Requirements
 
-### Requirement: Right-side section spread content (IA e Automações)
-**When** IA e Automações spread is rendered (5th spread)
-**THEN** the left leaf MUST display IA/Automações overview and skills, and the right leaf MUST display featured IA/Automações projects and demos.
+### Requirement: Configurable marker page-pair content
+Each marker SHALL declare one or more page pairs containing a left leaf and a right leaf. The marker registry SHALL be the single content-order source used to render tabs and build the global navigation sequence.
 
-#### Scenario: IA e Automações left leaf
-- **WHEN** IA e Automações spread loads
-- **THEN** the left leaf shows IA/Automações technical skills, tools, and approach
+#### Scenario: Marker owns its pair collection
+- **WHEN** a marker has page pairs configured
+- **THEN** selecting its tab opens its first pair and the global arrows can traverse every pair it owns
 
-#### Scenario: IA e Automações right leaf
-- **WHEN** IA e Automações spread loads
-- **THEN** the right leaf shows featured IA/Automações projects with deploy links
+#### Scenario: Marker count is editable
+- **WHEN** a maintainer adds or removes a configured marker
+- **THEN** the notebook renders the resulting marker count and traverses its pairs without requiring a separate navigation-order update
 
-### Requirement: Right-side section spread content (Jogos)
-**When** Jogos spread is rendered (6th spread)
-**THEN** the left leaf MUST display game development overview and skills, and the right leaf MUST display featured game projects and demos.
+### Requirement: Project page-pair layout
+Each project-oriented page pair SHALL display descriptive project content on its left leaf and the project's image or demo on its right leaf.
 
-#### Scenario: Jogos left leaf
-- **WHEN** Jogos spread loads
-- **THEN** the left leaf shows game development technical skills, engines, and approach
+#### Scenario: First IA e Automações project pair
+- **WHEN** IA e Automações renders its first project pair
+- **THEN** its description appears on the left leaf and its image or demo appears on the right leaf
 
-#### Scenario: Jogos right leaf
-- **WHEN** Jogos spread loads
-- **THEN** the right leaf shows featured game projects with deploy links
+#### Scenario: Subsequent project pair
+- **WHEN** the user advances to another project pair in the same marker
+- **THEN** that pair also uses descriptive text on the left leaf and image or demo on the right leaf
 
-### Requirement: Right-side section spread content (WebDev)
-**When** WebDev spread is rendered (7th spread)
-**THEN** the left leaf MUST display web development overview and skills, and the right leaf MUST display featured web projects and demos.
+### Requirement: Projetos marker overview content
+When the Projetos marker's page pair is rendered, it SHALL provide an overview of the project domains and guide users toward the corresponding right-side markers.
 
-#### Scenario: WebDev left leaf
-- **WHEN** WebDev spread loads
-- **THEN** the left leaf shows web development technical skills, frameworks, and approach
-
-#### Scenario: WebDev right leaf
-- **WHEN** WebDev spread loads
-- **THEN** the right leaf shows featured web projects with deploy links
-
-### Requirement: Right-side section spread content (BackEnd)
-**When** BackEnd spread is rendered (8th spread)
-**THEN** the left leaf MUST display backend development overview and skills, and the right leaf MUST display featured backend projects and demos.
-
-#### Scenario: BackEnd left leaf
-- **WHEN** BackEnd spread loads
-- **THEN** the left leaf shows backend development technical skills, databases, APIs, and approach
-
-#### Scenario: BackEnd right leaf
-- **WHEN** BackEnd spread loads
-- **THEN** the right leaf shows featured backend projects with deploy links
-
-### Requirement: Projetos spread content updated
-**When** Projetos spread is rendered (4th spread)
-**THEN** the left leaf MUST display an overview of all project categories, and the right leaf MUST display featured/highlighted projects across all categories with navigation hints to the right-side sections.
-
-#### Scenario: Projetos left leaf
-- **WHEN** Projetos spread loads
-- **THEN** the left leaf shows a summary of all four project categories (IA e Automações, Jogos, WebDev, BackEnd) with brief descriptions
-
-#### Scenario: Projetos right leaf
-- **WHEN** Projetos spread loads
-- **THEN** the right leaf shows 1-2 featured projects from each category with visual indicators pointing to the right-side section tabs for deeper exploration
+#### Scenario: Projetos overview
+- **WHEN** the Projetos marker's first pair is displayed
+- **THEN** it summarizes IA e Automações, Jogos, WebDev, and BackEnd and provides visual navigation cues for their right-side tabs

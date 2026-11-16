@@ -19,6 +19,10 @@ export const profileData = {
       career: 'Carreira',
       studies: 'Estudos',
       projects: 'Projetos',
+      'ai-automation': 'IA e Automações',
+      games: 'Jogos',
+      webdev: 'WebDev',
+      backend: 'BackEnd',
       contact: 'Contato',
     },
     labels: {
@@ -194,6 +198,10 @@ export const profileData = {
       career: 'Career',
       studies: 'Studies',
       projects: 'Projects',
+      'ai-automation': 'AI & Automations',
+      games: 'Games',
+      webdev: 'WebDev',
+      backend: 'BackEnd',
       contact: 'Contact',
     },
     labels: {

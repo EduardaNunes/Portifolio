@@ -2,45 +2,37 @@
 
 ## Why
 
-The current page navigation has inconsistent behavior and structural limitations. The notebook currently has 5 main sections (About Me, Career, Studies, Projects, Contact) with Projects being the only section that has category filtering on the right side. The user wants to restructure this into 9 sections total - 5 on the left side and 4 on the right side - where ALL sections behave consistently with arrow navigation passing through every page sequentially, and the right-side sections (IA e Automações, Jogos, WebDev, BackEnd) are always visible and can have dual active state with "Projetos" on the left.
+The notebook navigation currently mixes fixed sections with project-category filtering, which causes inconsistent behavior and hard-to-maintain page ordering. A configurable marker model is needed so every notebook group owns its own ordered page pairs while the global arrows navigate them consistently.
 
 ## What Changes
 
-**BREAKING** - Navigation structure fundamentally changes:
-- **New section order**: 9 sections instead of 5: "Sobre Mim", "Carreira", "Estudos", "Projetos", "IA e Automações", "Jogos", "WebDev", "BackEnd", "Contato"
-- **Right-side sections**: The 4 project categories become full sections on the right side (not just category filters), each with at least 2 pages (1 spread)
-- **Sequential arrow navigation**: Bottom corner arrows navigate through ALL 9 spreads (18 pages) sequentially, one by one, regardless of side
-- **Right-side tabs always visible**: The 4 right-side section tabs are permanently rendered, not just when in Projects section
-- **Dual active tab state**: When a right-side section is active, BOTH "Projetos" (left tab) AND the active right-side tab are highlighted simultaneously - this is the ONLY case where two tabs can be active
-- **Each section = 1 spread (2 pages)**: Minimum 2 pages per section, with ability to add more page pairs if content overflows
-- **Category filtering removed from Projects**: The old category filtering within Projects is replaced by the new right-side sections structure
+**BREAKING** — The notebook navigation model changes from five sections plus a filtered project list to an ordered marker registry.
 
-**Implementation changes needed**:
-- `buildNotebookPages.js` - rebuild spread generation for 9 fixed sections
-- `NarrativeNotebook.jsx` - new navigation logic, dual active tab state, right-side tabs always visible
-- `NotebookTab.jsx` - support dual active state for right-side tabs
-- `ProjectsSection.jsx` - likely replaced/removed since right-side tabs become permanent section tabs
-- `App.jsx` - new sections and categories data structure
-- Profile data - add content for the 4 new right-side sections
+- Add one ordered, editable marker registry. Each marker declares its stable ID, localized label, visual `side` (`left` or `right`), accent/icon metadata, and one or more two-page page pairs.
+- Preserve the initial registry order: Sobre Mim → Carreira → Estudos → Projetos → IA e Automações → Jogos → WebDev → BackEnd → Contato.
+- Render the five current left markers (Sobre Mim, Carreira, Estudos, Projetos, Contato) on the left and the four current project-domain markers (IA e Automações, Jogos, WebDev, BackEnd) on the right. The side is driven by marker metadata and does not change registry order.
+- Navigate all page pairs sequentially with the existing global corner arrows: every pair in a marker is traversed before the next marker begins.
+- Require each marker to own at least one page pair and allow any marker to add further pairs without changing navigation logic. Project pairs retain the existing layout: descriptive text on the left page and image/demo on the right page.
+- Keep right-side markers permanently visible. While a right-side marker is current, activate both its tab and the Projetos tab; otherwise, exactly one tab is active.
+- Replace category filtering with direct navigation to the marker's first page pair.
 
 ## Capabilities
 
 ### New Capabilities
-- `narrative-right-sections`: Handles the 4 right-side sections (IA e Automações, Jogos, WebDev, BackEnd) as first-class notebook sections with their own spreads, permanent tab visibility, and dual active state with "Projetos"
+- `narrative-right-sections`: Defines right-side project-domain markers, their permanent visibility, dual active state with Projetos, and support for multiple page pairs.
 
 ### Modified Capabilities
-- `narrative-notebook-component`: Navigation logic completely refactored - sequential arrow navigation through all 9 spreads, dual active tab state for right-side sections, right-side tabs always visible
-- `narrative-content-pages`: Spread ordering changed from 5 to 9 sections, each section gets exactly 1 spread (2 pages), Projects category filtering removed and replaced by right-side sections
+- `narrative-notebook-component`: Changes marker rendering and navigation to use ordered, side-aware markers and flattened global page-pair traversal.
+- `narrative-content-pages`: Changes content ordering/counting from a fixed number of spreads to configurable markers with one or more page pairs.
 
 ## Impact
 
-**Affected files**:
-- `src/utils/buildNotebookPages.js` - spread generation logic
-- `src/components/narrative-notebook-component/NarrativeNotebook.jsx` - navigation, tabs, active state
-- `src/components/narrative-notebook-component/NotebookTab.jsx` - dual active state support
-- `src/components/narrative-notebook-component/ProjectsSection.jsx` - likely removed/replaced
-- `src/App.jsx` - sections and categories data
-- `src/data/profile.js` - content for 4 new right-side sections
-- `src/data/projects.js` - may need adjustments for new structure
+**Affected areas:**
+- `src/App.jsx` marker configuration and notebook inputs
+- `src/utils/buildNotebookPages.js` page-pair generation and flattening
+- `src/components/narrative-notebook-component/NarrativeNotebook.jsx` global navigation and active-tab derivation
+- `src/components/narrative-notebook-component/NotebookTab.jsx` active-state accessibility
+- Notebook page components and localized profile/project data
+- Existing category-filtering UI (`ProjectsSection.jsx`) will be removed or repurposed only if no longer needed
 
-**Dependencies**: None new - pure refactoring within existing React/Vite stack
+No external dependencies are required.

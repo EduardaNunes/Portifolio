@@ -25,6 +25,28 @@ const GITHUB = 'https://github.com/EduardaNunes'
  * All projects with their category assignments
  */
 export const projects = [
+  // IA e Automações
+  {
+    id: 'proj-chatbot-whatsapp',
+    title: 'Chatbot para WhatsApp',
+    description:
+      'Automação de atendimento via WhatsApp com fluxos conversacionais para organizar mensagens e responder dúvidas recorrentes.',
+    techStack: ['JavaScript', 'Node.js', 'WhatsApp API'],
+    repoLink: `${GITHUB}/chatbot-whatsapp`,
+    thumbnailUrl: '/images/projects/chatbot-whatsapp.svg',
+    categoryId: PROJECT_CATEGORIES.IA_AUTOMACAOES,
+  },
+  {
+    id: 'proj-automation-spreadsheet',
+    title: 'Automação de Planilhas',
+    description:
+      'Automação de tarefas repetitivas em planilhas para transformar dados, reduzir trabalho manual e manter relatórios atualizados.',
+    techStack: ['Python', 'Pandas', 'Automação'],
+    repoLink: `${GITHUB}/automation-spreadsheet`,
+    thumbnailUrl: '/images/projects/automation-spreadsheet.svg',
+    categoryId: PROJECT_CATEGORIES.IA_AUTOMACAOES,
+  },
+
   // Jogos
   {
     id: 'proj-programadas',
@@ -92,24 +114,6 @@ export const projects = [
     categoryId: PROJECT_CATEGORIES.BACKEND,
   },
 ]
-
-/**
- * Helper function to get projects by category
- */
-export const getProjectsByCategory = (categoryId) => {
-  return projects.filter((p) => p.categoryId === categoryId)
-}
-
-/**
- * Helper function to get all categories with their project count
- */
-export const getCategorizedProjects = () => {
-  return CATEGORIES.map((category) => ({
-    name: category,
-    id: category,
-    projects: getProjectsByCategory(category),
-  }))
-}
 
 /**
  * Helper function to get a single project by ID

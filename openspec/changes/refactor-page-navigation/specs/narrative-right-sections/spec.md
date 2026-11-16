@@ -2,61 +2,65 @@
 
 ## Purpose
 
-Handles the four right-side sections (IA e Automações, Jogos, WebDev, BackEnd) as first-class notebook sections with their own spreads, permanent tab visibility on the right side, and dual active state where "Projetos" on the left and exactly one right-side tab are simultaneously active.
+Defines right-side project-domain markers as permanent, configurable notebook markers. Each can own multiple page pairs while sharing the global navigation order and dual active state with Projetos.
 
 ## ADDED Requirements
 
-### Requirement: Right-side sections as permanent notebook sections
-The notebook SHALL include four right-side sections: "IA e Automações", "Jogos", "WebDev", and "BackEnd", each occupying exactly one spread (two pages) in the fixed navigation order after "Projetos" and before "Contato".
+### Requirement: Side-aware marker configuration
+The notebook SHALL define each marker in one ordered configuration with an ID, label, side (`left` or `right`), and one or more page pairs. A marker's side SHALL control only where its tab renders and SHALL NOT alter its position in the ordered configuration.
 
-#### Scenario: Right sections exist in spread sequence
-- **WHEN** the notebook spreads are generated
-- **THEN** the spread order is: Sobre Mim → Carreira → Estudos → Projetos → IA e Automações → Jogos → WebDev → BackEnd → Contato (9 spreads total)
+#### Scenario: Initial right-side markers
+- **WHEN** the default marker configuration is rendered
+- **THEN** IA e Automações, Jogos, WebDev, and BackEnd have `side: right` and render on the notebook's right edge
 
-#### Scenario: Each right section has exactly one spread
-- **WHEN** any right-side section is rendered
-- **THEN** it occupies exactly one spread with distinct left and right leaf content
+#### Scenario: Side does not reorder navigation
+- **WHEN** a marker is configured with `side: right`
+- **THEN** global navigation retains its configured position between Projetos and Contato
+
+#### Scenario: Editable marker collection
+- **WHEN** a maintainer adds, removes, or changes the side of a marker in the configuration
+- **THEN** the tabs and global page-pair navigation reflect that configuration without separate ordering logic
 
 ### Requirement: Right-side tabs always visible
-The four right-side section tabs SHALL remain permanently rendered on the right edge of the notebook, regardless of which section is currently active.
+Right-side markers SHALL remain permanently rendered on the right edge of the notebook, regardless of which marker or page pair is current.
 
-#### Scenario: Right tabs visible on all sections
-- **WHEN** the notebook is open on any spread (including Sobre Mim, Carreira, etc.)
-- **THEN** all four right-side tabs (IA e Automações, Jogos, WebDev, BackEnd) are visible in compact form
+#### Scenario: Right tabs visible outside project domains
+- **WHEN** the notebook is open on Sobre Mim, Carreira, Estudos, Projetos, or Contato
+- **THEN** all configured right-side tabs remain visible in compact form
 
-#### Scenario: Right tabs use shared tab component
-- **WHEN** right-side tabs render
-- **THEN** they use the same NotebookTab component as left tabs, mirrored for the right side
+#### Scenario: Right tabs use shared behavior
+- **WHEN** a right-side tab renders
+- **THEN** it uses the same tab interaction and accessibility behavior as a left-side tab, mirrored for the right edge
 
-### Requirement: Dual active tab state with Projetos
-When any right-side section is the active spread, BOTH the "Projetos" left tab AND the corresponding right-side tab SHALL be in active/expanded state simultaneously. This is the ONLY scenario where two tabs are active at once.
+### Requirement: Dual active state with Projetos
+When a page pair belonging to a right-side marker is current, the Projetos left-side tab and exactly that current right-side tab SHALL be active and expanded simultaneously. For all other current markers, exactly one tab SHALL be active.
 
-#### Scenario: Right section active shows dual active state
-- **WHEN** user navigates to "Jogos" spread (via arrows or right tab click)
-- **THEN** "Projetos" left tab is active AND "Jogos" right tab is active simultaneously
+#### Scenario: Right-side pair activates two tabs
+- **WHEN** the current page pair belongs to Jogos
+- **THEN** Projetos and Jogos are active simultaneously and every other marker tab is inactive
 
-#### Scenario: Left-only section shows single active state
-- **WHEN** user navigates to "Carreira" spread
-- **THEN** only "Carreira" left tab is active; all right tabs are compact; "Projetos" is NOT active
+#### Scenario: Left-side marker activates one tab
+- **WHEN** the current page pair belongs to Carreira
+- **THEN** only Carreira is active and all right-side tabs are compact
 
-#### Scenario: Projetos section shows single active state
-- **WHEN** user navigates to "Projetos" spread
-- **THEN** only "Projetos" left tab is active; all right tabs are compact
+#### Scenario: Projetos marker activates one tab
+- **WHEN** the current page pair belongs to Projetos
+- **THEN** only Projetos is active and all right-side tabs are compact
 
-#### Scenario: Contato section shows single active state
-- **WHEN** user navigates to "Contato" spread
-- **THEN** only "Contato" left tab is active; all right tabs are compact; "Projetos" is NOT active
+### Requirement: Right-side markers support multiple page pairs
+Each right-side marker SHALL own at least one two-page pair and MAY own additional pairs. Global navigation SHALL traverse all of a marker's pairs in their configured order before proceeding to the next marker.
 
-### Requirement: Right tab click navigates to corresponding spread
-Clicking a right-side tab SHALL navigate directly to that section's spread and establish the dual active state.
+#### Scenario: Multiple IA e Automações projects
+- **WHEN** IA e Automações has two configured project pairs
+- **THEN** the next arrow moves from the first pair to the second pair before moving to Jogos
 
-#### Scenario: Click right tab navigates and activates dual state
-- **WHEN** user clicks "WebDev" right tab while on "Sobre Mim"
-- **THEN** notebook navigates to "WebDev" spread with page turn animation AND "Projetos" left tab + "WebDev" right tab become active
+#### Scenario: Project pair layout
+- **WHEN** a project-oriented page pair is displayed
+- **THEN** its descriptive text is on the left page and its image or demo is on the right page
 
-### Requirement: Right sections have minimum two pages each
-Each right-side section SHALL have at least one spread (two pages: left and right leaf). Additional page pairs may be added if content overflows.
+### Requirement: Right tab direct navigation
+Selecting a right-side marker tab SHALL navigate to the first page pair belonging to that marker and establish its dual active state.
 
-#### Scenario: Right section has left and right leaf content
-- **WHEN** "IA e Automações" spread renders
-- **THEN** left leaf shows IA/Automações overview and right leaf shows related projects/demos
+#### Scenario: Right tab selects first pair
+- **WHEN** the user selects WebDev while viewing Sobre Mim
+- **THEN** the notebook navigates to WebDev's first page pair and activates Projetos plus WebDev

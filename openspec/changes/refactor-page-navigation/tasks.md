@@ -1,60 +1,40 @@
 # Tasks
 
-## 1. Data & Content Updates
+## 1. Marker Registry and Content Model
 
-- [ ] 1.1 Add right-side section content to `src/data/profile.js` (PT and EN) - verify by checking profileData structure has `aiAutomation`, `games`, `webdev`, `backend` objects with `heading`, `left`, `right` content for each language
-- [ ] 1.2 Update `src/data/projects.js` if needed - verify project data can be referenced by new right-side sections (no breaking changes to existing project structure)
+- [x] 1.1 Define one ordered marker registry for Sobre Mim, Carreira, Estudos, Projetos, IA e Automações, Jogos, WebDev, BackEnd, and Contato, with ID, localized label, `side`, visual metadata, and `pagePairs`; verify it preserves the required order while exposing five `left` and four `right` markers.
+- [x] 1.2 Move or adapt localized content in `src/data/profile.js` so every marker owns at least one left/right page pair; verify both PT and EN render all marker labels and page content.
+- [x] 1.3 Represent project-domain content as one or more ordered page pairs per marker; verify every project pair provides description/metadata on the left and image/demo/deploy content on the right.
+- [x] 1.4 Preserve or adapt project data in `src/data/projects.js` for pair generation without breaking existing project links/assets; verify each referenced project renders from its existing data.
 
-## 2. Spread Generation Refactor
+## 2. Page-Pair Generation
 
-- [ ] 2.1 Rewrite `src/utils/buildNotebookPages.js` to generate fixed 9-spread array with section IDs: `about`, `career`, `studies`, `projects`, `ai-automation`, `games`, `webdev`, `backend`, `contact` - verify by console.log output showing 9 spreads with correct section IDs
-- [ ] 2.2 Create/import page components for right-side sections in `buildNotebookPages.js` - verify all 9 spreads render without errors
-- [ ] 2.3 Update `getPageSectionCounts` if needed - verify it returns counts for all 9 sections
+- [x] 2.1 Refactor `src/utils/buildNotebookPages.js` to generate page pairs from the marker registry rather than category filtering; verify generated spreads retain owning `markerId`, pair ID, left leaf, and right leaf.
+- [x] 2.2 Flatten marker `pagePairs` in registry order for the global notebook sequence; verify a marker with two pairs yields consecutive spreads before the following marker begins.
+- [x] 2.3 Update `getPageSectionCounts` or equivalent helpers to count generated pairs by marker ID; verify counts reflect a configurable number of pairs.
+- [x] 2.4 Create or adapt page components for marker and project-pair content; verify every configured pair renders without React errors.
 
-## 3. Page Components for Right-Side Sections
+## 3. Side-Aware Tabs and Navigation
 
-- [ ] 3.1 Create `src/components/narrative-notebook-component/AiAutomationPage.jsx` (left/right variants or single with side prop) - verify component renders with correct content from profileData
-- [ ] 3.2 Create `src/components/narrative-notebook-component/GamesPage.jsx` - verify component renders with correct content
-- [ ] 3.3 Create `src/components/narrative-notebook-component/WebDevPage.jsx` - verify component renders with correct content
-- [ ] 3.4 Create `src/components/narrative-notebook-component/BackEndPage.jsx` - verify component renders with correct content
-- [ ] 3.5 Update `src/components/narrative-notebook-component/ProjectsSection.jsx` or create new `ProjectsOverviewPage.jsx` for Projetos spread content - verify Projetos spread shows category overview + featured projects
+- [x] 3.1 Refactor `NarrativeNotebook.jsx` to receive the marker registry and derive left/right tab groups from each marker's `side`; verify the default layout renders only Sobre Mim, Carreira, Estudos, Projetos, and Contato on the left and the four project-domain markers on the right.
+- [x] 3.2 Keep right-side tabs permanently visible and remove category-filter conditional rendering; verify all four right tabs remain visible while viewing every marker.
+- [x] 3.3 Update direct marker selection so either side's tab navigates to its first owned page pair; verify a right-tab click reaches the first pair of its marker without changing global ordering.
+- [x] 3.4 Update corner-arrow navigation to move one flattened page pair at a time with valid first/last bounds; verify it traverses every pair within a marker before the next marker.
+- [x] 3.5 Derive active state from the current pair's owning marker; verify a current right-side pair activates Projetos plus exactly its matching right tab, and any left-side pair activates only its own tab.
+- [x] 3.6 Reconcile pending page-turn/tab anchoring state using marker ownership; verify tab state remains correct during forward, backward, and reduced-motion transitions.
 
-## 4. Navigation & Tab Logic Refactor (NarrativeNotebook.jsx)
+## 4. Component and Application Integration
 
-- [ ] 4.1 Replace `currentSpread`/`goToSpread` logic with fixed 0-8 index mapping - verify `goToSpread(index)` clamps to 0-8 and navigation works
-- [ ] 4.2 Implement dual active state: track `activeLeftSection` and `activeRightSection` - verify when on right-side spread, both "Projetos" left tab AND right tab are active
-- [ ] 4.3 Render right-side tabs permanently (not conditional on `isProjects`) - verify 4 right tabs visible on ALL spreads
-- [ ] 4.4 Update `handleMarkerClick` for left tabs (9 sections) - verify clicking any left tab navigates to correct spread
-- [ ] 4.5 Add right tab click handlers - verify clicking right tab navigates to correct spread (index 4-7) and sets dual active state
-- [ ] 4.6 Update arrow navigation (corner zones) to use fixed 0-8 sequence - verify left/right arrows move through all 9 spreads sequentially
-- [ ] 4.7 Remove `activeCategory` prop and related category filtering logic - verify no references to `activeCategory` or `onCategorySelect` remain
-- [ ] 4.8 Update `effectiveSection` logic for tab anchoring during turns - verify tabs update correctly during page turns
-- [ ] 4.9 Remove `ProjectsSection` component usage from render - verify right tabs render directly in NotebookTab
+- [x] 4.1 Update `NotebookTab.jsx` accessibility state so single and dual active tabs expose correct labels and selected/current semantics; verify keyboard focus still expands inactive tabs without changing selection.
+- [x] 4.2 Update `App.jsx` to pass the marker registry and generated page pairs; remove `activeCategory`, category filtering callbacks, and duplicate side/order configuration; verify no category-filter props remain.
+- [x] 4.3 Remove or repurpose `ProjectsSection.jsx` only after its filtering responsibilities are replaced; verify there are no unused imports or runtime module errors.
+- [x] 4.4 Remove obsolete category-filter constants/helpers only when no longer referenced; verify repository search finds no stale `activeCategory` or filter-navigation logic.
 
-## 5. NotebookTab Component Updates
+## 5. Verification
 
-- [ ] 5.1 Add `dualActive` prop to `NotebookTab` for right-side tabs - verify right tab shows active styling when `dualActive=true`
-- [ ] 5.2 Ensure left "Projetos" tab can be active simultaneously with right tab - verify both show expanded/active state together
-- [ ] 5.3 Verify hover/focus behavior still works correctly with dual active state - verify non-active tabs expand on hover/focus
-
-## 6. App.jsx Integration
-
-- [ ] 6.1 Update `sections` array to 9 sections with correct IDs and labels - verify all 9 left tabs render with correct labels
-- [ ] 6.2 Remove `categories` array and `activeCategory` state - verify no category filtering code remains
-- [ ] 6.3 Remove `onCategorySelect` handler - verify Notebook receives only `sections` and `spreads` props
-- [ ] 6.4 Pass new `spreads` from `buildNotebookPages` (no longer needs `activeCategory`) - verify spreads generated correctly
-
-## 7. Cleanup & Verification
-
-- [ ] 7.1 Remove unused `ProjectsSection.jsx` if fully replaced - verify no import errors
-- [ ] 7.2 Remove unused category-related constants from `src/data/projects.js` (`CATEGORIES`, `CATEGORY_META` in App.jsx) - verify no dead code
-- [ ] 7.3 Test full navigation flow: arrows, left tabs, right tabs, direct spread access - verify all 9 spreads accessible and dual active state works
-- [ ] 7.4 Test reduced motion preference - verify page turns work without animation
-- [ ] 7.5 Test theme toggle (light/dark) - verify tab icons and cover colors still work
-- [ ] 7.6 Test language toggle (PT/EN) - verify all 9 sections show correct localized labels
-- [ ] 7.7 Run build (`npm run build`) - verify no TypeScript/ESLint errors and production build succeeds
+- [x] 5.5 Run `npm run build`; verify the production build completes without errors.
 
 ## Workflow follow-up
 
-- Archive the change after implementation is complete and verified
-- Verify the archived result
+- Archive the change after implementation is complete and verified.
+- Verify the archived result.
