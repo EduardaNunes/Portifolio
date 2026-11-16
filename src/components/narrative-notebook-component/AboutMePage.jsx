@@ -20,16 +20,16 @@ const AboutMePage = ({
 }) => {
   if (side === 'right') {
     return (
-      <div className="about-me-page about-me-page-right">
-        <section className="results-section">
-          <h3>{labels.results}</h3>
+      <div className="about-me-page about-me-page-right pixel-art-container">
+        <section className="results-section pixel-art-entry-list">
+          <h3 className="pixel-art-header">{labels.results}</h3>
           <ul className="results-list">
             {results.map((result, index) => (
-              <li key={index} className="result-item">
-                <span className="result-title">{result.title}</span>
-                <span className="result-desc">{result.description}</span>
+              <li key={index} className="result-item pixel-art-entry">
+                <span className="result-title pixel-art-entry-label">{result.title}</span>
+                <span className="result-desc pixel-art-entry-value">{result.description}</span>
                 {result.link && (
-                  <a href={result.link} target="_blank" rel="noopener noreferrer" className="result-link">
+                  <a href={result.link} target="_blank" rel="noopener noreferrer" className="result-link pixel-art-entry-action">
                     {result.title} →
                   </a>
                 )}
@@ -42,28 +42,28 @@ const AboutMePage = ({
   }
 
   return (
-    <div className="about-me-page about-me-page-left">
-      <h2>{heading}</h2>
+    <div className="about-me-page about-me-page-left pixel-art-container">
+      <h2 className="pixel-art-header">{heading}</h2>
 
-      <section className="skills-section">
-        <h3>{labels.skills}</h3>
+      <section className="skills-section pixel-art-entry-list">
+        <h3 className="pixel-art-header">{labels.skills}</h3>
         <ul className="skills-list">
           {skills.map((skill, index) => (
-            <li key={index} className="skill-item">
-              <span className="skill-name">{skill.name}</span>
-              <span className="skill-tags">{skill.tags ? skill.tags.join(', ') : ''}</span>
+            <li key={index} className="skill-item pixel-art-entry">
+              <span className="skill-name pixel-art-entry-label">{skill.name}</span>
+              <span className="skill-tags pixel-art-entry-value">{skill.tags ? skill.tags.join(', ') : ''}</span>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="soft-skills-section">
-        <h3>{labels.softSkills}</h3>
-        <ul className="soft-skills-list">
+      <section className="soft-skills-section pixel-art-entry-list">
+        <h3 className="pixel-art-header">{labels.softSkills}</h3>
+        <ul className="soft-skill-list">
           {softSkills.map((skill, index) => (
-            <li key={index} className="soft-skill-item">
-              <span className="soft-skill-name">{skill.name}</span>
-              <span className="soft-skill-desc">{skill.description}</span>
+            <li key={index} className="soft-skill-item pixel-art-entry">
+              <span className="soft-skill-name pixel-art-entry-label">{skill.name}</span>
+              <span className="soft-skill-desc pixel-art-entry-value">{skill.description}</span>
             </li>
           ))}
         </ul>

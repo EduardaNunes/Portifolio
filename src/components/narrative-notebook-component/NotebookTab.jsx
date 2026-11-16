@@ -92,7 +92,7 @@ export default function NotebookTab({
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="var(--tab-icon-ink)"
           strokeWidth="1.8"
           strokeLinecap="round"
           strokeLinejoin="round"

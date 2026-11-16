@@ -41,6 +41,10 @@ Tabs MUST touch the notebook's visible page system with no floating gap. Inactiv
 - **WHEN** any tab is rendered
 - **THEN** its shape has no semicircular notch, circle, or dot
 
+#### Scenario: Anchor changes do not float
+- **WHEN** a tab changes between inactive and active state
+- **THEN** its page-stack or top-leaf contact position updates instantly without a visible transform transition or detached floating state
+
 ### Requirement: Tab icons keep fixed contrast across themes
 Tab icons MUST use the documented black ink color and MUST NOT inherit the light/dark theme text color, tab label color, or tab accent. Icons remain visible when the theme changes.
 
@@ -71,6 +75,14 @@ The left and right sides of the notebook MUST act as pixel-art cover boards usin
 - **WHEN** the notebook is open
 - **THEN** the cover boards and intervening page stacks remain visible on both sides of the white leaves
 
+#### Scenario: Closed notebook keeps the cover
+- **WHEN** the notebook is closed before Play
+- **THEN** the collapsed notebook still presents the pixel-art cover in the current theme colors
+
+#### Scenario: No new colors
+- **WHEN** the cover is inspected in either theme
+- **THEN** every color used already exists in the project palette
+
 #### Scenario: Page stack is visible behind the spread
 - **WHEN** the notebook is open
 - **THEN** gray layered page edges are visible between both cover boards and their adjacent white leaf edges
@@ -82,6 +94,48 @@ The left and right sides of the notebook MUST act as pixel-art cover boards usin
 #### Scenario: Existing notebook interactions are preserved
 - **WHEN** the user changes spread through a tab or corner navigation
 - **THEN** the current navigation, page-turn animation, category filtering, and reduced-motion behavior continue to work
+
+## ADDED Requirements
+
+### Requirement: Page turns provide sound feedback
+
+An animated notebook page turn MUST play `book_page_turn.wav` once when it starts. Navigation MUST remain usable if audio playback is unavailable. When reduced motion is preferred, content changes MUST remain direct and MUST NOT play turn audio.
+
+#### Scenario: Animated spread turn plays sound
+- **WHEN** a user starts an animated spread change through a corner or section marker
+- **THEN** the page-turn animation starts and `book_page_turn.wav` plays once
+
+#### Scenario: Reduced motion omits turn feedback
+- **WHEN** the user prefers reduced motion and changes a spread or category
+- **THEN** content changes without a rotational turn and `book_page_turn.wav` is not played
+
+### Requirement: Category navigation uses page-turn transactions
+
+Project-category markers MUST use the same forward/backward page-turn transaction and turn lock as spread navigation when they change project content.
+
+#### Scenario: Category change turns the project spread
+- **WHEN** a user selects a different project category through a right-side marker
+- **THEN** the project content changes through the same page-turn animation and turn lock used for spread navigation
+
+#### Scenario: Category selection preserves filtering
+- **WHEN** a project category turn completes
+- **THEN** the selected category remains active and the project spread reflects that category's filtered content
+
+### Requirement: Corner navigation uses directional arrow affordances
+
+The previous and next corner controls MUST retain their existing navigation behavior, localized accessible names, and first/last-page disabled limits. Their hover treatment MUST use the existing arrow artwork instead of a dark rectangular hover fill. The left affordance MUST point left, the right affordance MUST point right, and each MUST scale up slightly on hover or keyboard focus.
+
+#### Scenario: Directional corner affordances
+- **WHEN** an enabled previous or next corner control is visible
+- **THEN** it presents the corresponding existing arrow artwork pointing outward from the notebook
+
+#### Scenario: Hover and focus arrow feedback
+- **WHEN** a user hovers or keyboard-focuses an enabled corner control
+- **THEN** its arrow increases slightly in size without changing the control's navigation target or hit area
+
+#### Scenario: Boundary corner controls remain disabled
+- **WHEN** the notebook is at the first or last spread
+- **THEN** the unavailable previous or next control remains non-operable and its directional affordance is not presented as available
 
 #### Scenario: Closed notebook keeps the cover
 - **WHEN** the notebook is closed before Play

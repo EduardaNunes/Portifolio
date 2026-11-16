@@ -22,14 +22,14 @@ const ContactPage = ({
 
   if (side === 'right') {
     return (
-      <div className="contact-page contact-page-right">
-        <section className="social-links-section">
+      <div className="contact-page contact-page-right pixel-art-container">
+        <section className="social-links-section pixel-art-entry-list">
           {linkedinUrl && (
             <a
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link linkedin"
+              className="social-link linkedin pixel-art-entry-action"
               aria-label="LinkedIn profile"
             >
               <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -44,7 +44,7 @@ const ContactPage = ({
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link github"
+              className="social-link github pixel-art-entry-action"
               aria-label="GitHub profile"
             >
               <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -55,7 +55,7 @@ const ContactPage = ({
           )}
 
           {mailto && (
-            <a href={mailto} className="social-link email" aria-label="Send email">
+            <a href={mailto} className="social-link email pixel-art-entry-action" aria-label="Send email">
               <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
               </svg>
@@ -65,14 +65,14 @@ const ContactPage = ({
         </section>
 
         {socialLinks.length > 0 && (
-          <section className="social-links-section">
+          <section className="social-links-section pixel-art-entry-list">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-link external"
+                className="social-link external pixel-art-entry-action"
                 aria-label={`Visit ${link.platform}`}
               >
                 <span className="platform-name">{link.platform}</span>
@@ -85,14 +85,14 @@ const ContactPage = ({
   }
 
   return (
-    <div className="contact-page contact-page-left">
-      <h2>{heading}</h2>
+    <div className="contact-page contact-page-left pixel-art-container">
+      <h2 className="pixel-art-header">{heading}</h2>
 
-      {email && <p className="contact-email">{email}</p>}
+      {email && <p className="contact-email pixel-art-entry-value">{email}</p>}
 
       {mailto && (
         <div className="contact-actions">
-          <a className="contact-btn" href={mailto}>
+          <a className="contact-btn pixel-art-entry-action" href={mailto}>
             {labels.message}
           </a>
         </div>

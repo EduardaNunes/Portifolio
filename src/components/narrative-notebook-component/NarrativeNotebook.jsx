@@ -49,14 +49,19 @@ const NarrativeNotebook = ({
 }) => {
   const [currentSpread, setCurrentSpread] = useState(0)
   const [turn, setTurn] = useState(null)
+  const [pendingSection, setPendingSection] = useState(null)
   const turningRef = useRef(false)
   const previousCategory = useRef(activeCategory)
+  // Track the spread that is visually on screen (for category-turn origin)
+  const visualSpreadRef = useRef(spreads[0] ?? null)
   const totalSpreads = spreads.length
   const safeSpread = totalSpreads === 0 ? 0 : Math.min(currentSpread, totalSpreads - 1)
   const current = spreads[safeSpread]
   const currentSection = current?.section
-  const isProjects = currentSection === 'projects'
-  const currentLabel = sections.find((section) => section.id === currentSection)?.label ?? ''
+  // During a turn, use the pending target section for immediate tab anchoring
+  const effectiveSection = pendingSection ?? currentSection
+  const isProjects = effectiveSection === 'projects'
+  const currentLabel = sections.find((section) => section.id === effectiveSection)?.label ?? ''
 
   const commitSpread = useCallback(
     (index) => {
@@ -67,13 +72,18 @@ const NarrativeNotebook = ({
   )
 
   const goToSpread = useCallback(
-    (index) => {
+    (index, options = {}) => {
       if (totalSpreads === 0 || turningRef.current) return
       const clamped = Math.max(0, Math.min(index, totalSpreads - 1))
       if (clamped === safeSpread) return
 
+      const targetSection = spreads[clamped]?.section
+      if (targetSection) setPendingSection(targetSection)
+
       if (prefersReducedMotion()) {
         commitSpread(clamped)
+        visualSpreadRef.current = spreads[clamped] ?? null
+        setPendingSection(null)
         return
       }
 
@@ -83,17 +93,20 @@ const NarrativeNotebook = ({
         from: safeSpread,
         to: clamped,
         direction: clamped > safeSpread ? 'forward' : 'backward',
+        fromSpread: options.fromSpread ?? null,
       })
     },
-    [commitSpread, safeSpread, totalSpreads],
+    [commitSpread, safeSpread, totalSpreads, spreads],
   )
 
   const handleTurnFinish = useCallback(() => {
     if (!turn) return
     turningRef.current = false
     commitSpread(turn.to)
+    visualSpreadRef.current = spreads[turn.to] ?? null
     setTurn(null)
-  }, [commitSpread, turn])
+    setPendingSection(null)
+  }, [commitSpread, turn, spreads])
 
   useEffect(() => {
     setCurrentSpread((previous) => Math.min(previous, Math.max(0, totalSpreads - 1)))
@@ -105,8 +118,11 @@ const NarrativeNotebook = ({
     turningRef.current = false
     setTurn(null)
     const firstProject = spreads.findIndex((spread) => spread.section === 'projects')
-    if (firstProject >= 0) setCurrentSpread(firstProject)
-  }, [activeCategory, spreads])
+    if (firstProject >= 0) {
+      // Use the visually current spread as the turn origin for category changes
+      goToSpread(firstProject, { fromSpread: visualSpreadRef.current })
+    }
+  }, [activeCategory, spreads, goToSpread])
 
   const handleMarkerClick = (sectionId) => {
     const index = spreads.findIndex((spread) => spread.section === sectionId)
@@ -127,6 +143,11 @@ const NarrativeNotebook = ({
     turn && spreads[turn.from] && spreads[turn.to]
       ? { from: spreads[turn.from], to: spreads[turn.to] }
       : null
+
+  // For category turns, the "from" spread may not be in the new spreads array
+  const fromSpreadForTurn = turn?.fromSpread ?? (turnSpreads?.from ?? null)
+  const toSpreadForTurn = turnSpreads?.to ?? null
+
   const isForward = turn?.direction === 'forward'
   const baseLeft = turnSpreads
     ? isForward
@@ -138,13 +159,15 @@ const NarrativeNotebook = ({
       ? turnSpreads.to
       : turnSpreads.from
     : current
-  const turningFront = turnSpreads ? (isForward ? turnSpreads.from : turnSpreads.to) : null
-  const turningBack = turnSpreads ? (isForward ? turnSpreads.to : turnSpreads.from) : null
+  const turningFront = toSpreadForTurn
+  const turningBack = fromSpreadForTurn
 
   return (
     <section id="notebook-section" className="notebook-section" data-snap-section>
       <div className="notebook-frame">
         <div className="notebook-shell">
+          <div className="notebook-page-stack left" aria-hidden="true" />
+          <div className="notebook-page-stack right" aria-hidden="true" />
           <div className="notebook-stage">
             {baseLeft && baseRight && (
               <div className="notebook-spread">
@@ -200,7 +223,7 @@ const NarrativeNotebook = ({
               side="left"
               icon={section.id}
               label={section.label}
-              active={section.id === currentSection}
+              active={section.id === effectiveSection}
               accent={section.accent}
               onSelect={() => handleMarkerClick(section.id)}
             />

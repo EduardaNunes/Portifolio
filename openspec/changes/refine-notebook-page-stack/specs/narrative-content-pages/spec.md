@@ -13,6 +13,10 @@ Every notebook leaf MUST present its existing localized information in a structu
 - **WHEN** a project leaf is rendered
 - **THEN** its existing metadata or demo information is presented with the shared pixel-art treatment without removing the repository, preview, or deploy actions required for that leaf
 
+#### Scenario: Project preview has no demo-copy overlay
+- **WHEN** a project image or video preview is rendered
+- **THEN** no "Ver demo" or equivalent demo-label text is displayed over the media while the media frame, visual overlay treatment, and deploy action remain available
+
 #### Scenario: Information division is preserved
 - **WHEN** any spread is rendered after the presentation refresh
 - **THEN** the information remains on the same left or right leaf defined by the content requirements

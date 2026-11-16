@@ -38,7 +38,23 @@ Tabs retain their shared component and active state. The tab container will alig
 
 **Alternatives considered:** Moving the entire tab list for the active state was rejected because it incorrectly moves inactive tabs. Conditional rendering of duplicate active tabs was rejected because it harms keyboard order and risks visual duplication during changes.
 
-### 3. Use an explicit black icon token
+### 3. Make marker attachment instantaneous
+
+The active-state offset that moves a marker between the page stack and top leaf will not be included in the tab transition. Width, label, shadow, and focus/hover presentation may retain their existing short transitions, but the contact-edge position changes immediately when the active section or category changes.
+
+**Rationale:** A delayed transform leaves the marker visibly floating between its physical anchors during page changes.
+
+**Alternatives considered:** Reducing the transform duration was rejected because it still permits a visible detached state and is less deterministic than removing the anchor transition.
+
+### 4. Synchronize page-turn feedback across navigation sources
+
+A single notebook turn transaction will serve corner navigation, left section markers, and right project-category markers. When an animated turn begins, it will play `public/Sounds/book_page_turn.wav` once. Reduced-motion navigation remains direct and does not start a rotational turn or its associated sound. Category selection continues to filter the project spread model, but its visual transition uses the same forward/backward turn direction and turn lock that prevents overlapping page turns.
+
+**Rationale:** The same navigational metaphor and feedback should apply regardless of whether a spread or a project category initiated the change.
+
+**Alternatives considered:** A separate category-only fade was rejected because it weakens the physical-book metaphor. Playing the sound for direct reduced-motion changes was rejected because no page turn occurs.
+
+### 5. Use an explicit black icon token
 
 Define a tab-icon ink token using the existing dark ink (`#1a1917`) and apply it directly to the icon wrapper/SVG, independently from tab foreground and theme variables. Labels and accent strips keep their present roles.
 
@@ -46,7 +62,7 @@ Define a tab-icon ink token using the existing dark ink (`#1a1917`) and apply it
 
 **Alternatives considered:** Reusing the teal tab-icon token was rejected because the requested result is black. Inheriting the global text color was rejected because it caused the reported contrast issue.
 
-### 4. Build a shared pixel-paper vocabulary over existing semantic markup
+### 6. Build a shared pixel-paper vocabulary over existing semantic markup
 
 Refine each page component only where a semantic grouping or label is missing; otherwise attach shared page classes to existing headings, sections, list rows, metadata chips, timelines, action links, and media areas. CSS will provide square pixel borders, compact header bands, small corner/edge ornaments, entry separators, and content-specific accents from the approved palette. The decorations remain clipped by the leaf and must not be fixed-positioned or consume unbounded width.
 
@@ -54,7 +70,15 @@ Refine each page component only where a semantic grouping or label is missing; o
 
 **Alternatives considered:** A single decorative background was rejected because it would not improve information hierarchy. A component rewrite around hard-coded card copy was rejected because it risks localization and content loss.
 
-### 5. Document the source palette in the README
+### 7. Replace corner hover shading with directional arrow affordances
+
+The existing corner buttons retain their semantics, hit areas, disabled limits, and navigation handlers. Their hover-only rectangular shading is replaced by the existing arrow image asset. The left arrow is mirrored to point left, the right arrow points right, and either arrow receives a small scale increase on hover or keyboard focus. The artwork remains decorative because the buttons already expose localized accessible names.
+
+**Rationale:** Directional arrows make the available turn direction explicit without changing the established corner interaction.
+
+**Alternatives considered:** Replacing the buttons with image links was rejected because it would duplicate controls and weaken the existing accessible button behavior.
+
+### 8. Document the source palette in the README
 
 Add a color-policy section to the README that enumerates the current CSS colors by semantic groups (dark/light base, text/ink, blue cover family, orange cover family, neutral/paper/tab grays, section accents, white, and allowed alpha effects). The rule will require reuse of this inventory and an explicit documentation update for any new interface color.
 
@@ -65,14 +89,17 @@ Add a color-policy section to the README that enumerates the current CSS colors 
 ## Risks / Trade-offs
 
 - **Page-stack inset reduces usable leaf width** → use responsive `clamp` sizing and validate both desktop and the existing narrow viewport target; retain leaf-local vertical scrolling.
-- **Active tab offset plus expanded-tab correction can misplace tabs at narrow widths** → compose transforms through named custom properties and test inactive, active, hover, and focus states on both sides.
+- **Active tab offset plus expanded-tab correction can misplace tabs at narrow widths** → compose transforms through named custom properties, make anchor changes immediate, and test inactive, active, hover, and focus states on both sides.
+- **Category turns can overlap with section turns** → route all animated changes through the existing turn lock and play the sound only at transaction start.
+- **Audio playback can be blocked or the asset can fail to load** → invoke playback from the user-initiated navigation path, handle rejected playback promises silently, and keep navigation functional without sound.
 - **Expanded visual treatment makes dense localized content taller** → favor compact separators and responsive type/spacing; test long leaves and keep controls in normal document flow.
 - **Palette inventory can drift from literals in CSS** → derive the first inventory from the observed current stylesheet and review notebook edits against it during implementation.
 
 ## Migration Plan
 
 1. Introduce the documented palette policy before adding notebook colors.
-2. Add the page-stack layout and tab anchor styling while retaining current stage, tab, and turn behavior.
-3. Apply the shared pixel-paper treatment to page components and styles.
-4. Build and manually verify both themes, desktop and narrow layouts, tab keyboard behavior, long-leaf scrolling, project links, category filtering, page turns, and reduced motion.
-5. Roll back by reverting the change; no data migrations or persisted-state changes are involved.
+2. Add the page-stack layout and instant tab-anchor styling while retaining the current stage and navigation behavior.
+3. Route section, corner, and category changes through the turn transaction; add the bundled page-turn audio at animated-turn start.
+4. Apply the shared pixel-paper treatment, remove preview overlay copy, and add directional corner-arrow affordances.
+5. Build and manually verify both themes, desktop and narrow layouts, tab keyboard behavior, long-leaf scrolling, project links, category filtering, page turns with audio, directional arrows, and reduced motion.
+6. Roll back by reverting the change; no data migrations or persisted-state changes are involved.

@@ -11,6 +11,10 @@ The open notebook does not currently communicate a physical stack of pages: tabs
 - Fix tab icons in the approved black ink color, independent of theme, so they remain legible in both light and dark modes.
 - Reorganize and style the content on all pages for a richer pixel-art composition that is legible and contained within each leaf's scrolling bounds.
 - Document the site color policy and enumerate the colors currently used in the project; implementation must follow this policy.
+- Make marker anchoring changes instant so tabs never visibly float while attaching to or detaching from a leaf.
+- Play the bundled `book_page_turn.wav` sound whenever an animated notebook page turn starts, and use the same page-turn transaction when changing project categories from the right-side markers.
+- Remove the text overlay from project media previews while preserving the image/video, overlay treatment, and available project actions.
+- Replace the dark rectangular corner-hover treatment with the existing arrow artwork, mirrored outward per side and subtly enlarged on hover, without changing corner navigation behavior.
 
 ## Capabilities
 

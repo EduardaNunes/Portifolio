@@ -14,6 +14,7 @@
  * @param {Function} props.onFinish Called once the turn is complete
  */
 import React, { useEffect, useRef } from 'react'
+import { PAGE_TURN_SOUND_URL } from '../../data/constants'
 
 const TURN_EASING = 'cubic-bezier(0.45, 0, 0.15, 1)'
 
@@ -66,6 +67,12 @@ export default function PageTurn({ front, back, direction, duration = 420, onFin
       { duration, easing: TURN_EASING, fill: 'both' },
     )
     animation.onfinish = finish
+
+    // Play page turn sound at the start of the animated turn
+    const audio = new Audio(PAGE_TURN_SOUND_URL)
+    audio.play().catch(() => {
+      /* ignore autoplay/permission errors */
+    })
 
     return () => animation.cancel()
   }, [direction, duration])

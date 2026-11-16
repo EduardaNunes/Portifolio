@@ -41,6 +41,7 @@
   --profile-hover-img: url(/Imgs/ProfileBlackHover.png);
   --light-switch-img: url(/Imgs/SwitchBlack.png);
   --switch-arrow-img: url(/Imgs/ArrowBlack.png);
+  --corner-arrow-img: url(/Imgs/ArrowBlack.png);
 }
 
 .lightmode {
@@ -71,6 +72,7 @@
   --profile-hover-img: url(/Imgs/ProfileWhiteHover.png);
   --light-switch-img: url(/Imgs/SwitchWhite.png);
   --switch-arrow-img: url(/Imgs/ArrowWhite.png);
+  --corner-arrow-img: url(/Imgs/ArrowWhite.png);
 }
 
 html,
@@ -475,6 +477,8 @@ header {
 /* ---------- Notebook Styling ---------- */
 
 .notebook-frame {
+  --notebook-cover-inset: clamp(16px, 2vw, 28px);
+  --page-stack-depth: clamp(10px, 1.5vw, 18px);
   position: relative;
   width: min(80vw, 1100px);
   height: 80vh;
@@ -527,6 +531,52 @@ header {
     0 10px 0 var(--cover-dark);
 }
 
+/* Visual-only gray leaves sit between each cover board and the top spread. */
+.notebook-shell {
+  --page-stack-base: #b8afa5;
+  --page-stack-dark: #6d6964;
+  --page-stack-light: #e0d4c7;
+}
+
+.notebook-page-stack {
+  position: absolute;
+  top: clamp(12px, 1.6vw, 20px);
+  bottom: clamp(12px, 1.6vw, 20px);
+  width: var(--page-stack-depth);
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--page-stack-light) 0 2px,
+    var(--page-stack-base) 2px 5px
+  );
+  box-shadow: inset 2px 0 var(--page-stack-dark), inset -2px 0 var(--page-stack-dark);
+}
+
+.notebook-page-stack.left {
+  left: clamp(16px, 2vw, 28px);
+  border-radius: 2px 0 0 2px;
+}
+
+.notebook-page-stack.right {
+  right: clamp(16px, 2vw, 28px);
+  border-radius: 0 2px 2px 0;
+}
+
+.notebook-page-stack::after {
+  content: '';
+  position: absolute;
+  inset: 5px 2px;
+  border-top: 1px solid var(--page-stack-dark);
+  border-bottom: 1px solid var(--page-stack-dark);
+  opacity: 0.7;
+}
+
+.notebook-stage {
+  width: calc(100% - (var(--page-stack-depth) * 2));
+  margin-inline: var(--page-stack-depth);
+}
+
 .notebook-shell.is-closed {
   background:
     linear-gradient(
@@ -543,7 +593,7 @@ header {
 
 .notebook-stage {
   position: relative;
-  width: 100%;
+  z-index: 3;
   height: 100%;
   perspective: 1600px;
   perspective-origin: 50% 50%;
@@ -743,13 +793,13 @@ header {
 }
 
 .page-tabs {
-  left: 0;
+  left: var(--notebook-cover-inset);
   transform: translate(-100%, -50%);
   align-items: flex-end;
 }
 
 .category-tabs {
-  right: 0;
+  right: var(--notebook-cover-inset);
   transform: translate(100%, -50%);
   align-items: flex-start;
   z-index: 24;
@@ -759,9 +809,10 @@ header {
   --tab-bg: #f6efe3;
   --tab-border: #b7a88e;
   --tab-text: #4a3f30;
-  --tab-icon: #145053;
+  --tab-icon-ink: #1a1917;
   --tab-accent: #3f8f92;
   --tab-collapsed: 46px;
+  --tab-anchor-offset: 0px;
   --tab-expanded: clamp(92px, calc(10vw - 8px), 168px);
   --tab-overflow: max(0px, calc(var(--tab-expanded) - 10vw));
 
@@ -778,14 +829,14 @@ header {
   background:
     linear-gradient(100deg, rgba(255, 255, 255, 0.55), rgba(0, 0, 0, 0.04)),
     var(--tab-bg);
-  color: var(--tab-icon);
+  color: var(--tab-text);
   cursor: pointer;
   overflow: hidden;
   transition:
     width 0.22s ease,
-    transform 0.22s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
+  /* transform is not transitioned so anchor offset changes are instant */
 }
 
 .notebook-tab.left {
@@ -811,6 +862,7 @@ header {
 .notebook-tab-icon {
   display: inline-flex;
   flex: none;
+  color: var(--tab-icon-ink);
   align-items: center;
   justify-content: center;
   width: 20px;
@@ -849,18 +901,28 @@ header {
   width: var(--tab-expanded);
 }
 
+/* Active tabs bridge the page-stack depth to touch the top white leaf. Hover
+   and focus preserve the current physical anchor while expanding outward. */
+.notebook-tab.left.is-active {
+  --tab-anchor-offset: var(--page-stack-depth);
+}
+
+.notebook-tab.right.is-active {
+  --tab-anchor-offset: calc(-1 * var(--page-stack-depth));
+}
+
 /* When the side gutter is narrower than the expanded tab, slide it inward so
    the inline label never leaves the viewport. On desktop the overflow is 0. */
 .notebook-tab.left:hover,
 .notebook-tab.left:focus-visible,
 .notebook-tab.left.is-active {
-  transform: translateX(var(--tab-overflow));
+  transform: translateX(calc(var(--tab-anchor-offset) + var(--tab-overflow)));
 }
 
 .notebook-tab.right:hover,
 .notebook-tab.right:focus-visible,
 .notebook-tab.right.is-active {
-  transform: translateX(calc(-1 * var(--tab-overflow)));
+  transform: translateX(calc(var(--tab-anchor-offset) - var(--tab-overflow)));
 }
 
 .notebook-tab:hover .notebook-tab-label,
@@ -928,8 +990,45 @@ header {
   right: 0;
 }
 
-.corner-zone:hover:not(:disabled) {
-  background: rgba(127, 127, 127, 0.08);
+/* Directional arrow affordance replaces rectangular hover shading */
+.corner-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  width: 24px;
+  height: 24px;
+  background-image: var(--corner-arrow-img);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+
+.corner-zone.left::after {
+  left: 8px;
+  transform: scaleX(-1);
+}
+
+.corner-zone.right::after {
+  right: 8px;
+}
+
+.corner-zone:not(:disabled):hover::after,
+.corner-zone:not(:disabled):focus-visible::after {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.corner-zone.left:not(:disabled):hover::after,
+.corner-zone.left:not(:disabled):focus-visible::after {
+  transform: scaleX(-1) scale(1.15);
+}
+
+.corner-zone:focus-visible {
+  outline: 2px solid var(--h1-color);
+  outline-offset: 3px;
 }
 
 /* ---------- Project pages ---------- */
@@ -1146,5 +1245,193 @@ header {
   .notebook-tab,
   .notebook-tab-label {
     transition: none;
+  }
+}
+
+/* ---------- Pixel-art page presentation ---------- */
+
+.pixel-art-container {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.pixel-art-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 4px;
+  background: var(--paper-accent);
+  box-shadow: 4px 4px 0 var(--paper-accent);
+  pointer-events: none;
+}
+
+.pixel-art-header {
+  display: block;
+  max-width: 100%;
+  margin: 0 0 0.55rem;
+  padding: 0.35rem 0.45rem;
+  box-sizing: border-box;
+  border: 1px solid var(--paper-border);
+  border-left: 4px solid var(--paper-accent);
+  background: var(--paper-bg);
+  color: var(--paper-text);
+  font-size: clamp(0.62rem, 1.7vw, 0.82rem);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.pixel-art-entry-list,
+.pixel-art-media-frame,
+.pixel-art-section {
+  max-width: 100%;
+  margin: 0.55rem 0;
+  padding: 0.4rem;
+  box-sizing: border-box;
+  border: 1px solid var(--paper-border);
+  border-radius: 0;
+  background: var(--paper-bg);
+}
+
+.pixel-art-entry-list > .pixel-art-header {
+  margin: -0.4rem -0.4rem 0.4rem;
+}
+
+.pixel-art-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.18rem 0.35rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.35rem 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--paper-border);
+  font-size: inherit;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.pixel-art-entry:last-child {
+  border-bottom: 0;
+}
+
+.pixel-art-entry-label,
+.pixel-art-label {
+  color: var(--paper-text);
+  font-weight: normal;
+}
+
+.pixel-art-entry-value {
+  min-width: 0;
+  color: var(--paper-muted);
+}
+
+.pixel-art-entry-action,
+.repo-link-button,
+.contact-btn,
+.prominent-deploy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  max-width: 100%;
+  padding: 0.25rem 0.4rem;
+  box-sizing: border-box;
+  border: 1px solid var(--paper-accent);
+  border-radius: 0;
+  color: var(--paper-accent);
+  background: var(--paper-bg);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.pixel-art-entry-action:hover,
+.repo-link-button:hover,
+.contact-btn:hover,
+.prominent-deploy-btn:hover {
+  background: var(--paper-accent);
+  color: var(--paper-bg);
+}
+
+.pixel-art-entry-action:focus-visible,
+.repo-link-button:focus-visible,
+.contact-btn:focus-visible,
+.prominent-deploy-btn:focus-visible,
+.social-link:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+.pixel-art-chip {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 0.16rem 0.3rem;
+  border: 1px solid var(--paper-border);
+  border-radius: 0;
+  background: var(--paper-bg);
+  font-size: 0.52rem;
+  overflow-wrap: anywhere;
+}
+
+.pixel-art-media-frame {
+  position: relative;
+  padding: 0.45rem;
+}
+
+.pixel-art-media-frame img,
+.pixel-art-media-frame video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+.pixel-art-separator {
+  height: 1px;
+  margin: 0.4rem 0;
+  background: var(--paper-border);
+}
+
+.no-horizontal-scroll {
+  overflow-x: hidden;
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 600px) {
+  .page-tabs,
+  .category-tabs {
+    gap: 6px;
+  }
+
+  .notebook-tab {
+    --tab-collapsed: 38px;
+    --tab-expanded: clamp(86px, 20vw, 112px);
+    height: auto;
+    min-height: 40px;
+    padding: 2px 4px;
+    gap: 2px;
+  }
+
+  .notebook-tab-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .notebook-tab-label {
+    font-size: 0.46rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .notebook-tab:hover .notebook-tab-label,
+  .notebook-tab:focus-visible .notebook-tab-label,
+  .notebook-tab.is-active .notebook-tab-label {
+    max-width: calc(var(--tab-expanded) - 30px);
   }
 }

@@ -12,12 +12,14 @@ import React from 'react'
 const CareerPage = ({ side = 'left', heading, labels = {}, currentRole, timeline = [], goals = [] }) => {
   if (side === 'right') {
     return (
-      <div className="career-page career-page-right">
-        <section className="goals-section">
-          <h3>{labels.goals}</h3>
+      <div className="career-page career-page-right pixel-art-container">
+        <section className="goals-section pixel-art-entry-list">
+          <h3 className="pixel-art-header">{labels.goals}</h3>
           <ul className="goals-list">
             {goals.map((goal, index) => (
-              <li key={index} className="goal-item">{goal}</li>
+              <li key={index} className="goal-item pixel-art-entry">
+                <span className="goal-title pixel-art-entry-label">{goal}</span>
+              </li>
             ))}
           </ul>
         </section>
@@ -26,22 +28,22 @@ const CareerPage = ({ side = 'left', heading, labels = {}, currentRole, timeline
   }
 
   return (
-    <div className="career-page career-page-left">
-      <h2>{heading}</h2>
+    <div className="career-page career-page-left pixel-art-container">
+      <h2 className="pixel-art-header">{heading}</h2>
 
-      <section className="current-role-section">
-        <p className="role-intro">{currentRole}</p>
+      <section className="current-role-section pixel-art-entry">
+        <p className="role-intro pixel-art-entry-label">{currentRole}</p>
       </section>
 
-      <section className="timeline-section">
-        <h3>{labels.timeline}</h3>
+      <section className="timeline-section pixel-art-entry-list">
+        <h3 className="pixel-art-header">{labels.timeline}</h3>
         <ul className="timeline-list">
           {timeline.map((position, index) => (
-            <li key={index} className="timeline-item">
-              <span className="position-title">{position.title}</span>
-              <span className="position-company">{position.company}</span>
-              <span className="position-duration">{position.duration}</span>
-              <p className="position-desc">{position.description}</p>
+            <li key={index} className="timeline-item pixel-art-entry">
+              <span className="position-title pixel-art-entry-label">{position.title}</span>
+              <span className="position-company pixel-art-entry-value">{position.company}</span>
+              <span className="position-duration pixel-art-entry-value">{position.duration}</span>
+              <p className="position-desc pixel-art-entry-value">{position.description}</p>
             </li>
           ))}
         </ul>
