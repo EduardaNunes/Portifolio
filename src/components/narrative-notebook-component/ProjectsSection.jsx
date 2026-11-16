@@ -1,17 +1,19 @@
 /**
  * ProjectsSection Component
  *
- * Right-side category sidebar for the Projects section. It only filters the
- * project list; page rendering lives in the flat page model so the notebook
- * can animate and count every project page (2 per project).
+ * Right-side category sidebar for the Projects section. Categories use the same
+ * mirrored `NotebookTab` as the left section markers; the active category stays
+ * visible and expanded. It only filters the project list; page rendering lives
+ * in the spread model.
  *
  * @param {Object} props
- * @param {Array} props.categories [{ id, label, count }]
+ * @param {Array} props.categories [{ id, label, icon, accent, count }]
  * @param {string|null} props.activeCategory
  * @param {Function} props.onCategorySelect
  * @param {string} [props.emptyCategoryLabel]
  */
 import React from 'react'
+import NotebookTab from './NotebookTab'
 
 const ProjectsSection = ({
   categories = [],
@@ -26,17 +28,15 @@ const ProjectsSection = ({
       {categories.map((category) => {
         const isSelected = category.id === activeCategory
         return (
-          <button
+          <NotebookTab
             key={category.id}
-            type="button"
-            className={`category-tab ${isSelected ? 'current' : ''}`}
-            aria-pressed={isSelected}
-            onClick={() => onCategorySelect?.(isSelected ? null : category.id)}
-          >
-            <span className="category-dot" aria-hidden="true" />
-            <span className="category-name">{category.label}</span>
-            <span className="category-count">{category.count}</span>
-          </button>
+            side="right"
+            icon={category.icon ?? 'projects'}
+            label={category.label}
+            active={isSelected}
+            accent={category.accent}
+            onSelect={() => onCategorySelect?.(isSelected ? null : category.id)}
+          />
         )
       })}
 

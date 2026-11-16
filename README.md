@@ -35,15 +35,21 @@ O conteúdo principal é um notebook em formato de caderno aberto, centralizado
   - Estudos: formação × cursos/projetos;
   - Projetos: metadados × demo/deploy;
   - Contato: CTA/e-mail × links sociais.
-- As folhas usam papel branco e texto escuro em ambos os temas; a capa, as
-  abas de página e as tabs seguem o esquema claro/escuro do site.
-- Abas de página físicas à esquerda (ícone + entalhe + sombra): apenas a aba da
-  seção atual fica oculta; as demais mostram o nome da seção no tooltip.
+- As folhas usam papel branco e texto escuro em ambos os temas.
+- A capa/laterais seguem o esquema do site: azul no tema escuro e laranja no
+  tema claro, usando apenas as cores já existentes no projeto.
+- A página abre bloqueada: antes do primeiro clique no Play o documento não
+  rola. O Play libera a rolagem permanentemente na sessão; recarregar volta ao
+  estado bloqueado.
+- As abas de página físicas ficam encostadas na capa, sem gap e sem entalhe
+  semicircular. Esquerda (seções) e direita (categorias) usam o mesmo
+  componente espelhado. A aba ativa permanece visível e expande horizontalmente
+  com o nome; hover/foco fazem a mesma expansão. Não há tooltip flutuante.
+- Os ícones das abas usam uma tinta fixa e não mudam de cor com o tema.
 - A troca de spread usa uma folha 3D de duas faces girando em torno da lombada
   (~420ms, frente/verso, sombra móvel). Cliques rápidos não sobrepõem viradas.
-- Tabs de categoria (só em Projetos): filtram por categoria; a categoria
-  selecionada tem o marcador oculto e continua clicável para voltar a "todas".
-  Em telas estreitas elas ficam em uma linha abaixo do caderno.
+- Abas de categoria (só em Projetos): IA e Automações, Jogos, WebDev e BackEnd
+  filtram os projetos; a categoria ativa fica visível e expandida, sem contagem.
 - Cantos inferiores esquerdo/direito navegam para o spread anterior/seguinte.
 - O botão Play abre o notebook e rola suavemente até ele.
 - Rolagem: as barras verticais e horizontais ficam ocultas, o eixo horizontal

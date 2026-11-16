@@ -8,6 +8,7 @@
  * the leaf reaches its edge.
  *
  * @param {React.RefObject<HTMLElement>} containerRef Scroll container (.app-scroll)
+ * @param {{ enabled?: boolean }} [options] When disabled, wheel input is blocked
  */
 import { useEffect, useRef } from 'react'
 import { scrollToSection } from '../utils/scrollToSection'
@@ -42,12 +43,23 @@ function leafCanScroll(leaf, delta) {
   return leaf.scrollTop > 1
 }
 
-export function useSectionSnap(containerRef) {
+export function useSectionSnap(containerRef, { enabled = true } = {}) {
   const lockedRef = useRef(false)
 
   useEffect(() => {
     const scroller = containerRef.current
     if (!scroller) return undefined
+
+    // The document is intentionally locked until the first Play activation.
+    if (!enabled) {
+      lockedRef.current = false
+      const blockWheel = (event) => {
+        if (!event.ctrlKey && !event.defaultPrevented) event.preventDefault()
+      }
+
+      scroller.addEventListener('wheel', blockWheel, { passive: false })
+      return () => scroller.removeEventListener('wheel', blockWheel)
+    }
 
     const gesture = { delta: 0, timer: null }
     let unlockTimer = null
@@ -142,5 +154,5 @@ export function useSectionSnap(containerRef) {
       clearGesture()
       unlock()
     }
-  }, [containerRef])
+  }, [containerRef, enabled])
 }

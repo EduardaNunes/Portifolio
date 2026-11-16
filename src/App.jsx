@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Clouds from './components/Clouds'
 import HeaderText from './components/HeaderText'
 import LightSwitch from './components/LightSwitch'
@@ -12,14 +12,31 @@ import { CATEGORIES, projects } from './data/projects'
 import { buildNotebookPages } from './utils/buildNotebookPages'
 import { scrollToSection } from './utils/scrollToSection'
 
+const CATEGORY_META = {
+  'IA e Automações': { icon: 'ai', accent: '#3f8f92' },
+  Jogos: { icon: 'games', accent: '#7c68b5' },
+  WebDev: { icon: 'webdev', accent: '#bc8a2f' },
+  BackEnd: { icon: 'backend', accent: '#4f8a63' },
+}
+
 export default function App() {
   const { isLightMode, toggleTheme } = useTheme()
   const { texts, language, toggleLanguage } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(false)
   const [activeCategory, setActiveCategory] = useState(null)
   const scrollRef = useRef(null)
 
-  useSectionSnap(scrollRef)
+  useSectionSnap(scrollRef, { enabled: isUnlocked })
+
+  useEffect(() => {
+    const scroller = scrollRef.current
+    if (scroller) scroller.scrollTop = 0
+
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+  }, [])
 
   const content = profileData[language]
 
@@ -41,23 +58,29 @@ export default function App() {
 
   const categories = useMemo(
     () =>
-      CATEGORIES.map((categoryId) => ({
-        id: categoryId,
-        label: categoryId,
-        count: projects.filter((project) => project.categoryId === categoryId).length,
-      })),
+      CATEGORIES.map((categoryId) => {
+        const meta = CATEGORY_META[categoryId] ?? CATEGORY_META['WebDev']
+        return {
+          id: categoryId,
+          label: categoryId,
+          icon: meta.icon,
+          accent: meta.accent,
+          count: projects.filter((project) => project.categoryId === categoryId).length,
+        }
+      }),
     [],
   )
 
   const openNotebook = () => {
     setIsOpen(true)
+    setIsUnlocked(true)
     requestAnimationFrame(() => {
       scrollToSection(document.getElementById('notebook-section'))
     })
   }
 
   return (
-    <div className="app-scroll" ref={scrollRef}>
+    <div className={`app-scroll${isUnlocked ? '' : ' is-scroll-locked'}`} ref={scrollRef}>
       <section className="hero-section" data-snap-section>
         <nav>
           <LightSwitch hint={texts.switchHint} onToggle={toggleTheme} />

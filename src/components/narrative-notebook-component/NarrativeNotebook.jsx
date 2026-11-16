@@ -20,56 +20,11 @@
  * @param {string} [props.emptyCategoryLabel]
  */
 import { useCallback, useEffect, useRef, useState } from 'react'
+import NotebookTab from './NotebookTab'
 import PageTurn from './PageTurn'
 import ProjectsSection from './ProjectsSection'
 
 const TURN_DURATION = 420
-
-const ICON_PATHS = {
-  about: [
-    'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
-    'M4.5 20a7.5 7.5 0 0 1 15 0',
-  ],
-  career: [
-    'M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7',
-    'M4 7h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z',
-    'M3 12h18',
-  ],
-  studies: [
-    'm3 8 9-4 9 4-9 4-9-4Z',
-    'M7 10v4.5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V10',
-    'M21 8v5',
-  ],
-  projects: [
-    'M3.5 7A1.5 1.5 0 0 1 5 5.5h4l2 2h8A1.5 1.5 0 0 1 20.5 9v8.5A1.5 1.5 0 0 1 19 19H5a1.5 1.5 0 0 1-1.5-1.5V7Z',
-  ],
-  contact: [
-    'M4 5.5h16A1.5 1.5 0 0 1 21.5 7v10a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 17V7A1.5 1.5 0 0 1 4 5.5Z',
-    'm3 7 9 6 9-6',
-  ],
-}
-
-function SectionIcon({ sectionId }) {
-  const paths = ICON_PATHS[sectionId] ?? ICON_PATHS.about
-
-  return (
-    <svg
-      className="page-tab-icon"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {paths.map((path) => (
-        <path key={path} d={path} />
-      ))}
-    </svg>
-  )
-}
 
 function prefersReducedMotion() {
   return (
@@ -239,24 +194,17 @@ const NarrativeNotebook = ({
         </div>
 
         <nav className="page-tabs" aria-label={sectionsLabel}>
-          {sections.map((section) => {
-            const isCurrent = section.id === currentSection
-            return (
-              <button
-                key={section.id}
-                type="button"
-                className={`page-tab${isCurrent ? ' current' : ''}`}
-                style={{ '--tab-accent': section.accent }}
-                data-tooltip={section.label}
-                aria-label={section.label}
-                aria-current={isCurrent ? 'page' : undefined}
-                tabIndex={isCurrent ? -1 : undefined}
-                onClick={() => handleMarkerClick(section.id)}
-              >
-                <SectionIcon sectionId={section.id} />
-              </button>
-            )
-          })}
+          {sections.map((section) => (
+            <NotebookTab
+              key={section.id}
+              side="left"
+              icon={section.id}
+              label={section.label}
+              active={section.id === currentSection}
+              accent={section.accent}
+              onSelect={() => handleMarkerClick(section.id)}
+            />
+          ))}
         </nav>
 
         {isProjects && (

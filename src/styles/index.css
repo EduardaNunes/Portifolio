@@ -30,6 +30,12 @@
   --btn-play-highlight2: #3a8386;
   --btn-play-shine: #c6e2e4;
 
+  --cover-base: #5f9ea0;
+  --cover-dark: #145053;
+  --cover-shadow: #26696d;
+  --cover-light: #99c0c2;
+  --cover-shine: #c6e2e4;
+
   --cloud-img: url(/Imgs/CloudBlack.png);
   --profile-img: url(/Imgs/ProfileBlack.png);
   --profile-hover-img: url(/Imgs/ProfileBlackHover.png);
@@ -53,6 +59,12 @@
   --btn-play-highlight: #e0d4c7;
   --btn-play-highlight2: #9b9187;
   --btn-play-shine: #ffffff;
+
+  --cover-base: #d87f0b;
+  --cover-dark: #b45309;
+  --cover-shadow: #b8763c;
+  --cover-light: #f19925;
+  --cover-shine: #f9efe4;
 
   --cloud-img: url(/Imgs/CloudWhite.png);
   --profile-img: url(/Imgs/ProfileWhite.png);
@@ -91,6 +103,14 @@ body {
   width: 0;
   height: 0;
   display: none;
+}
+
+/* The first Play click owns the entry into the notebook. */
+.app-scroll.is-scroll-locked {
+  overflow: hidden;
+  scroll-snap-type: none;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 .hero-section {
@@ -464,23 +484,61 @@ header {
   position: relative;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  padding: clamp(12px, 1.6vw, 20px) clamp(16px, 2vw, 28px);
   overflow: hidden;
-  border: 2px solid var(--text-color);
-  border-radius: 14px;
-  background-color: var(--bg-color);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(var(--cover-light), var(--cover-light)) left top / 100% 4px no-repeat,
+    linear-gradient(var(--cover-shadow), var(--cover-shadow)) left bottom / 100% 6px no-repeat,
+    var(--cover-base);
+  box-shadow:
+    inset 0 0 0 4px var(--cover-dark),
+    inset 0 0 0 8px var(--cover-light),
+    10px 10px 0 var(--cover-dark),
+    0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Stepped pixel corners, in the same block language as the Play button. */
+.notebook-shell::before,
+.notebook-shell::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 28px;
+  height: 10px;
+  background: var(--cover-light);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.notebook-shell::before {
+  left: 0;
+  box-shadow:
+    28px 0 0 var(--cover-base),
+    0 10px 0 var(--cover-dark);
+}
+
+.notebook-shell::after {
+  right: 0;
+  box-shadow:
+    -28px 0 0 var(--cover-base),
+    0 10px 0 var(--cover-dark);
 }
 
 .notebook-shell.is-closed {
-  opacity: 0.25;
-  background-image: linear-gradient(
-    135deg,
-    transparent 48%,
-    var(--text-color) 49%,
-    var(--text-color) 51%,
-    transparent 52%
-  );
-  background-size: 40px 40px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 48%,
+      var(--cover-dark) 48%,
+      var(--cover-dark) 52%,
+      transparent 52%
+    ),
+    linear-gradient(var(--cover-light), var(--cover-light)) left top / 100% 4px no-repeat,
+    linear-gradient(var(--cover-shadow), var(--cover-shadow)) left bottom / 100% 6px no-repeat,
+    var(--cover-base);
 }
 
 .notebook-stage {
@@ -671,198 +729,176 @@ header {
   height: 1rem;
 }
 
-/* ---------- Left Page Tabs ---------- */
+/* ---------- Shared Page Tabs (left sections / right categories) ---------- */
 
-.page-tabs {
+.page-tabs,
+.category-tabs {
   position: absolute;
-  left: clamp(-58px, -4.4vw, -36px);
   top: 50%;
-  width: auto;
-  height: auto;
-  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
   gap: 8px;
+  width: max-content;
   z-index: 25;
 }
 
-.page-tab {
+.page-tabs {
+  left: 0;
+  transform: translate(-100%, -50%);
+  align-items: flex-end;
+}
+
+.category-tabs {
+  right: 0;
+  transform: translate(100%, -50%);
+  align-items: flex-start;
+  z-index: 24;
+}
+
+.notebook-tab {
   --tab-bg: #f6efe3;
   --tab-border: #b7a88e;
   --tab-text: #4a3f30;
+  --tab-icon: #145053;
+  --tab-accent: #3f8f92;
+  --tab-collapsed: 46px;
+  --tab-expanded: clamp(92px, calc(10vw - 8px), 168px);
+  --tab-overflow: max(0px, calc(var(--tab-expanded) - 10vw));
 
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 46px;
-  padding: 0 0 0 3px;
+  gap: 6px;
+  width: var(--tab-collapsed);
+  height: auto;
+  min-height: 46px;
+  padding: 3px 9px;
+  box-sizing: border-box;
   border: 2px solid var(--tab-border);
-  border-right: none;
-  border-radius: 9px 0 0 9px;
   background:
     linear-gradient(100deg, rgba(255, 255, 255, 0.55), rgba(0, 0, 0, 0.04)),
     var(--tab-bg);
-  color: var(--tab-accent, var(--tab-text));
-  box-shadow:
-    inset 3px 0 0 var(--tab-accent, var(--tab-border)),
-    -3px 4px 8px rgba(0, 0, 0, 0.35);
+  color: var(--tab-icon);
   cursor: pointer;
+  overflow: hidden;
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    width 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* Notch where the tab meets the cover */
-.page-tab::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -7px;
-  width: 12px;
-  height: 12px;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  border: 2px solid var(--tab-border);
-  border-left-color: transparent;
-  background: var(--bg-color);
+.notebook-tab.left {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  box-shadow:
+    inset 4px 0 0 var(--tab-accent),
+    -4px 4px 8px rgba(0, 0, 0, 0.35);
 }
 
-/* Tooltip remains on the non-current tabs */
-.page-tab::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: calc(100% + 12px);
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 4px 8px;
-  border: 1px solid var(--tab-border);
-  border-radius: 4px;
-  background: var(--tab-bg);
+.notebook-tab.right {
+  flex-direction: row;
+  justify-content: flex-start;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  box-shadow:
+    inset -4px 0 0 var(--tab-accent),
+    4px 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+.notebook-tab-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.notebook-tab-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.notebook-tab-label {
+  max-width: 0;
+  overflow: hidden;
   color: var(--tab-text);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
+  line-height: 1.1;
   white-space: nowrap;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition:
+    max-width 0.22s ease,
+    opacity 0.16s ease;
+}
+
+.notebook-tab.left .notebook-tab-label {
+  text-align: right;
+}
+
+.notebook-tab.right .notebook-tab-label {
+  text-align: left;
+}
+
+.notebook-tab:hover,
+.notebook-tab:focus-visible,
+.notebook-tab.is-active {
+  width: var(--tab-expanded);
+}
+
+/* When the side gutter is narrower than the expanded tab, slide it inward so
+   the inline label never leaves the viewport. On desktop the overflow is 0. */
+.notebook-tab.left:hover,
+.notebook-tab.left:focus-visible,
+.notebook-tab.left.is-active {
+  transform: translateX(var(--tab-overflow));
+}
+
+.notebook-tab.right:hover,
+.notebook-tab.right:focus-visible,
+.notebook-tab.right.is-active {
+  transform: translateX(calc(-1 * var(--tab-overflow)));
+}
+
+.notebook-tab:hover .notebook-tab-label,
+.notebook-tab:focus-visible .notebook-tab-label,
+.notebook-tab.is-active .notebook-tab-label {
+  max-width: calc(var(--tab-expanded) - 52px);
+  opacity: 1;
+}
+
+.notebook-tab:hover,
+.notebook-tab:focus-visible {
   z-index: 30;
-}
-
-.page-tab-icon {
-  width: 19px;
-  height: 19px;
-  flex: none;
-}
-
-.page-tab.current {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-10px);
-}
-
-.page-tab:not(.current):hover {
-  transform: translateX(-4px);
+  border-color: var(--tab-text);
   box-shadow:
-    inset 3px 0 0 var(--tab-accent, var(--tab-border)),
+    inset 4px 0 0 var(--tab-accent),
     -5px 6px 12px rgba(0, 0, 0, 0.42);
 }
 
-.page-tab:not(.current):focus-visible {
+.notebook-tab.right:hover,
+.notebook-tab.right:focus-visible {
+  box-shadow:
+    inset -4px 0 0 var(--tab-accent),
+    5px 6px 12px rgba(0, 0, 0, 0.42);
+}
+
+.notebook-tab.is-active {
+  border-color: var(--tab-text);
+}
+
+.notebook-tab:focus-visible {
   outline: 2px solid var(--h1-color);
   outline-offset: 3px;
-}
-
-/* Keep the active tab visible while it still owns keyboard focus */
-.page-tab.current:focus-visible {
-  opacity: 1;
-  transform: none;
-  outline: 2px solid var(--h1-color);
-  outline-offset: 3px;
-}
-
-.page-tab:not(.current):hover::after {
-  opacity: 1;
-}
-
-.page-tab.current::after {
-  display: none;
-}
-
-/* ---------- Right Category Tabs ---------- */
-
-.category-tabs {
-  position: absolute;
-  right: -128px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-  z-index: 20;
-}
-
-.category-tab {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 7px;
-  background: transparent;
-  border: 1px solid var(--text-color);
-  border-radius: 6px;
-  color: var(--text-color);
-  cursor: pointer;
-  font-size: 0.52rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-@media (max-width: 1300px) {
-  .category-tabs {
-    right: 50%;
-    top: auto;
-    bottom: -46px;
-    transform: translateX(50%);
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    width: max-content;
-    max-width: 92vw;
-  }
-}
-
-.category-tab:hover {
-  background: var(--text-color);
-  color: var(--bg-color);
-}
-
-.category-tab.current {
-  opacity: 0.7;
-}
-
-.category-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--h1-color);
-}
-
-.category-tab.current .category-dot {
-  opacity: 0;
-}
-
-.category-count {
-  font-size: 0.55rem;
-  opacity: 0.8;
 }
 
 .empty-category-state {
   max-width: 130px;
   font-size: 0.55rem;
+  color: var(--tab-text);
 }
 
 /* ---------- Corner Click Zones ---------- */
@@ -1063,19 +1099,35 @@ header {
 /* ---------- Narrow screens ---------- */
 
 @media (max-width: 600px) {
-  .page-tabs {
-    left: -30px;
+  .page-tabs,
+  .category-tabs {
     gap: 6px;
   }
 
-  .page-tab {
-    width: 34px;
-    height: 40px;
+  .notebook-tab {
+    --tab-collapsed: 38px;
+    --tab-expanded: clamp(86px, 20vw, 112px);
+    height: auto;
+    min-height: 40px;
+    padding: 2px 4px;
+    gap: 2px;
   }
 
-  .page-tab-icon {
+  .notebook-tab-icon {
     width: 16px;
     height: 16px;
+  }
+
+  .notebook-tab-label {
+    font-size: 0.46rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .notebook-tab:hover .notebook-tab-label,
+  .notebook-tab:focus-visible .notebook-tab-label,
+  .notebook-tab.is-active .notebook-tab-label {
+    max-width: calc(var(--tab-expanded) - 30px);
   }
 }
 
@@ -1091,8 +1143,8 @@ header {
     opacity: 0;
   }
 
-  .page-tab,
-  .page-tab::after {
+  .notebook-tab,
+  .notebook-tab-label {
     transition: none;
   }
 }
