@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#2d2d2d"/>
+  <text x="200" y="140" font-family="monospace" font-size="16" fill="#888" text-anchor="middle">Productive Tracking</text>
+  <text x="200" y="165" font-family="monospace" font-size="12" fill="#666" text-anchor="middle">Firebase • Calendar</text>
+  <rect x="150" y="180" width="100" height="4" rx="2" fill="#444"/>
+  <rect x="150" y="180" width="65" height="4" rx="2" fill="#3b82f6"/>
+</svg>
