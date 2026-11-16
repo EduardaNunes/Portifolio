@@ -1,4 +1,3 @@
-export const GAME_PAGE_URL = '/game.html'
 export const SWITCH_SOUND_URL = '/Sounds/Light-Switch.mp3'
 
 export const THEME_IMAGES = [

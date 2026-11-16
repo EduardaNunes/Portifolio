@@ -1,6 +1,6 @@
 import PlayButton from './PlayButton'
 
-export default function HeaderText({ texts }) {
+export default function HeaderText({ texts, onPlay }) {
   return (
     <div className="header-text flex-column">
       <div>
@@ -16,7 +16,7 @@ export default function HeaderText({ texts }) {
         <p>{texts.playSubtitle}</p>
       </div>
 
-      <PlayButton label={texts.playButton} />
+      <PlayButton label={texts.playButton} onPlay={onPlay} />
     </div>
   )
 }

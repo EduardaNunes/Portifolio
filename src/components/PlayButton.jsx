@@ -1,10 +1,6 @@
-import { GAME_PAGE_URL } from '../data/constants'
-
-export default function PlayButton({ label }) {
-  const goToGame = () => window.location.assign(GAME_PAGE_URL)
-
+export default function PlayButton({ label, onPlay }) {
   return (
-    <button className="btn-animation" onClick={goToGame}>
+    <button className="btn-animation" onClick={() => onPlay?.()}>
       <div className="btn btn-play">
         <div className="btn-border btn-border-top" />
         <div className="btn-highlight" />

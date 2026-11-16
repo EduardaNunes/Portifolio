@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Portfolio Personalizado">
+  <rect width="800" height="450" fill="#1a1917"/>
+  <rect x="24" y="24" width="752" height="402" fill="none" stroke="#61afef" stroke-width="4" rx="18"/>
+  <text x="400" y="205" text-anchor="middle" font-family="monospace" font-size="34" fill="#f9efe4">Portfolio Personalizado</text>
+  <text x="400" y="255" text-anchor="middle" font-family="monospace" font-size="18" fill="#61afef">placeholder demo</text>
+</svg>
