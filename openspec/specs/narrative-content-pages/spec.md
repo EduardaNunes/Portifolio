@@ -213,3 +213,14 @@ When the Projetos marker's page pair is rendered, it SHALL provide an overview o
 #### Scenario: Projetos overview
 - **WHEN** the Projetos marker's first pair is displayed
 - **THEN** it summarizes IA e Automações, Jogos, WebDev, and BackEnd and provides visual navigation cues for their right-side tabs
+
+### Requirement: Highlighted notebook content is semantically identified
+Notebook page content that is intended to receive visual emphasis SHALL be identified with the shared highlight treatment rather than with item-specific color styling.
+
+#### Scenario: Highlighted page metadata
+- **WHEN** a notebook page renders content designated as highlighted
+- **THEN** the emphasized content uses the shared highlight treatment while all other page content retains its existing semantic styling
+
+#### Scenario: Localized highlighted content
+- **WHEN** the active locale changes while a notebook page contains highlighted content
+- **THEN** the localized text remains highlighted without changing its meaning or placement
