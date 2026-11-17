@@ -22,7 +22,7 @@ const AboutMePage = ({
     return (
       <div className="about-me-page about-me-page-right pixel-art-container">
         <section className="results-section pixel-art-entry-list">
-          <h3 className="pixel-art-header">{labels.results}</h3>
+          <h3 className="pixel-art-header destaque">{labels.results}</h3>
           <ul className="results-list">
             {results.map((result, index) => (
               <li key={index} className="result-item pixel-art-entry">
@@ -46,7 +46,7 @@ const AboutMePage = ({
       <h2 className="pixel-art-header">{heading}</h2>
 
       <section className="skills-section pixel-art-entry-list">
-        <h3 className="pixel-art-header">{labels.skills}</h3>
+        <h3 className="pixel-art-header destaque">{labels.skills}</h3>
         <ul className="skills-list">
           {skills.map((skill, index) => (
             <li key={index} className="skill-item pixel-art-entry">
@@ -58,7 +58,7 @@ const AboutMePage = ({
       </section>
 
       <section className="soft-skills-section pixel-art-entry-list">
-        <h3 className="pixel-art-header">{labels.softSkills}</h3>
+        <h3 className="pixel-art-header destaque">{labels.softSkills}</h3>
         <ul className="soft-skill-list">
           {softSkills.map((skill, index) => (
             <li key={index} className="soft-skill-item pixel-art-entry">

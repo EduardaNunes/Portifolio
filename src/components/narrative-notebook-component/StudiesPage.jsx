@@ -14,7 +14,7 @@ const StudiesPage = ({ side = 'left', heading, labels = {}, education = [], cour
     return (
       <div className="studies-page studies-page-right pixel-art-container">
         <section className="courses-section pixel-art-entry-list">
-          <h3 className="pixel-art-header">{labels.courses}</h3>
+          <h3 className="pixel-art-header destaque">{labels.courses}</h3>
           <ul className="courses-list">
             {courses.map((course, index) => (
               <li key={index} className="course-item pixel-art-entry">
@@ -27,7 +27,7 @@ const StudiesPage = ({ side = 'left', heading, labels = {}, education = [], cour
         </section>
 
         <section className="projects-section pixel-art-entry-list">
-          <h3 className="pixel-art-header">{labels.projects}</h3>
+          <h3 className="pixel-art-header destaque">{labels.projects}</h3>
           <ul className="academic-projects-list">
             {projects.map((project, index) => (
               <li key={index} className="academic-project-item pixel-art-entry">
@@ -51,7 +51,7 @@ const StudiesPage = ({ side = 'left', heading, labels = {}, education = [], cour
       <h2 className="pixel-art-header">{heading}</h2>
 
       <section className="education-section pixel-art-entry-list">
-        <h3 className="pixel-art-header">{labels.education}</h3>
+        <h3 className="pixel-art-header destaque">{labels.education}</h3>
         <ul className="education-list">
           {education.map((item, index) => (
             <li key={index} className="education-item pixel-art-entry">

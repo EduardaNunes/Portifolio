@@ -21,6 +21,7 @@
   --h1-selection: #5f9ea0;
   --strong: cadetblue;
   --strong-selection: #f9efe4;
+  --notebook-highlight-color: #d87f0b;
 
   --btn-play: #5f9ea0;
   --btn-text: var(--btn-play-shine);
@@ -63,6 +64,7 @@
   --h1-selection: #1a1917;
   --strong: #d87f0b;
   --strong-selection: #1a1917;
+  --notebook-highlight-color: cadetblue;
 
   --btn-play: var(--cover-base);
   --btn-text: var(--cover-shine);
@@ -780,6 +782,11 @@ header {
   margin: 0.8rem 0 0.35rem;
   font-size: clamp(0.62rem, 1.7vw, 0.8rem);
   color: var(--strong);
+}
+
+/* Reusable semantic emphasis for notebook content. */
+.notebook-leaf .destaque {
+  color: var(--notebook-highlight-color);
 }
 
 .notebook-leaf p {

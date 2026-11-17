@@ -14,7 +14,7 @@ const CareerPage = ({ side = 'left', heading, labels = {}, currentRole, timeline
     return (
       <div className="career-page career-page-right pixel-art-container">
         <section className="goals-section pixel-art-entry-list">
-          <h3 className="pixel-art-header">{labels.goals}</h3>
+          <h3 className="pixel-art-header destaque">{labels.goals}</h3>
           <ul className="goals-list">
             {goals.map((goal, index) => (
               <li key={index} className="goal-item pixel-art-entry">
@@ -36,7 +36,7 @@ const CareerPage = ({ side = 'left', heading, labels = {}, currentRole, timeline
       </section>
 
       <section className="timeline-section pixel-art-entry-list">
-        <h3 className="pixel-art-header">{labels.timeline}</h3>
+        <h3 className="pixel-art-header destaque">{labels.timeline}</h3>
         <ul className="timeline-list">
           {timeline.map((position, index) => (
             <li key={index} className="timeline-item pixel-art-entry">
