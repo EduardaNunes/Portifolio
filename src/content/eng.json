@@ -1,0 +1,593 @@
+{
+  "about": {
+    "label": "About Me",
+    "sections": [
+      {
+        "id": "about-me-text",
+        "subHeader": "Who am I?",
+        "content": [
+          {
+            "type": "text",
+            "text": "Dedicated Software Engineer driven by excellence, guided by the conviction that software development means identifying and solving problems, not just writing code."
+          },
+          {
+            "type": "text",
+            "text": "Recognized for being active and proactive, consistently anticipating team needs and prioritizing the end-user experience to deliver maximum satisfaction."
+          },
+          {
+            "type": "text",
+            "text": "Ready to apply my technical skills and ideas in a collaborative team, building not only scalable, high-quality software but solutions with purpose."
+          }
+        ]
+      },
+      {
+        "id": "skills",
+        "subHeader": "Technical Skills",
+        "content": [
+          {
+            "type": "blocks",
+            "name": "Languages",
+            "items": ["JavaScript", "TypeScript", "Python", "Java", "C++", "C#", "GDScript"]
+          },
+          {
+            "type": "blocks",
+            "name": "Web and Mobile",
+            "items": ["React", "React Native", "Expo", "HTML5", "CSS3"]
+          },
+          {
+            "type": "blocks",
+            "name": "Data and APIs",
+            "items": ["Supabase", "Firebase", "REST API", "Google Maps API", "ViaCEP"]
+          },
+          {
+            "type": "blocks",
+            "name": "Games",
+            "items": ["Unity", "Godot"]
+          },
+          {
+            "type": "blocks",
+            "name": "Tools",
+            "items": ["Git", "GitHub"]
+          }
+        ]
+      }
+    ]
+  },
+  "career": {
+    "label": "Career",
+    "sections": [
+      {
+        "id": "current-role",
+        "content": [
+          {
+            "type": "text",
+            "text": "Software Engineer at Levty, working on a high-volume financial system for Livelo. Focused on clean code, stability and user experience."
+          }
+        ]
+      },
+      {
+        "id": "timeline",
+        "subHeader": "Professional Timeline",
+        "content": [
+          {
+            "type": "positions",
+            "items": [
+              {
+                "position": "Software Engineer",
+                "company": "Levty (client: Livelo)",
+                "fromDate": "Dec 2024",
+                "toDate": "",
+                "description": "I build and maintain scalable features, debug failures, write documentation and review code in an agile environment to keep deliveries stable."
+              },
+              {
+                "position": "Software Developer and Researcher",
+                "company": "GET — Tutorial Education Group (UFJF)",
+                "fromDate": "Sep 2024",
+                "toDate": "",
+                "description": "Building a student-housing app from scratch (React Native, TypeScript, Expo, Supabase), with Google Maps and ViaCEP to locate listings and autofill addresses."
+              },
+              {
+                "position": "Lead Programmer and Idealizer",
+                "company": "ProgramADAs (UFJF)",
+                "fromDate": "Sep 2023",
+                "toDate": "Dec 2024",
+                "description": "Designed the architecture and built an educational RPG in Unity to encourage women in STEM, with mini-games that teach algorithms."
+              },
+              {
+                "position": "Founder",
+                "company": "Creati Lab — custom 3D printing",
+                "fromDate": "???",
+                "toDate": "???",
+                "description": "From 3D modeling to printer calibration, I deliver custom pieces end to end."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "goals",
+        "subHeader": "Next Steps",
+        "content": [
+          {
+            "type": "list",
+            "items": [
+              "Build scalable, high-quality software with purpose",
+              "Go deeper into mobile and back-end (React Native, Supabase, APIs)",
+              "Keep creating games and educational gamification solutions"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "studies": {
+    "label": "Studies",
+    "sections": [
+      {
+        "id": "education",
+        "subHeader": "Academic Background",
+        "content": [
+          {
+            "type": "positions",
+            "items": [
+              {
+                "position": "B.Sc. in Information Systems",
+                "company": "Federal University of Juiz de Fora (UFJF)",
+                "fromDate": "2023",
+                "toDate": "2027",
+                "description": "Average above 90%. Active in outreach and in GET, teaching mini-courses and mentoring peers in programming logic."
+              },
+              {
+                "position": "Technical High School in Internet Informatics",
+                "company": "Federal Institute — Paulo de Frontin",
+                "fromDate": "2019",
+                "toDate": "2021",
+                "description": "My first contact with programming: HTML, CSS and JavaScript."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "courses",
+        "subHeader": "Achievements and Courses",
+        "content": [
+          {
+            "type": "list",
+            "items": [
+              {
+                "text": "1st place, Junior Programming Marathon",
+                "detail": "UFJF, 2023",
+                "done": true
+              },
+              {
+                "text": "Programming logic mini-courses (instructor)",
+                "detail": "GET / UFJF",
+                "done": true
+              },
+              {
+                "text": "Advanced English",
+                "detail": "Fluent in technical writing",
+                "done": true
+              },
+              {
+                "text": "100 Days CSS Challenge",
+                "detail": "Self-taught",
+                "done": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "projects",
+        "subHeader": "Academic Projects",
+        "content": [
+          {
+            "type": "text",
+            "title": "ProgramADAs",
+            "text": "Educational Unity game that teaches algorithms in a playful way.",
+            "link": {
+              "label": "View playtest",
+              "url": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+            }
+          },
+          {
+            "type": "text",
+            "title": "Esbugalhado: the Game",
+            "text": "JavaScript game built for the DCC202 course (UFJF).",
+            "link": {
+              "label": "View repository",
+              "url": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
+            }
+          }
+        ]
+      },
+      {
+        "id": "achieviments",
+        "subHeader": "Achievements",
+        "content": [
+          {
+            "type": "text",
+            "title": "ProgramADAs",
+            "text": "Led the design, systems architecture, and development of a university RPG educational game in Unity (C#), aimed at encouraging women to stay in STEM careers.",
+            "link": {
+              "label": "View playtest",
+              "url": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+            }
+          },
+          {
+            "type": "text",
+            "title": "1st place, UFJF Junior Marathon",
+            "text": "In 2023, still in my first semester, my team won the UFJF Junior Programming Marathon."
+          },
+          {
+            "type": "text",
+            "title": "Financial software at scale",
+            "text": "At Levty, I deliver features, fixes, and code reviews in a high-volume internal system used by Livelo."
+          },
+          {
+            "type": "text",
+            "title": "Academic excellence",
+            "text": "Average above 90% in Information Systems, balancing internship, research, and outreach.",
+            "link": {
+              "label": "View GitHub",
+              "url": "https://github.com/EduardaNunes"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "label": "Projects"
+  },
+  "ai-automation": {
+    "label": "AI & Automations",
+    "projects": [
+      {
+        "id": "proj-chatbot-whatsapp",
+        "title": "Chatbot for WhatsApp",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "WhatsApp support automation with conversational flows to organize messages and answer recurring questions."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["JavaScript", "Node.js", "WhatsApp API"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/chatbot-whatsapp.svg",
+              "alt": "Chatbot for WhatsApp demo",
+              "caption": "Chatbot for WhatsApp"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/chatbot-whatsapp"
+        }
+      },
+      {
+        "id": "proj-automation-spreadsheet",
+        "title": "Spreadsheet Automation",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Automation of repetitive spreadsheet tasks to transform data, reduce manual work and keep reports up to date."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["Python", "Pandas", "Automation"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/automation-spreadsheet.svg",
+              "alt": "Spreadsheet Automation demo",
+              "caption": "Spreadsheet Automation"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/automation-spreadsheet"
+        }
+      }
+    ]
+  },
+  "games": {
+    "label": "Games",
+    "projects": [
+      {
+        "id": "proj-programadas",
+        "title": "ProgramADAs",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Problem: algorithms feel abstract to beginners, and few women persist in computing. Solution: a university RPG in Unity (C#) with mini-games that turn logic into mechanics. Result: a browser-playable game (WebGL), led by me from idea to code."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["Unity", "C#", "WebGL", "Game Design"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/programadas.svg",
+              "alt": "ProgramADAs demo",
+              "caption": "ProgramADAs"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest",
+          "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+        }
+      },
+      {
+        "id": "proj-esbugalhado",
+        "title": "Esbugalhado: the Game",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "JavaScript game built for the DCC202 course (UFJF). I practiced game state, rules and browser interaction starting from the class's base repository."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["JavaScript", "HTML", "CSS"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/esbugalhado.svg",
+              "alt": "Esbugalhado: the Game demo",
+              "caption": "Esbugalhado: the Game"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
+        }
+      }
+    ]
+  },
+  "webdev": {
+    "label": "WebDev",
+    "projects": [
+      {
+        "id": "proj-productive-tracking",
+        "title": "Productive Tracking",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Problem: ordinary task lists do not show consistency. Solution: a to-do app with login, real-time database and a productivity calendar. Result: a single signup/login form with animation and data synced automatically in Firebase."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["JavaScript", "HTML", "CSS", "Firebase"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/productive-tracking.svg",
+              "alt": "Productive Tracking demo",
+              "caption": "Productive Tracking"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/Productive-Tracking",
+          "deployLink": "https://eduardanunes.github.io/Productive-Tracking/"
+        }
+      },
+      {
+        "id": "proj-pixel-paint",
+        "title": "Pixel Paint",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Browser pixel-art editor built in plain JavaScript to practice DOM manipulation and interface events."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["JavaScript", "HTML", "CSS"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/pixel-paint.svg",
+              "alt": "Pixel Paint demo",
+              "caption": "Pixel Paint"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/Pixel-Paint"
+        }
+      },
+      {
+        "id": "proj-portfolio",
+        "title": "Notebook Portfolio",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "React portfolio with light/dark theme, PT/EN and 3D notebook navigation. I applied accessibility (keyboard, reduced motion) and a custom pixel-art design system."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["React", "Vite", "CSS", "Web Animations API"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/portfolio-web.svg",
+              "alt": "Notebook Portfolio demo",
+              "caption": "Notebook Portfolio"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/Portifolio"
+        }
+      }
+    ]
+  },
+  "backend": {
+    "label": "BackEnd",
+    "projects": [
+      {
+        "id": "proj-student-housing",
+        "title": "Student Housing App",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Problem: students struggle to find housing near the university. Solution: a GET mobile app with a map and address autofill by postal code. Result: authentication and data in Supabase, integrated with Google Maps and ViaCEP."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["React Native", "TypeScript", "Expo", "Supabase"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [
+            {
+              "src": "/images/projects/student-housing.svg",
+              "alt": "Student Housing App demo",
+              "caption": "Student Housing App"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "sections": [
+      {
+        "id": "email",
+        "content": [
+          {
+            "type": "email",
+            "email": "eduardapmn@gmail.com"
+          }
+        ]
+      },
+      {
+        "id": "links",
+        "content": [
+          {
+            "type": "links",
+            "items": [
+              {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/eduardapmn"
+              },
+              {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "https://github.com/EduardaNunes"
+              },
+              {
+                "icon": "email",
+                "name": "Email",
+                "link": "mailto:eduardapmn@gmail.com"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

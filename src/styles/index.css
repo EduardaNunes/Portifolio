@@ -21,6 +21,7 @@
   --h1-selection: #5f9ea0;
   --strong: cadetblue;
   --strong-selection: #f9efe4;
+  --notebook-highlight-color: #d87f0b;
 
   --btn-play: #5f9ea0;
   --btn-text: var(--btn-play-shine);
@@ -63,6 +64,7 @@
   --h1-selection: #1a1917;
   --strong: #d87f0b;
   --strong-selection: #1a1917;
+  --notebook-highlight-color: cadetblue;
 
   --btn-play: var(--cover-base);
   --btn-text: var(--cover-shine);
@@ -724,6 +726,11 @@ header {
   --paper-border: #d9d0c4;
   --paper-accent: #145053;
 
+  /* Page presentation ink aliases (aliases only, no new colors) */
+  --page-ink: var(--paper-accent);
+  --page-ink-soft: var(--strong);
+  --page-line: var(--page-ink-soft);
+
   /* Re-point the theme tokens so existing components inherit contrast */
   --bg-color: var(--paper-bg);
   --text-color: var(--paper-text);
@@ -733,13 +740,11 @@ header {
   flex: 1 1 50%;
   min-width: 0;
   height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* A leaf is one fixed page: it never scrolls. Content that does not fit is a
+     pagination defect and must be moved to a continuation pair (see
+     notebook-page-flow), never turned into a scroll region. */
+  overflow: hidden;
   overflow-wrap: anywhere;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overscroll-behavior: contain;
-  touch-action: pan-y;
   /* Extra bottom padding (60px corner zone + 12px buffer) so content doesn't overlap arrows */
   padding: 1.1rem 1rem calc(1.4rem + 72px);
   box-sizing: border-box;
@@ -748,12 +753,6 @@ header {
   font-size: clamp(0.55rem, 1.5vw, 0.72rem);
   line-height: 1.55;
   text-align: left;
-}
-
-.notebook-leaf::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none;
 }
 
 .notebook-leaf.left {
@@ -780,6 +779,11 @@ header {
   margin: 0.8rem 0 0.35rem;
   font-size: clamp(0.62rem, 1.7vw, 0.8rem);
   color: var(--strong);
+}
+
+/* Reusable semantic emphasis for notebook content. */
+.notebook-leaf .destaque {
+  color: var(--notebook-highlight-color);
 }
 
 .notebook-leaf p {
@@ -1209,26 +1213,13 @@ header {
 
 /* ---------- Deploy Link Styling ---------- */
 
+/* Positioning only: the visual style comes from .page-action. */
 .prominent-deploy-btn {
   position: absolute;
   top: 0;
   right: 0;
   max-width: calc(100% - 0.5rem);
-  background: var(--btn-play);
-  color: var(--bg-color);
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 0.52rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.2s ease;
   z-index: 10;
-}
-
-.prominent-deploy-btn:hover {
-  background: var(--btn-play-shadow);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .prominent-deploy-btn .icon {
@@ -1236,6 +1227,13 @@ header {
   height: 11px;
   vertical-align: middle;
   margin-right: 3px;
+}
+
+.notebook-leaf .thumbnail-caption {
+  margin-top: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--page-ink-soft);
 }
 
 /* ---------- Narrow screens ---------- */
@@ -1313,116 +1311,13 @@ header {
   pointer-events: none;
 }
 
-.pixel-art-header {
-  display: block;
-  max-width: 100%;
-  margin: 0 0 0.55rem;
-  padding: 0.35rem 0.45rem;
-  box-sizing: border-box;
-  border: 1px solid var(--paper-border);
-  border-left: 4px solid var(--paper-accent);
-  background: var(--paper-bg);
-  color: var(--paper-text);
-  font-size: clamp(0.62rem, 1.7vw, 0.82rem);
-  line-height: 1.25;
-  overflow-wrap: anywhere;
-}
-
-.pixel-art-entry-list,
-.pixel-art-media-frame,
-.pixel-art-section {
-  max-width: 100%;
-  margin: 0.55rem 0;
-  padding: 0.4rem;
-  box-sizing: border-box;
-  border: 1px solid var(--paper-border);
-  border-radius: 0;
-  background: var(--paper-bg);
-}
-
-.pixel-art-entry-list > .pixel-art-header {
-  margin: -0.4rem -0.4rem 0.4rem;
-}
-
-.pixel-art-entry {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.18rem 0.35rem;
-  max-width: 100%;
-  margin: 0;
-  padding: 0.35rem 0;
-  box-sizing: border-box;
-  border-bottom: 1px solid var(--paper-border);
-  font-size: inherit;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-}
-
-.pixel-art-entry:last-child {
-  border-bottom: 0;
-}
-
-.pixel-art-entry-label,
-.pixel-art-label {
-  color: var(--paper-text);
-  font-weight: normal;
-}
-
-.pixel-art-entry-value {
-  min-width: 0;
-  color: var(--paper-muted);
-}
-
-.pixel-art-entry-action,
-.repo-link-button,
-.contact-btn,
-.prominent-deploy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  max-width: 100%;
-  padding: 0.25rem 0.4rem;
-  box-sizing: border-box;
-  border: 1px solid var(--paper-accent);
-  border-radius: 0;
-  color: var(--paper-accent);
-  background: var(--paper-bg);
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-
-.pixel-art-entry-action:hover,
-.repo-link-button:hover,
-.contact-btn:hover,
-.prominent-deploy-btn:hover {
-  background: var(--paper-accent);
-  color: var(--paper-bg);
-}
-
-.pixel-art-entry-action:focus-visible,
-.repo-link-button:focus-visible,
-.contact-btn:focus-visible,
-.prominent-deploy-btn:focus-visible,
-.social-link:focus-visible {
-  outline: 2px solid var(--paper-text);
-  outline-offset: 2px;
-}
-
-.pixel-art-chip {
-  display: inline-flex;
-  max-width: 100%;
-  padding: 0.16rem 0.3rem;
-  border: 1px solid var(--paper-border);
-  border-radius: 0;
-  background: var(--paper-bg);
-  font-size: 0.52rem;
-  overflow-wrap: anywhere;
-}
-
+/* Kept only as the project image/video frame (ornament/media), not a text box. */
 .pixel-art-media-frame {
   position: relative;
+  max-width: 100%;
+  margin: 0.55rem 0;
   padding: 0.45rem;
+  box-sizing: border-box;
 }
 
 .pixel-art-media-frame img,
@@ -1434,14 +1329,260 @@ header {
   border-radius: 0;
 }
 
-.pixel-art-separator {
-  height: 1px;
-  margin: 0.4rem 0;
-  background: var(--paper-border);
-}
-
 .no-horizontal-scroll {
   overflow-x: hidden;
+}
+
+/* ---------- Paper-like page text presentation (page-* vocabulary) ---------- */
+/* Less frames, more lines: the text rests on dotted rules like a real pad. */
+
+.notebook-leaf .page-title {
+  margin: 0 0 0.9rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: center;
+  font-size: clamp(0.95rem, 3vw, 1.45rem);
+  line-height: 1.2;
+  color: var(--page-ink);
+  text-wrap: balance;
+}
+
+.notebook-leaf .page-label {
+  margin: 0.9rem 0 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(0.5rem, 1.3vw, 0.62rem);
+  color: var(--page-ink-soft);
+  text-wrap: balance;
+}
+
+.notebook-leaf .page-label::after {
+  content: '';
+  display: block;
+  width: 3.2em;
+  height: 4px;
+  margin: 0.3rem auto 0;
+  background:
+    linear-gradient(var(--page-line), var(--page-line)) left top / 100% 2px no-repeat,
+    linear-gradient(var(--page-line), var(--page-line)) 25% 2px / 50% 2px no-repeat;
+}
+
+.notebook-leaf .page-field {
+  display: block;
+  margin: 0;
+  padding: 0.3rem 0 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--page-ink);
+  background:
+    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
+    left bottom / 100% 1px no-repeat;
+}
+
+.notebook-leaf .page-field > .field-label {
+  color: var(--page-ink-soft);
+}
+
+.notebook-leaf .page-field > .field-label::after {
+  content: ':';
+  margin-right: 0.35em;
+}
+
+.notebook-leaf .page-field > .field-value {
+  color: var(--page-ink);
+  overflow-wrap: anywhere;
+}
+
+.notebook-leaf .page-field-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.9rem;
+}
+
+.notebook-leaf .page-field-pair > .page-field {
+  flex: 1 1 8.5em;
+  min-width: 0;
+}
+
+.notebook-leaf .page-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.notebook-leaf .page-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  background:
+    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
+    left bottom / 100% 1px no-repeat;
+}
+
+.notebook-leaf .page-marker {
+  flex: none;
+  width: 0.65rem;
+  height: 0.65rem;
+  margin-top: 0.15em;
+  border: 2px solid var(--page-ink);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.notebook-leaf .page-marker.is-done {
+  background: var(--page-ink);
+  /* "check" by inner ring, no new color */
+  box-shadow: inset 0 0 0 2px var(--paper-bg);
+}
+
+.notebook-leaf .page-note {
+  --note-step: 3px;
+  position: relative;
+  margin: 0.6rem 0;
+  padding: 0.32rem 0.6rem;
+  border: 1px solid var(--page-ink);
+  line-height: 1.6;
+  clip-path: polygon(
+    var(--note-step) 0,
+    calc(100% - var(--note-step)) 0,
+    calc(100% - var(--note-step)) var(--note-step),
+    100% var(--note-step),
+    100% calc(100% - var(--note-step)),
+    calc(100% - var(--note-step)) calc(100% - var(--note-step)),
+    calc(100% - var(--note-step)) 100%,
+    var(--note-step) 100%,
+    var(--note-step) calc(100% - var(--note-step)),
+    0 calc(100% - var(--note-step)),
+    0 var(--note-step),
+    var(--note-step) var(--note-step)
+  );
+  /* Internal pad: each text line rests on a dotted rule. The 1.6em stop
+     MUST stay equal to this box's line-height (1.6). */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 calc(1.6em - 1px),
+    var(--page-line) calc(1.6em - 1px) 1.6em
+  );
+  background-origin: content-box;
+}
+
+.notebook-leaf .page-note > .note-title {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--page-ink);
+  text-transform: uppercase;
+}
+
+.notebook-leaf .page-note > p {
+  margin: 0;
+  color: var(--paper-text);
+}
+
+.notebook-leaf .page-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 1.9rem;
+  padding: 0.25rem 0.6rem;
+  border: 2px solid var(--page-ink);
+  border-radius: 0;
+  background: var(--paper-bg);
+  color: var(--page-ink);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.notebook-leaf .page-action:hover {
+  background: var(--page-ink);
+  color: var(--paper-bg);
+}
+
+.notebook-leaf .page-action:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+.notebook-leaf .page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.notebook-leaf .page-chip {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 0.16rem 0.35rem;
+  border: 1px solid var(--page-ink);
+  border-radius: 0;
+  background: var(--paper-bg);
+  color: var(--page-ink);
+  text-transform: uppercase;
+  font-size: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.notebook-leaf .page-field > .field-value .page-chip {
+  margin: 0 0.25rem 0.2rem 0;
+}
+
+.notebook-leaf .page-field:last-child .page-chip:last-child {
+  margin-bottom: 0;
+}
+
+.notebook-leaf .course-body,
+.notebook-leaf .academic-project-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.notebook-leaf .social-link-field {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Generic content sections keep the same rhythm as `h3.page-label`. */
+.notebook-leaf .notebook-content-section + .notebook-content-section {
+  margin-top: 0.55rem;
+}
+
+.notebook-leaf .positions-list .position-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.notebook-leaf .list-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.notebook-leaf .list-detail {
+  color: var(--paper-muted);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+}
+
+/* Anchors the deploy action to the demo leaf, like the old right page. */
+.notebook-leaf .project-demo-block {
+  position: relative;
+  min-height: 100%;
+  padding-top: 1.7rem;
 }
 
 /* ---------- Narrow screens ---------- */

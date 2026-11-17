@@ -8,8 +8,9 @@ import VolumeControlButton from './components/VolumeControlButton'
 import { useLanguage } from './hooks/useLanguage'
 import { useSectionSnap } from './hooks/useSectionSnap'
 import { useTheme } from './hooks/useTheme'
-import { profileData } from './data/profile'
-import { projects } from './data/projects'
+import { getMarkerContent } from './content'
+import { markerRegistry } from './content/markers'
+import { notebookLayout } from './content/layout'
 import { buildNotebookPages } from './utils/buildNotebookPages'
 import { scrollToSection } from './utils/scrollToSection'
 
@@ -30,8 +31,17 @@ export default function App() {
     }
   }, [])
 
-  const content = profileData[language]
-  const notebook = useMemo(() => buildNotebookPages({ content, projects }), [content])
+  const content = getMarkerContent(language)
+  const notebook = useMemo(
+    () =>
+      buildNotebookPages({
+        content,
+        registry: markerRegistry,
+        layout: notebookLayout,
+        labels: texts.notebook,
+      }),
+    [content, texts.notebook],
+  )
 
   const openNotebook = () => {
     setIsOpen(true)
@@ -55,9 +65,9 @@ export default function App() {
           markers={notebook.markers}
           spreads={notebook.spreads}
           isOpen={isOpen}
-          previousLabel={content.labels.ui.previous}
-          nextLabel={content.labels.ui.next}
-          sectionsLabel={content.labels.ui.sectionsLabel}
+          previousLabel={texts.notebook.previous}
+          nextLabel={texts.notebook.next}
+          sectionsLabel={texts.notebook.sectionsLabel}
         />
       </div>
     </>

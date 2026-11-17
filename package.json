@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "npm run validate:content",
     "build": "vite build",
-    "preview": "vite preview"
+    "prebuild": "npm run validate:content",
+    "preview": "vite preview",
+    "validate:content": "node scripts/validate-content.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

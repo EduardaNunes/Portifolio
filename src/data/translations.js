@@ -23,21 +23,20 @@ export const translations = {
     playSubtitle: 'Para conhecer mais sobre mim e o meu trabalho :)',
     playButton: 'start',
 
-    // Navigation markers and labels (left sidebar)
-    navigationMarkers: {
-      sobreMim: 'Sobre Mim',
-      carreira: 'Carreira',
-      estudos: 'Estudos',
-      projetos: 'Projetos',
-      contato: 'Contato',
-    },
-
-    // Navigation markers and labels (right category tabs for Projects section)
-    projectCategories: {
-      IA_AUTOMACAOES: 'IA e Automações',
-      JOGOS: 'Jogos',
-      WEBDEV: 'WebDev',
-      BACKEND: 'BackEnd',
+    // Notebook UI copy (page chrome, actions and generated labels)
+    notebook: {
+      previous: 'Página anterior',
+      next: 'Próxima página',
+      sectionsLabel: 'Seções do caderno',
+      message: 'Enviar mensagem',
+      techStack: 'Tech Stack',
+      viewSource: 'Ver código fonte',
+      deploy: 'Ver deploy',
+      demo: 'Ver demo',
+      noThumbnail: 'Nenhum thumbnail disponível',
+      emptyCategory: 'Nenhum projeto nesta categoria',
+      currentPosition: 'atual',
+      projectCountSuffix: 'projeto(s)',
     },
 
     // Navigation zones labels (bottom corners)
@@ -60,21 +59,20 @@ export const translations = {
     playSubtitle: 'To discover more about me and my work :)',
     playButton: 'start',
 
-    // Navigation markers and labels (left sidebar)
-    navigationMarkers: {
-      sobreMim: 'About Me',
-      carreira: 'Career',
-      estudos: 'Studies',
-      projetos: 'Projects',
-      contato: 'Contact',
-    },
-
-    // Navigation markers and labels (right category tabs for Projects section)
-    projectCategories: {
-      IA_AUTOMACAOES: 'IA e Automações',
-      JOGOS: 'Jogos',
-      WEBDEV: 'WebDev',
-      BACKEND: 'BackEnd',
+    // Notebook UI copy (page chrome, actions and generated labels)
+    notebook: {
+      previous: 'Previous page',
+      next: 'Next page',
+      sectionsLabel: 'Notebook sections',
+      message: 'Send message',
+      techStack: 'Tech Stack',
+      viewSource: 'View source code',
+      deploy: 'View deployment',
+      demo: 'View demo',
+      noThumbnail: 'No thumbnail available',
+      emptyCategory: 'No projects in this category',
+      currentPosition: 'present',
+      projectCountSuffix: 'project(s)',
     },
 
     // Navigation zones labels (bottom corners)
