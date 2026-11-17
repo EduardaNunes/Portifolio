@@ -1,10 +1,9 @@
-# Spec Delta
+# marker-content-schema Specification
 
 ## Purpose
-
 Defines the typed, per-language content model that supplies every notebook marker: stable ids, ordered sections, seven block types with required and optional fields, project lists, and validation that keeps locales and layout aligned.
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: Marker content is declared per language with identical structure
 
@@ -36,7 +35,7 @@ The top-level keys of a content document SHALL be stable marker ids, and each ma
 
 ### Requirement: Sections group ordered content under an optional subheader
 
-Each marker SHALL declare an ordered `sections` array. Every section SHALL have an `id` unique within its marker and SHALL contain an ordered `content` array of typed blocks. A section MAY declare a localized `subHeader`.
+Each narrative marker SHALL declare an ordered `sections` array. Every section SHALL have an `id` unique within its marker and SHALL contain an ordered `content` array of typed blocks. A section MAY declare a localized `subHeader`.
 
 #### Scenario: Section order is preserved
 
@@ -102,26 +101,31 @@ A `text` block SHALL require non-empty `text`. It MAY declare `title` and a `lin
 
 ### Requirement: Position blocks describe dated entries
 
-A `positions` block SHALL contain a non-empty `items` array. Each item SHALL require `position`, `company`, and `fromDate`, and MAY declare `toDate` and `description`. An absent or empty `toDate` SHALL render as the localized current-position wording.
+A `positions` block SHALL contain a non-empty `items` array. Each item SHALL require `position` and `company`, and MAY declare `fromDate`, `toDate`, and `description` as free-form strings (not typed dates). An absent or empty `toDate` SHALL render as the localized current-position wording when `fromDate` is present; an item with neither date SHALL render no date range.
 
 #### Scenario: Current position
 
-- **WHEN** a position omits `toDate` or declares it empty
+- **WHEN** a position declares `fromDate` and omits `toDate` or declares it empty
 - **THEN** the renderer shows the localized current-position wording instead of an empty date
 
 #### Scenario: Completed position
 
-- **WHEN** a position declares `toDate`
+- **WHEN** a position declares both `fromDate` and `toDate`
 - **THEN** the renderer shows the range from `fromDate` to `toDate`
+
+#### Scenario: Free-form date text
+
+- **WHEN** a position declares non-date text such as a placeholder in `fromDate` or `toDate`
+- **THEN** the renderer displays it unchanged instead of parsing or reformatting it
 
 #### Scenario: Required position fields are enforced
 
-- **WHEN** `position`, `company`, or `fromDate` is missing or empty
+- **WHEN** `position` or `company` is missing or empty
 - **THEN** validation fails with the position index
 
 ### Requirement: List blocks cover bullets and checklists
 
-A `list` block SHALL contain a non-empty `items` array whose entries are either strings or objects with `text` and an optional `done` boolean. String entries SHALL render as bullet items; entries that declare `done` SHALL render as checklist items and expose their state to assistive technology.
+A `list` block SHALL contain a non-empty `items` array whose entries are either strings or objects with `text`, an optional `done` boolean, and an optional `detail` string. String entries SHALL render as bullet items; entries that declare `done` SHALL render as checklist items and expose their state to assistive technology; `detail` SHALL render as a secondary line.
 
 #### Scenario: Bullet items
 
@@ -132,6 +136,11 @@ A `list` block SHALL contain a non-empty `items` array whose entries are either 
 
 - **WHEN** list entries declare `done`
 - **THEN** each entry renders with the matching marker state and its completion is announced to assistive technology
+
+#### Scenario: List detail line
+
+- **WHEN** a list entry declares `detail`
+- **THEN** the entry shows the detail as a secondary line without replacing its bullet or checklist marker
 
 #### Scenario: Empty list fails validation
 

@@ -42,10 +42,12 @@ There is no test framework in the project. Validation will be a small shared mod
 
 ```js
 export const markerRegistry = [
-  { id: 'about', side: 'left', icon: 'about', accent: '#3f8f92' },
+  { id: 'about', kind: 'narrative', side: 'left', icon: 'about', accent: '#3f8f92' },
   // ...
 ]
 ```
+
+`kind` is `narrative`, `overview` (the generated Projects summary), or `category` (a marker that owns projects). It lets validation and generation branch without inspecting localized content.
 
 **Rationale:** Content keys must not change with language, and side/icon/accent/order are presentation. The registry remains the single marker-order source for tabs and the flattened sequence.
 
@@ -59,13 +61,13 @@ export const markerRegistry = [
 |---|---|---|---|
 | `blocks` | `name`, `items: string[]` | — | About technical skills |
 | `text` | `text` | `title`, `link: { label, url }` | About results/soft skills, current role, education descriptions |
-| `positions` | `items: [{ position, company, fromDate }]` | per item `toDate`, `description` | Career timeline, education entries |
+| `positions` | `items: [{ position, company }]` | per item `fromDate`, `toDate`, `description` (free-form strings) | Career timeline, education entries |
 | `email` | `email` | — | Contact address |
 | `links` | `items: [{ icon, name, link }]` | — | Contact LinkedIn/GitHub/email rows |
-| `list` | `items: string[] \| [{ text, done? }]` | — | Career goals, Studies courses |
+| `list` | `items: string[] \| [{ text }]` | per item `done`, `detail` | Career goals, Studies courses |
 | `projectDemo` | — | `images: [{ src, alt?, caption?, video? }]`, `repoLink`, `deployLink` | Project right leaf |
 
-An absent or empty `toDate` renders the localized current-position wording. `list` entries that are strings render bullets; entries that declare `done` render checklist items. `text.link` is all-or-nothing: a partial link fails validation, and an absent link renders no button.
+`fromDate`/`toDate` are free-form strings in month-year form, not parsed dates, so undated entries can carry a placeholder or a label. With `fromDate` present, an absent or empty `toDate` renders the localized current-position wording; with neither date, no range renders. `list` entries that are strings render bullets; entries that declare `done` render checklist items; `detail` renders a muted secondary line. `text.link` is all-or-nothing: a partial link fails validation, and an absent link renders no button.
 
 **Rationale:** These seven types cover every existing content unit. Keeping `items` as the repeated field makes slicing uniform. Content stores natural case; CSS keeps `text-transform: uppercase`.
 

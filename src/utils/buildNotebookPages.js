@@ -1,175 +1,191 @@
 import React from 'react'
-import AboutMePage from '../components/narrative-notebook-component/AboutMePage'
-import CareerPage from '../components/narrative-notebook-component/CareerPage'
-import StudiesPage from '../components/narrative-notebook-component/StudiesPage'
-import ProjectLeftPage from '../components/narrative-notebook-component/ProjectLeftPage'
-import ProjectRightPage from '../components/narrative-notebook-component/ProjectRightPage'
-import ContactPage from '../components/narrative-notebook-component/ContactPage'
+import NotebookLeaf from '../components/notebook-content/NotebookLeaf'
+import { markerRegistry } from '../content/markers'
+import { notebookLayout } from '../content/layout'
 
 const h = React.createElement
+const REPEATABLE_TYPES = ['positions', 'list', 'links']
 
-const MARKER_META = {
-  about: { side: 'left', icon: 'about', accent: '#3f8f92' },
-  career: { side: 'left', icon: 'career', accent: '#b8763c' },
-  studies: { side: 'left', icon: 'studies', accent: '#7c68b5' },
-  projects: { side: 'left', icon: 'projects', accent: '#bc8a2f' },
-  'ai-automation': { side: 'right', icon: 'ai', accent: '#3f8f92' },
-  games: { side: 'right', icon: 'games', accent: '#7c68b5' },
-  webdev: { side: 'right', icon: 'webdev', accent: '#bc8a2f' },
-  backend: { side: 'right', icon: 'backend', accent: '#4f8a63' },
-  contact: { side: 'left', icon: 'contact', accent: '#4f8a63' },
+function sliceRange(items, range) {
+  const [start, end = items.length] = range
+  return items.slice(start, end)
 }
 
-const CATEGORY_MARKERS = {
-  'IA e Automações': 'ai-automation',
-  Jogos: 'games',
-  WebDev: 'webdev',
-  BackEnd: 'backend',
+function resolveSlice(markerContent, slice) {
+  const section = markerContent.sections.find((candidate) => candidate.id === slice.section)
+  if (!section) {
+    throw new Error(`Layout references missing section "${slice.section}" in ${markerContent.label}`)
+  }
+
+  if (Array.isArray(slice.components)) {
+    return { ...section, content: sliceRange(section.content, slice.components) }
+  }
+
+  if (Array.isArray(slice.items)) {
+    const repeatable = section.content.find((block) => REPEATABLE_TYPES.includes(block.type))
+    if (!repeatable) {
+      throw new Error(`Layout slices items in "${slice.section}", which has no repeatable block`)
+    }
+    return {
+      ...section,
+      content: section.content.map((block) =>
+        block === repeatable ? { ...block, items: sliceRange(block.items, slice.items) } : block,
+      ),
+    }
+  }
+
+  return { ...section, content: section.content }
 }
 
-/**
- * Page-pair slice contract
- *
- * A marker owns one or more page pairs. Each pair receives a bounded slice of the
- * localized content so that every leaf fits its fixed page: leaves never scroll,
- * and anything that does not fit must continue on a later pair of the same marker.
- *
- * Slices are declared here, at build time, from the existing localized data.
- * They are never measured or generated at runtime. When content grows, move a
- * boundary or add a pair; never shrink type below legibility and never
- * reintroduce scrolling.
- *
- * A continuation pair omits `heading` and passes `runningHead` instead, so the
- * page component renders a small running head (existing localized copy) rather
- * than repeating the page title. A pair with no content on one side renders a
- * blank paper leaf (`null`).
- */
-const sliceBetween = (items = [], start = 0, end) => items.slice(start, end)
-const sliceFrom = (items = [], start = 0) => items.slice(start)
+function resolveSide(markerContent, side, sideIndex, labels) {
+  if (!side) return null
+
+  const resolved = side.sections.map((slice) => resolveSlice(markerContent, slice))
+
+  const title = markerContent.label
+  const sections = resolved
+
+  return h(NotebookLeaf, { title, sections, labels })
+}
+
+function resolveNarrativePairs(markerId, markerContent, markerLayout, labels) {
+  let leftIndex = 0
+  let rightIndex = 0
+
+  return markerLayout.pages.map((page, pageIndex) => {
+    const left = resolveSide(markerContent, page.left, leftIndex, labels)
+    if (page.left) leftIndex += 1
+
+    const right = resolveSide(markerContent, page.right, rightIndex, labels)
+    if (page.right) rightIndex += 1
+
+    return { id: `${markerId}-${pageIndex + 1}`, left, right }
+  })
+}
 
 function projectPair(project, labels) {
+  const sections = project.sections.map((section) => ({ ...section }))
+
+  if (project.demo?.repoLink) {
+    sections.push({
+      id: 'source',
+      content: [
+        {
+          type: 'links',
+          items: [{ icon: 'github', name: labels.viewSource, link: project.demo.repoLink }],
+        },
+      ],
+    })
+  }
+
   return {
     id: project.id,
-    left: h(ProjectLeftPage, {
-      title: project.title,
-      description: project.description,
-      techStack: project.techStack,
-      repoUrl: project.repoLink,
-      sourceCodeLink: project.repoLink,
-      labels: labels.project,
-    }),
-    right: h(ProjectRightPage, {
-      thumbnailUrl: project.thumbnailUrl,
-      deployUrl: project.deployUrl,
-      projectTitle: project.title,
-      labels: labels.project,
+    left: h(NotebookLeaf, { title: project.title, sections, labels }),
+    right: h(NotebookLeaf, {
+      sections: [{ id: 'demo', content: [project.demo] }],
+      labels,
     }),
   }
 }
 
-function overviewPair(content, projects, labels) {
-  const categories = ['IA e Automações', 'Jogos', 'WebDev', 'BackEnd']
+function overviewPair(content, registry, labels) {
+  const categories = registry.filter((marker) => marker.kind === 'category')
+  const counts = categories
+    .map((marker) => {
+      const category = content[marker.id]
+      return `${category.label}: ${category.projects.length} ${labels.projectCountSuffix}`
+    })
+    .join(' · ')
+  const firstImage = categories
+    .flatMap((marker) => content[marker.id].projects)
+    .flatMap((project) => project.demo?.images ?? [])
+    .find((image) => image?.src)
+  const overviewImage = firstImage ? { ...firstImage, caption: content.projects.label } : undefined
+
   return {
     id: 'projects-overview',
-    left: h(ProjectLeftPage, {
-      title: content.sections.projects,
-      description: categories.map((category) => `${category}: ${projects.filter((item) => item.categoryId === category).length} projeto(s)`).join(' · '),
-      techStack: categories,
-      labels: labels.project,
+    left: h(NotebookLeaf, {
+      title: content.projects.label,
+      sections: [
+        { id: 'summary', content: [{ type: 'text', text: counts }] },
+        {
+          id: 'categories',
+          content: [
+            {
+              type: 'blocks',
+              name: labels.techStack,
+              items: categories.map((marker) => content[marker.id].label),
+            },
+          ],
+        },
+      ],
+      labels,
     }),
-    right: h(ProjectRightPage, {
-      thumbnailUrl: projects.find((item) => item.thumbnailUrl)?.thumbnailUrl,
-      projectTitle: content.sections.projects,
-      labels: labels.project,
+    right: h(NotebookLeaf, {
+      sections: [
+        {
+          id: 'demo',
+          content: [{ type: 'projectDemo', images: overviewImage ? [overviewImage] : [] }],
+        },
+      ],
+      labels,
+    }),
+  }
+}
+
+function emptyCategoryPair(markerId, label, labels) {
+  return {
+    id: `${markerId}-empty`,
+    left: h(NotebookLeaf, {
+      title: label,
+      sections: [{ id: 'empty', content: [{ type: 'text', text: labels.emptyCategory }] }],
+      labels,
+    }),
+    right: h(NotebookLeaf, {
+      sections: [{ id: 'demo', content: [{ type: 'projectDemo', images: [] }] }],
+      labels,
     }),
   }
 }
 
 /**
  * Builds the ordered marker registry and its flattened global page-pair list.
- * `side` is presentation metadata only; the marker array remains navigation order.
+ * Content supplies text only; this module resolves layout slices and generates
+ * project pairs. `side` is presentation metadata used by the notebook tabs.
  */
-export function buildNotebookPages({ content, projects = [] }) {
-  const { labels } = content
-  const byMarker = (markerId) => projects.filter((project) => CATEGORY_MARKERS[project.categoryId] === markerId)
+export function buildNotebookPages({
+  content,
+  registry = markerRegistry,
+  layout = notebookLayout,
+  labels = {},
+}) {
+  const markers = registry.map((meta) => {
+    const markerContent = content[meta.id]
+    if (!markerContent) throw new Error(`Content is missing marker "${meta.id}"`)
 
-  const markers = [
-    {
-      id: 'about', label: content.sections.about, ...MARKER_META.about,
-      pagePairs: [
-        {
-          id: 'about-main',
-          left: h(AboutMePage, { side: 'left', heading: content.about.heading, labels: labels.about, skills: content.about.skills }),
-          right: h(AboutMePage, { side: 'right', labels: labels.about, results: sliceBetween(content.about.results, 0, 2) }),
-        },
-        {
-          id: 'about-continued',
-          left: h(AboutMePage, { side: 'left', runningHead: content.about.heading, labels: labels.about, softSkills: content.about.softSkills }),
-          right: h(AboutMePage, { side: 'right', runningHead: content.about.heading, labels: labels.about, results: sliceFrom(content.about.results, 2) }),
-        },
-      ],
-    },
-    {
-      id: 'career', label: content.sections.career, ...MARKER_META.career,
-      pagePairs: [
-        {
-          id: 'career-main',
-          left: h(CareerPage, { side: 'left', heading: content.career.heading, labels: labels.career, currentRole: content.career.currentRole, timeline: sliceBetween(content.career.timeline, 0, 1) }),
-          right: h(CareerPage, { side: 'right', labels: labels.career, goals: content.career.goals }),
-        },
-        {
-          id: 'career-timeline',
-          left: h(CareerPage, { side: 'left', runningHead: content.career.heading, labels: labels.career, timeline: sliceBetween(content.career.timeline, 1, 2) }),
-          right: null,
-        },
-        {
-          id: 'career-timeline-end',
-          left: h(CareerPage, { side: 'left', runningHead: content.career.heading, labels: labels.career, timeline: sliceFrom(content.career.timeline, 2) }),
-          right: null,
-        },
-      ],
-    },
-    {
-      id: 'studies', label: content.sections.studies, ...MARKER_META.studies,
-      pagePairs: [
-        {
-          id: 'studies-main',
-          left: h(StudiesPage, { side: 'left', heading: content.studies.heading, labels: labels.studies, education: sliceBetween(content.studies.education, 0, 1) }),
-          right: h(StudiesPage, { side: 'right', labels: labels.studies, courses: content.studies.courses }),
-        },
-        {
-          id: 'studies-projects',
-          left: h(StudiesPage, { side: 'left', runningHead: content.studies.heading, labels: labels.studies, education: sliceFrom(content.studies.education, 1) }),
-          right: h(StudiesPage, { side: 'right', runningHead: content.studies.heading, labels: labels.studies, projects: content.studies.projects }),
-        },
-      ],
-    },
-    { id: 'projects', label: content.sections.projects, ...MARKER_META.projects, pagePairs: [overviewPair(content, projects, labels)] },
-    ...Object.entries(CATEGORY_MARKERS).map(([category, id]) => ({
-      id,
-      label: content.sections[id],
-      ...MARKER_META[id],
-      pagePairs: byMarker(id).map((project) => projectPair(project, labels)),
-    })),
-    {
-      id: 'contact', label: content.sections.contact, ...MARKER_META.contact,
-      pagePairs: [{
-        id: 'contact-main',
-        left: h(ContactPage, { side: 'left', heading: content.contact.heading, labels: labels.contact, email: content.contact.email }),
-        right: h(ContactPage, { side: 'right', heading: content.contact.heading, labels: labels.contact, linkedinUrl: content.contact.linkedinUrl, githubUrl: content.contact.githubUrl, email: content.contact.email, socialLinks: content.contact.socialLinks }),
-      }],
-    },
-  ]
-
-  // Keep every configured marker navigable, including a domain with no projects.
-  markers.forEach((marker) => {
-    if (marker.pagePairs.length === 0) {
-      marker.pagePairs.push({
-        id: `${marker.id}-empty`,
-        left: h(ProjectLeftPage, { title: marker.label, description: content.labels.ui.emptyCategory, labels: labels.project }),
-        right: h(ProjectRightPage, { projectTitle: marker.label, labels: labels.project }),
-      })
+    const marker = {
+      id: meta.id,
+      label: markerContent.label,
+      side: meta.side,
+      icon: meta.icon,
+      accent: meta.accent,
+      pagePairs: [],
     }
+
+    if (meta.kind === 'overview') {
+      marker.pagePairs = [overviewPair(content, registry, labels)]
+    } else if (meta.kind === 'category') {
+      const projects = markerContent.projects ?? []
+      marker.pagePairs = projects.length > 0
+        ? projects.map((project) => projectPair(project, labels))
+        : [emptyCategoryPair(meta.id, markerContent.label, labels)]
+    } else {
+      const markerLayout = layout[meta.id]
+      if (!markerLayout) throw new Error(`Layout is missing narrative marker "${meta.id}"`)
+      marker.pagePairs = resolveNarrativePairs(meta.id, markerContent, markerLayout, labels)
+    }
+
+    return marker
   })
 
   const spreads = markers.flatMap((marker) => marker.pagePairs.map((pair) => ({

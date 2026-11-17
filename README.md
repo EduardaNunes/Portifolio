@@ -9,6 +9,159 @@ npm install
 npm run dev
 ```
 
+## Conteúdo do caderno
+
+O conteúdo editorial fica em `src/content/pt.json` e `src/content/eng.json`.
+Os dois arquivos têm **a mesma estrutura**: mesmos marcadores, mesmas seções,
+mesmos tipos de bloco e a mesma ordem. Só os textos e mídias mudam.
+
+Cada chave externa é um id estável de marcador (`about`, `career`, `studies`,
+`projects`, `ai-automation`, `games`, `webdev`, `backend`, `contact`). O `label`
+é o texto da aba naquele idioma. Lado da aba, ícone, cor e ordem ficam em
+`src/content/markers.js`, fora do conteúdo.
+
+```jsonc
+{
+  "about": {
+    "label": "Sobre Mim",
+    "sections": [
+      {
+        "id": "skills",
+        "subHeader": "Habilidades Técnicas",
+        "content": [
+          {
+            "type": "blocks",
+            "name": "Linguagens",
+            "items": ["JavaScript", "TypeScript"]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+- **Narrativos** (`about`, `career`, `studies`, `contact`) usam `sections`.
+- **Visão geral** (`projects`) só declara `label`; as páginas são geradas.
+- **Categorias** (`ai-automation`, `games`, `webdev`, `backend`) usam
+  `projects`, sem `sections`.
+
+### Blocos
+
+| Tipo | Obrigatório | Opcional |
+|---|---|---|
+| `blocks` | `name`, `items: string[]` | — |
+| `text` | `text` | `title`, `link: { label, url }` |
+| `positions` | `items: [{ position, company }]` | `fromDate`, `toDate`, `description` |
+| `email` | `email` | — |
+| `links` | `items: [{ icon, name, link }]` | — |
+| `list` | `items: string[] \| [{ text }]` | `detail`, `done` por item |
+| `projectDemo` | — | `images`, `repoLink`, `deployLink` |
+
+Regras:
+
+- `text.link` é tudo ou nada: se existir, precisa de `label` e `url`; sem link,
+  nenhum botão é renderizado.
+- `fromDate` e `toDate` são strings livres (ex.: `"dez 2024"`), não datas
+  tipadas. Com `fromDate` preenchido, `toDate` vazio significa cargo atual e
+  mostra o texto localizado (`atual` / `present`). Sem nenhuma das duas, nenhum
+  período aparece. Use `"???"` quando a data ainda não for conhecida.
+- `list` com strings renderiza bullets. Itens com `done` viram checklist;
+  `detail` aparece como linha secundária.
+- `links.icon` aceita `linkedin`, `github`, `email` ou `external`.
+- `projectDemo.images` aceita `{ src, alt?, caption?, video? }`; lista vazia
+  mostra o placeholder localizado. `repoLink` e `deployLink` são opcionais e
+  escondem seus botões quando ausentes.
+
+### Projetos
+
+Cada projeto pertence a exatamente uma categoria e mantém a ordem declarada:
+
+```jsonc
+{
+  "games": {
+    "label": "Jogos",
+    "projects": [
+      {
+        "id": "proj-programadas",
+        "title": "ProgramADAs",
+        "sections": [
+          {
+            "id": "description",
+            "content": [{ "type": "text", "text": "Descrição do projeto." }]
+          },
+          {
+            "id": "tech",
+            "content": [{ "type": "blocks", "name": "Tech Stack", "items": ["Unity"] }]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": [{ "src": "/images/projects/programadas.svg", "alt": "ProgramADAs demo" }],
+          "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest",
+          "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+        }
+      }
+    ]
+  }
+}
+```
+
+A repartição em páginas **não** fica no conteúdo. Ela é declarada em
+`src/content/layout.js` (ver seção “Paginação do caderno”).
+
+### Paginação do caderno
+
+A repartição em folhas fica em `src/content/layout.js`, separada do conteúdo.
+Cada marcador narrativo declara pares de páginas; cada lado é `null` (folha em
+branco) ou um objeto com uma lista de fatias:
+
+```js
+career: {
+  pages: [
+    {
+      left: {
+        sections: [
+          { section: 'current-role' },              // seção inteira
+          { section: 'timeline', items: [0, 1] },   // itens 0 (intervalo [0,1))
+        ],
+      },
+      right: { sections: [{ section: 'goals' }] },
+    },
+    {
+      left: { sections: [{ section: 'timeline', items: [1] }] }, // do 1 ao fim
+      right: null, // folha em branco
+    },
+  ],
+}
+```
+
+- `section` é o `id` da seção no JSON de conteúdo.
+- `components: [início, fim]` recorta o array `content` da seção.
+- `items: [início, fim]` recorta os itens do único bloco repetível da seção
+  (`positions`, `list` ou `links`). `[início]` vai até o fim.
+- **Toda folha populada de marcador narrativo recebe o label do marcador como
+  título grande (`h2.page-title`) automaticamente.** Não há mais modo
+  `title: 'section'` nem running head automático.
+- Projetos **não** entram no layout: o builder gera um par por projeto (esquerda
+  = título do projeto + seções + link do repositório; direita = demo) e um par de visão
+  geral para o marcador `projects`. Categoria vazia gera um par navegável com o
+  placeholder localizado.
+
+Ao editar um intervalo, rode `npm run validate:content`: se algum componente ou
+item ficar sem referência ou for referenciado duas vezes, a validação falha.
+
+### Validação
+
+```bash
+npm run validate:content
+```
+
+A validação roda antes de `npm run dev` e `npm run build`. Ela confere paridade
+PT/EN, campos obrigatórios, tipos de bloco, ids únicos, ícones de link, donos de
+projeto e cobertura do layout. Erros apontam o caminho exato, por exemplo
+`pt.career.sections[1].content[0].items[2].position`.
+
 ## Assets
 
 Copie as pastas do projeto original para `public/`:
@@ -174,16 +327,17 @@ Copie as pastas do projeto original para `public/`:
 ### Placeholders de imagem
 
 As imagens em `public/images/projects/*.svg` são placeholders. Substitua-as pelos
-screenshots reais mantendo os nomes, ou atualize `thumbnailUrl` em
-`src/data/projects.js`.
+screenshots reais mantendo os nomes, ou atualize `demo.images[].src` do projeto
+em `src/content/pt.json` e `src/content/eng.json`.
 
 ## Estrutura
 
 ```
 src/
 ├── components/   componentes de UI (um por responsabilidade)
+├── content/      conteúdo PT/EN, registro de marcadores, layout e validação
 ├── hooks/        lógica reutilizável (tema, idioma, arrastar o interruptor)
-├── data/         textos traduzidos e constantes
+├── data/         textos de interface e constantes
 ├── utils/        funções puras
 └── styles/       CSS global
 ```

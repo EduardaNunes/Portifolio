@@ -128,14 +128,17 @@ The notebook MUST order markers as About Me → Career → Studies → Projects 
 - **THEN** both WebDev pairs appear consecutively between Jogos and BackEnd during arrow navigation
 
 ### Requirement: Content localization support
+
 **When** page content renders  
-**THEN** all text content MUST respect the current language setting from translations.js or profile data (pt/eng locale switching)
+**THEN** all text content MUST respect the current language setting from the active per-language content document and translations.js (pt/eng locale switching)
 
 #### Scenario: Portuguese locale by default
+
 - **WHEN** page loads without explicit language preference or with pt locale
 - **THEN** headings use "Sobre Mim", "Carreira", etc. as specified
 
 #### Scenario: English locale override
+
 - **WHEN** user switches to eng locale via LightSwitch/translation toggle
 - **THEN** same heading positions display "About Me", "Career", etc. in English
 
@@ -197,13 +200,16 @@ The visual refresh MUST consume the existing localized content rather than repla
 - **THEN** refreshed page headings, labels, and information remain in English
 
 ### Requirement: Configurable marker page-pair content
-Each marker SHALL declare one or more page pairs containing a left leaf and a right leaf. The marker registry SHALL be the single content-order source used to render tabs and build the global navigation sequence.
+
+The layout module SHALL declare one or more page pairs per marker, each containing a left leaf and a right leaf, and SHALL resolve them from the marker content by stable section ids. The marker registry SHALL be the single marker-order source used to render tabs and build the global navigation sequence.
 
 #### Scenario: Marker owns its pair collection
+
 - **WHEN** a marker has page pairs configured
 - **THEN** selecting its tab opens its first pair and the global arrows can traverse every pair it owns
 
 #### Scenario: Marker count is editable
+
 - **WHEN** a maintainer adds or removes a configured marker
 - **THEN** the notebook renders the resulting marker count and traverses its pairs without requiring a separate navigation-order update
 
