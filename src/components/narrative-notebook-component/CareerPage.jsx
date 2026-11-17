@@ -1,53 +1,92 @@
 /**
  * CareerPage Component
  *
- * Displays one leaf of the Career spread. The left leaf holds the current role
- * and professional timeline; the right leaf holds the future goals.
+ * Displays one leaf of the Career marker. The left leaves hold the current role
+ * and professional timeline; the right leaf holds the future goals. A marker may
+ * render several page pairs, so each leaf receives only its own slice. The first
+ * leaf of a side renders the page title; a continuation leaf renders a running
+ * head built from the existing localized heading.
  *
  * @param {Object} props
  * @param {'left'|'right'} [props.side='left']
+ * @param {string} [props.heading] Page heading (first leaf only)
+ * @param {string} [props.runningHead] Existing heading reused as continuation label
  */
 import React from 'react'
 
-const CareerPage = ({ side = 'left', heading, labels = {}, currentRole, timeline = [], goals = [] }) => {
+const CareerPage = ({
+  side = 'left',
+  heading,
+  runningHead,
+  labels = {},
+  currentRole,
+  timeline = [],
+  goals = [],
+}) => {
   if (side === 'right') {
     return (
       <div className="career-page career-page-right pixel-art-container">
-        <section className="goals-section pixel-art-entry-list">
-          <h3 className="pixel-art-header destaque">{labels.goals}</h3>
-          <ul className="goals-list">
-            {goals.map((goal, index) => (
-              <li key={index} className="goal-item pixel-art-entry">
-                <span className="goal-title pixel-art-entry-label">{goal}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        {runningHead ? (
+          <p className="page-label">{runningHead}</p>
+        ) : (
+          <h2 className="page-title">{labels.goals}</h2>
+        )}
+
+        {goals.length > 0 && (
+          <section className="goals-section">
+            <ul className="goals-list page-list">
+              {goals.map((goal, index) => (
+                <li key={index} className="goal-item page-list-item">
+                  <span className="page-marker" aria-hidden="true" />
+                  <span className="goal-title">{goal}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     )
   }
 
   return (
     <div className="career-page career-page-left pixel-art-container">
-      <h2 className="pixel-art-header">{heading}</h2>
+      {heading ? (
+        <h2 className="page-title">{heading}</h2>
+      ) : (
+        runningHead && <p className="page-label">{runningHead}</p>
+      )}
 
-      <section className="current-role-section pixel-art-entry">
-        <p className="role-intro pixel-art-entry-label">{currentRole}</p>
-      </section>
+      {currentRole && (
+        <section className="current-role-section">
+          <div className="page-note">
+            <p className="role-intro">{currentRole}</p>
+          </div>
+        </section>
+      )}
 
-      <section className="timeline-section pixel-art-entry-list">
-        <h3 className="pixel-art-header destaque">{labels.timeline}</h3>
-        <ul className="timeline-list">
-          {timeline.map((position, index) => (
-            <li key={index} className="timeline-item pixel-art-entry">
-              <span className="position-title pixel-art-entry-label">{position.title}</span>
-              <span className="position-company pixel-art-entry-value">{position.company}</span>
-              <span className="position-duration pixel-art-entry-value">{position.duration}</span>
-              <p className="position-desc pixel-art-entry-value">{position.description}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {timeline.length > 0 && (
+        <section className="timeline-section">
+          <h3 className="page-label">{labels.timeline}</h3>
+          <ul className="timeline-list">
+            {timeline.map((position, index) => (
+              <li key={index} className="timeline-item">
+                <div className="page-field timeline-title">
+                  <span className="field-value">{position.title}</span>
+                </div>
+                <div className="page-field-pair">
+                  <div className="page-field">
+                    <span className="field-value">{position.company}</span>
+                  </div>
+                  <div className="page-field">
+                    <span className="field-value">{position.duration}</span>
+                  </div>
+                </div>
+                <p className="position-desc">{position.description}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   )
 }

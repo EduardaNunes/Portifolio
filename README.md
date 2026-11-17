@@ -109,6 +109,11 @@ this palette definition before being used.
 - `--paper-border`: #d9d0c4 (borders/dividers)
 - `--paper-accent`: #145053 (accent links/items)
 
+**Notebook page ink aliases** (aliases set in `.notebook-leaf`, no new colors):
+- `--page-ink`: `var(--paper-accent)` → #145053 (page titles and borders)
+- `--page-ink-soft`: `var(--strong)` → #26696d (ruled lines and section labels)
+- `--page-line`: `var(--page-ink-soft)` → #26696d (dotted rule color)
+
 **Other referenced colors** (existing, documented for awareness):
 - `--h1-selection`: #5f9ea0 / #1a1917 (selection background)
 - `--strong-selection`: #f9efe4 / #1a1917 (selection strong)

@@ -8,7 +8,7 @@
 **WHEN** user clicks the deploy link  
 **THEN** browser navigates to the deployed version or opens in new tab
 
-#### Scenario: Deploy link prominence with unified style
+#### Scenario: Deploy link prominence
 - **WHEN** viewing project right page (video/image showcase)
 - **THEN** deploy link is positioned prominently at its existing absolute top-right position, styled as a unified page-action button (uppercase text, 2px ink border, paper background, hover inverts to ink background with paper text), maintaining its current placement and z-order
 

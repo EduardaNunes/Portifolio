@@ -24,7 +24,7 @@ const ProjectRightPage = ({
           href={deployUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="deploy-link prominent-deploy-btn pixel-art-entry-action"
+          className="deploy-link prominent-deploy-btn page-action"
           aria-label={`Deploy link for ${projectTitle}`}
         >
           <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -73,8 +73,10 @@ const ProjectRightPage = ({
       </section>
 
       <section className="additional-info-section">
-        <span className="info-label">{labels.demo}:</span>
-        <span className="info-value">{projectTitle || '—'}</span>
+        <div className="page-field">
+          <span className="field-label">{labels.demo}</span>
+          <span className="field-value">{projectTitle || '—'}</span>
+        </div>
       </section>
     </div>
   )

@@ -27,6 +27,26 @@ const CATEGORY_MARKERS = {
   BackEnd: 'backend',
 }
 
+/**
+ * Page-pair slice contract
+ *
+ * A marker owns one or more page pairs. Each pair receives a bounded slice of the
+ * localized content so that every leaf fits its fixed page: leaves never scroll,
+ * and anything that does not fit must continue on a later pair of the same marker.
+ *
+ * Slices are declared here, at build time, from the existing localized data.
+ * They are never measured or generated at runtime. When content grows, move a
+ * boundary or add a pair; never shrink type below legibility and never
+ * reintroduce scrolling.
+ *
+ * A continuation pair omits `heading` and passes `runningHead` instead, so the
+ * page component renders a small running head (existing localized copy) rather
+ * than repeating the page title. A pair with no content on one side renders a
+ * blank paper leaf (`null`).
+ */
+const sliceBetween = (items = [], start = 0, end) => items.slice(start, end)
+const sliceFrom = (items = [], start = 0) => items.slice(start)
+
 function projectPair(project, labels) {
   return {
     id: project.id,
@@ -76,27 +96,53 @@ export function buildNotebookPages({ content, projects = [] }) {
   const markers = [
     {
       id: 'about', label: content.sections.about, ...MARKER_META.about,
-      pagePairs: [{
-        id: 'about-main',
-        left: h(AboutMePage, { side: 'left', heading: content.about.heading, labels: labels.about, skills: content.about.skills, softSkills: content.about.softSkills }),
-        right: h(AboutMePage, { side: 'right', heading: content.about.heading, labels: labels.about, results: content.about.results }),
-      }],
+      pagePairs: [
+        {
+          id: 'about-main',
+          left: h(AboutMePage, { side: 'left', heading: content.about.heading, labels: labels.about, skills: content.about.skills }),
+          right: h(AboutMePage, { side: 'right', labels: labels.about, results: sliceBetween(content.about.results, 0, 2) }),
+        },
+        {
+          id: 'about-continued',
+          left: h(AboutMePage, { side: 'left', runningHead: content.about.heading, labels: labels.about, softSkills: content.about.softSkills }),
+          right: h(AboutMePage, { side: 'right', runningHead: content.about.heading, labels: labels.about, results: sliceFrom(content.about.results, 2) }),
+        },
+      ],
     },
     {
       id: 'career', label: content.sections.career, ...MARKER_META.career,
-      pagePairs: [{
-        id: 'career-main',
-        left: h(CareerPage, { side: 'left', heading: content.career.heading, labels: labels.career, currentRole: content.career.currentRole, timeline: content.career.timeline }),
-        right: h(CareerPage, { side: 'right', heading: content.career.heading, labels: labels.career, goals: content.career.goals }),
-      }],
+      pagePairs: [
+        {
+          id: 'career-main',
+          left: h(CareerPage, { side: 'left', heading: content.career.heading, labels: labels.career, currentRole: content.career.currentRole, timeline: sliceBetween(content.career.timeline, 0, 1) }),
+          right: h(CareerPage, { side: 'right', labels: labels.career, goals: content.career.goals }),
+        },
+        {
+          id: 'career-timeline',
+          left: h(CareerPage, { side: 'left', runningHead: content.career.heading, labels: labels.career, timeline: sliceBetween(content.career.timeline, 1, 2) }),
+          right: null,
+        },
+        {
+          id: 'career-timeline-end',
+          left: h(CareerPage, { side: 'left', runningHead: content.career.heading, labels: labels.career, timeline: sliceFrom(content.career.timeline, 2) }),
+          right: null,
+        },
+      ],
     },
     {
       id: 'studies', label: content.sections.studies, ...MARKER_META.studies,
-      pagePairs: [{
-        id: 'studies-main',
-        left: h(StudiesPage, { side: 'left', heading: content.studies.heading, labels: labels.studies, education: content.studies.education }),
-        right: h(StudiesPage, { side: 'right', heading: content.studies.heading, labels: labels.studies, courses: content.studies.courses, projects: content.studies.projects }),
-      }],
+      pagePairs: [
+        {
+          id: 'studies-main',
+          left: h(StudiesPage, { side: 'left', heading: content.studies.heading, labels: labels.studies, education: sliceBetween(content.studies.education, 0, 1) }),
+          right: h(StudiesPage, { side: 'right', labels: labels.studies, courses: content.studies.courses }),
+        },
+        {
+          id: 'studies-projects',
+          left: h(StudiesPage, { side: 'left', runningHead: content.studies.heading, labels: labels.studies, education: sliceFrom(content.studies.education, 1) }),
+          right: h(StudiesPage, { side: 'right', runningHead: content.studies.heading, labels: labels.studies, projects: content.studies.projects }),
+        },
+      ],
     },
     { id: 'projects', label: content.sections.projects, ...MARKER_META.projects, pagePairs: [overviewPair(content, projects, labels)] },
     ...Object.entries(CATEGORY_MARKERS).map(([category, id]) => ({

@@ -1,9 +1,9 @@
-# Spec Delta
+# notebook-leaf-text-presentation Specification
 
 ## Purpose
-Provides a reusable text presentation system for notebook leaves that implements a paper-like aesthetic: centered titles, uppercase section labels with pixel-stepped underlines, dotted ruled lines for data rows and lists, circular check markers, stepped-corner info boxes with internal ruled lines, unified action buttons, and small chips — all using a single ink color palette with hierarchy through size, case, alignment, and lines rather than nested boxes.
+Provides a reusable text presentation system for fixed, non-scrolling notebook leaves that implements a paper-like aesthetic: centered titles, uppercase section labels with pixel-stepped underlines, dotted ruled lines for data rows and lists, circular check markers, stepped-corner info boxes with internal ruled lines, unified action buttons, and small chips — all using a single ink color palette with hierarchy through size, case, alignment, and lines rather than nested boxes.
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: Notebook leaf ink token aliases
 The notebook leaf SHALL expose three CSS custom property aliases scoped to `.notebook-leaf` that map to existing approved palette colors: `--page-ink` for titles and borders, `--page-ink-soft` for ruled lines and labels, and `--page-line` for dotted ruled lines (alias of `--page-ink-soft`). No new colors are introduced.
@@ -134,11 +134,11 @@ Skill and technology tags SHALL render as small uppercase chips with 1px ink bor
 - **THEN** each technology appears as a `page-chip` under a `page-label` "Tech Stack"
 
 ### Requirement: Text behavior rules
-All text in notebook leaves SHALL follow consistent behavioral rules: no truncation or ellipsis (always wrap), short titles use text-wrap: balance where supported, no decoration requires fixed width exceeding leaf width, sizes use clamp() and relative units, no new animations, focus-visible outlines retained.
+All text in notebook leaves SHALL follow consistent behavioral rules: no truncation or ellipsis (always wrap), short titles use text-wrap: balance where supported, no decoration requires fixed width exceeding leaf width, sizes use clamp() and relative units, no new animations, focus-visible outlines retained. Leaves are fixed pages: they do not scroll in either direction, and text that exceeds a leaf is continued on the next page pair instead of being scrolled.
 
 #### Scenario: Long text wraps without horizontal overflow
 - **WHEN** a notebook leaf contains long localized strings in Portuguese or English
-- **THEN** text wraps via overflow-wrap: anywhere (already on leaf), no horizontal scrollbar appears at 484px viewport, and vertical scrolling remains available for long leaves
+- **THEN** text wraps via overflow-wrap: anywhere (already on leaf), no horizontal scrollbar appears at 484px viewport, the leaf does not scroll in either direction, and excess content continues on the next page pair instead of becoming scrollable
 
 #### Scenario: Titles and labels avoid mid-word breaks on short words
 - **WHEN** a `page-title` or `page-label` renders on a narrow leaf
