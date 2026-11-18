@@ -77,19 +77,15 @@ export function PositionsBlock({ block, labels }) {
         const dates = formatDates(item, labels)
         return (
           <li key={index} className="position-item">
-            <div className="page-field">
+            <div className="position-title">
               <span className="field-value">{item.position}</span>
             </div>
-            <div className="page-field-pair">
-              <div className="page-field">
-                <span className="field-value">{item.company}</span>
-              </div>
-              {dates && (
-                <div className="page-field">
-                  <span className="field-value">{dates}</span>
-                </div>
-              )}
+
+            <div className="position-meta">
+              <span className="position-company">{item.company}</span>
+              {dates && <span className="position-dates">{dates}</span>}
             </div>
+
             {item.description && <p className="position-desc">{item.description}</p>}
           </li>
         )

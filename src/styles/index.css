@@ -1413,12 +1413,14 @@ header {
 }
 
 /* ----- Cargos / formação ----- */
+/* ----- Cargos / formação -----
+   Nome -> linha pontilhada -> datas -> linha pontilhada -> descrição */
 
 .notebook-leaf .positions-list .position-item {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding: 0.55rem 0;
+  gap: 0;
+  padding: 0.55rem 0 0.7rem;
   border-bottom: 1px solid var(--paper-border);
 }
 
@@ -1430,17 +1432,44 @@ header {
   border-bottom: 0;
 }
 
-.notebook-leaf .position-item > .page-field:first-child .field-value {
-  color: var(--page-ink);
+.notebook-leaf .position-title {
+  padding: 0 0 0.35rem;
 }
 
-.notebook-leaf .position-item .page-field-pair .field-value {
+.notebook-leaf .position-title .field-value {
+  color: var(--page-ink);
+  overflow-wrap: anywhere;
+}
+
+/* Faixa de datas, delimitada por duas linhas pontilhadas (em cima e embaixo) */
+.notebook-leaf .position-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.1rem 0.9rem;
+  padding: 0.3rem 0;
   color: var(--paper-muted);
   font-size: 0.92em;
+  background:
+    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
+      left top / 100% 1px no-repeat,
+    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
+      left bottom / 100% 1px no-repeat;
+}
+
+.notebook-leaf .position-company,
+.notebook-leaf .position-dates {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.notebook-leaf .position-dates {
+  margin-left: auto;
 }
 
 .notebook-leaf .position-desc {
-  margin: 0.15rem 0 0;
+  margin: 0;
+  padding-top: 0.4rem;
   line-height: 1.6;
   color: var(--paper-text);
 }
