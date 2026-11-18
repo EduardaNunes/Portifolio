@@ -61,19 +61,27 @@ Leaf content SHALL be sliced from the active localized content document when not
 - **THEN** page generation fails and identifies the uncovered or duplicated content
 
 ### Requirement: Continuation leaves keep their context
-A continuation leaf SHALL identify its context with a running head assembled from existing localized copy: the marker heading rendered as a section label, plus the continuing group label when its slice starts inside a labeled group. The full page title MUST appear only on the first leaf of a marker side, and no new copy keys may be introduced.
+Every non-blank narrative notebook leaf SHALL display its localized marker heading as the full page title. A rendered section's existing group label SHALL remain a section label below that title. The full page title MUST not be limited to a marker's first leaf or be replaced by a promoted section label, and no new copy keys may be introduced.
 
 #### Scenario: First leaf keeps the page title
-- **WHEN** the first leaf of a marker side renders
-- **THEN** it shows the existing page title, including the single-group promotion, exactly as before
+- **WHEN** the first populated leaf of a narrative marker side renders
+- **THEN** it shows the localized marker heading as the full page title and renders any section group label below it
 
 #### Scenario: Continuation leaf shows a running head
-- **WHEN** a continuation leaf renders
-- **THEN** it shows the marker's localized heading as a section label instead of the page title, and repeats the enclosing group label when its slice begins mid-group
+- **WHEN** a narrative slice continues onto a later page pair
+- **THEN** its populated leaf shows the marker heading as a full page title rather than a smaller running head
 
 #### Scenario: Running head reuses existing strings
-- **WHEN** the running head is rendered in either locale
-- **THEN** its text comes from the existing section heading or group label, with no new translation or profile keys
+- **WHEN** a continuation leaf renders in either locale
+- **THEN** its marker title comes from the existing localized marker heading with no new translation or content keys
+
+#### Scenario: Section label is never promoted
+- **WHEN** a leaf renders only one labeled section, including a results or goals slice
+- **THEN** the section label does not replace or use the visual treatment of the marker page title
+
+#### Scenario: Blank leaf remains untitled
+- **WHEN** a continuation pair has no content on one side
+- **THEN** that blank leaf remains paper-only without a marker title or section label
 
 ### Requirement: Continuation pairs stay in the navigation sequence
 Every page pair produced by continuation SHALL participate in the flattened global sequence in marker order. Corner navigation, marker selection, index bounds, and page-turn animation MUST treat continuation pairs like any other pair.
