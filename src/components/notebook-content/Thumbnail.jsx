@@ -25,25 +25,27 @@ export default function Thumbnail({ src, alt, caption, video }) {
   return (
     <div className="thumbnail-container">
       {shouldRenderVideo ? (
-        <video
-          src={resolvedSrc}
-          controls
-          className="project-thumbnail"
-          loop
-          muted
-          aria-label={alt}
-        />
+        <div className="thumbnail-frame">
+          <video
+            src={resolvedSrc}
+            className="thumbnail-media"
+            loop
+            muted
+            playsinline
+            aria-label={alt}
+          />
+        </div>
       ) : (
-        <>
+        <div className="thumbnail-frame">
           <img
             src={resolvedSrc}
             alt={alt}
-            className="project-thumbnail"
+            className="thumbnail-media"
           />
           <div className="play-overlay" aria-hidden="true">
             <LinkIcon name="external" />
           </div>
-        </>
+        </div>
       )}
 
       {caption && <p className="thumbnail-caption">{caption}</p>}

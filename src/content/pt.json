@@ -271,15 +271,21 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": [
+          "videoDemos": [
             {
               "src": "/Videos/ProgramADAs_SalaDeAula.mp4",
-              "alt": "ProgramADA demo",
-              "caption": "ProgramADA"
+              "alt": "ProgramADA - Sala de Aula",
+              "caption": "Sala de Aula",
+              "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+            },
+            {
+              "src": "/Videos/ProgramADAs_MiniGameCafe.mp4",
+              "alt": "ProgramADA - Minigame Café",
+              "caption": "Minigame Café",
+              "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
             }
           ],
-          "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest",
-          "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+          "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest"
         }
       },
       {
@@ -313,7 +319,14 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": []
+          "videoDemos": [
+            {
+              "src": "/Videos/MageBattle.mp4",
+              "alt": "Mage Battle demo",
+              "caption": "Mage Battle"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/Godot-Air-Sea-Battle-Atari-Clone"
         }
       },
       {
@@ -347,7 +360,14 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": []
+          "videoDemos": [
+            {
+              "src": "/Videos/SnowBattle.mp4",
+              "alt": "Snow Battle demo",
+              "caption": "Snow Battle"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/Godot-2D-Multiplayer"
         }
       },
       {
@@ -379,7 +399,8 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": []
+          "images": [],
+          "repoLink": "https://github.com/EduardaNunes/Bubble-Trouble"
         }
       }
     ]
@@ -417,11 +438,12 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": [
+          "videoDemos": [
             {
-              "src": "/images/projects/esbugalhado.svg",
+              "src": "/Videos/Esbugalhado.mp4",
               "alt": "Esbugalhado demo",
-              "caption": "Esbugalhado"
+              "caption": "Esbugalhado",
+              "deployLink": "https://eduardanunes.github.io/esbugalhado-o-jogo/"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
@@ -456,7 +478,15 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": []
+          "videoDemos": [
+            {
+              "src": "/Videos/TicTacToe.mp4",
+              "alt": "React Tic Tac Toe demo",
+              "caption": "React Tic Tac Toe",
+              "deployLink": "https://eduardanunes.github.io/React-Tic-Tac-Toe/"
+            }
+          ],
+          "repoLink": "https://github.com/EduardaNunes/React-Tic-Tac-Toe"
         }
       },
       {
@@ -489,11 +519,12 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": [
+          "videoDemos": [
             {
-              "src": "/images/projects/pixel-paint.svg",
+              "src": "/Videos/PixelPaint.mp4",
               "alt": "Pixel Paint demo",
-              "caption": "Pixel Paint"
+              "caption": "Pixel Paint",
+              "deployLink": "https://eduardanunes.github.io/Pixel-Paint/"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/Pixel-Paint"

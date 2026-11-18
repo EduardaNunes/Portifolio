@@ -142,29 +142,58 @@ function validateBlock(block, path, errors) {
       })
       break
 
-    case 'projectDemo':
-      if (block.images !== undefined) {
+    case 'projectDemo': {
+      const hasImages = block.images !== undefined
+      const hasVideoDemos = block.videoDemos !== undefined
+
+      if (!hasImages && !hasVideoDemos) {
+        errors.push(`${path} must have either "images" or "videoDemos" (or both)`)
+      }
+
+      if (hasImages) {
         if (!Array.isArray(block.images)) {
           errors.push(`${path}.images must be an array when present`)
-          break
+        } else {
+          block.images.forEach((image, index) => {
+            const imagePath = `${path}.images[${index}]`
+            if (!isObject(image)) {
+              errors.push(`${imagePath} must be an object`)
+              return
+            }
+            requireString(image.src, imagePath, errors, 'src')
+            requireOptionalString(image.alt, imagePath, errors, 'alt')
+            requireOptionalString(image.caption, imagePath, errors, 'caption')
+            if (image.video !== undefined && typeof image.video !== 'boolean') {
+              errors.push(`${imagePath}.video must be a boolean when present`)
+            }
+          })
         }
-        block.images.forEach((image, index) => {
-          const imagePath = `${path}.images[${index}]`
-          if (!isObject(image)) {
-            errors.push(`${imagePath} must be an object`)
-            return
-          }
-          requireString(image.src, imagePath, errors, 'src')
-          requireOptionalString(image.alt, imagePath, errors, 'alt')
-          requireOptionalString(image.caption, imagePath, errors, 'caption')
-          if (image.video !== undefined && typeof image.video !== 'boolean') {
-            errors.push(`${imagePath}.video must be a boolean when present`)
-          }
-        })
       }
+
+      if (hasVideoDemos) {
+        if (!Array.isArray(block.videoDemos)) {
+          errors.push(`${path}.videoDemos must be an array when present`)
+        } else if (block.videoDemos.length === 0) {
+          errors.push(`${path}.videoDemos must be a non-empty array when present`)
+        } else {
+          block.videoDemos.forEach((demo, index) => {
+            const demoPath = `${path}.videoDemos[${index}]`
+            if (!isObject(demo)) {
+              errors.push(`${demoPath} must be an object`)
+              return
+            }
+            requireString(demo.src, demoPath, errors, 'src')
+            requireOptionalString(demo.alt, demoPath, errors, 'alt')
+            requireOptionalString(demo.caption, demoPath, errors, 'caption')
+            requireOptionalString(demo.deployLink, demoPath, errors, 'deployLink')
+          })
+        }
+      }
+
       requireOptionalString(block.repoLink, path, errors, 'repoLink')
       requireOptionalString(block.deployLink, path, errors, 'deployLink')
       break
+    }
 
     default:
       break
@@ -393,6 +422,22 @@ function compareBlocks(left, right, path, errors) {
           }
         })
       }
+
+      compareItemCount(left.videoDemos, right.videoDemos)
+      if (Array.isArray(left.videoDemos) && Array.isArray(right.videoDemos)) {
+        left.videoDemos.forEach((demo, index) => {
+          const other = right.videoDemos[index]
+          if (!isObject(demo) || !isObject(other)) return
+          if (demo.src !== other.src) errors.push(`${path}.videoDemos[${index}].src differs between locales`)
+          if ((demo.caption === undefined) !== (other.caption === undefined)) {
+            errors.push(`${path}.videoDemos[${index}].caption presence differs between locales`)
+          }
+          if ((demo.deployLink === undefined) !== (other.deployLink === undefined)) {
+            errors.push(`${path}.videoDemos[${index}].deployLink presence differs between locales`)
+          }
+        })
+      }
+
       ;['repoLink', 'deployLink'].forEach((field) => {
         if ((left[field] === undefined) !== (right[field] === undefined)) {
           errors.push(`${path}.${field} presence differs between locales`)
