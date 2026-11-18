@@ -1,4 +1,5 @@
 import React from 'react'
+import { resolveAssetPath, isVideoFile } from '../../utils/assetPath'
 import { LinkIcon } from './blockRenderers'
 
 /**
@@ -11,18 +12,21 @@ import { LinkIcon } from './blockRenderers'
  * @param {string} props.src - Media source path (required)
  * @param {string} props.alt - Alt text for accessibility (required)
  * @param {string} [props.caption] - Optional caption displayed below media
- * @param {boolean} [props.video=false] - Whether media is a video
+ * @param {boolean} [props.video] - Whether media is a video; inferred from source when omitted
  */
-export default function Thumbnail({ src, alt, caption, video = false }) {
+export default function Thumbnail({ src, alt, caption, video }) {
   if (!src) {
     return null
   }
 
+  const shouldRenderVideo = video ?? isVideoFile(src)
+  const resolvedSrc = resolveAssetPath(src)
+
   return (
     <div className="thumbnail-container">
-      {video ? (
+      {shouldRenderVideo ? (
         <video
-          src={src}
+          src={resolvedSrc}
           controls
           className="project-thumbnail"
           loop
@@ -32,7 +36,7 @@ export default function Thumbnail({ src, alt, caption, video = false }) {
       ) : (
         <>
           <img
-            src={src}
+            src={resolvedSrc}
             alt={alt}
             className="project-thumbnail"
           />

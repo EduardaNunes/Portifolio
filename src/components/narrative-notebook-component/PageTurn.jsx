@@ -16,6 +16,7 @@
 import React, { useEffect, useRef } from 'react'
 import { PAGE_TURN_SOUND_URL } from '../../data/constants'
 import { useAudioManager } from '../../context/AudioManagerContext'
+import { resolveAssetPath } from '../../utils/assetPath'
 
 const TURN_EASING = 'cubic-bezier(0.45, 0, 0.15, 1)'
 
@@ -27,7 +28,7 @@ export default function PageTurn({ front, back, direction, duration = 420, onFin
   // Register page turn sound effect
   const playPageTurn = useRef(null)
   useEffect(() => {
-    playPageTurn.current = registerSound('page-turn', PAGE_TURN_SOUND_URL, 'sfx')
+    playPageTurn.current = registerSound('page-turn', resolveAssetPath(PAGE_TURN_SOUND_URL), 'sfx')
     return () => unregisterSound('page-turn')
   }, [registerSound, unregisterSound])
 

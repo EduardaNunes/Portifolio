@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Joystix Monospace";
-  src: url("/Fonts/joystix%20monospace.ttf");
+  src: url("../assets/Fonts/joystix%20monospace.ttf");
 }
 
 * {
@@ -41,11 +41,11 @@
   /* Darker orange for visibility in dark mode */
   --corner-hover-color: #e88d00;
 
-  --cloud-img: url(/Imgs/CloudBlack.png);
-  --profile-img: url(/Imgs/ProfileBlack.png);
-  --profile-hover-img: url(/Imgs/ProfileBlackHover.png);
-  --light-switch-img: url(/Imgs/SwitchBlack.png);
-  --switch-arrow-img: url(/Imgs/ArrowBlack.png);
+  --cloud-img: url(../assets/Imgs/CloudBlack.png);
+  --profile-img: url(../assets/Imgs/ProfileBlack.png);
+  --profile-hover-img: url(../assets/Imgs/ProfileBlackHover.png);
+  --light-switch-img: url(../assets/Imgs/SwitchBlack.png);
+  --switch-arrow-img: url(../assets/Imgs/ArrowBlack.png);
 
   /* Volume Control */
   --volume-slider-accent: #5f9ea0;
@@ -83,11 +83,11 @@
   /* Inverted hover colors for corner arrows: light theme gets blue */
   --corner-hover-color: #99c0c2;
 
-  --cloud-img: url(/Imgs/CloudWhite.png);
-  --profile-img: url(/Imgs/ProfileWhite.png);
-  --profile-hover-img: url(/Imgs/ProfileWhiteHover.png);
-  --light-switch-img: url(/Imgs/SwitchWhite.png);
-  --switch-arrow-img: url(/Imgs/ArrowWhite.png);
+  --cloud-img: url(../assets/Imgs/CloudWhite.png);
+  --profile-img: url(../assets/Imgs/ProfileWhite.png);
+  --profile-hover-img: url(../assets/Imgs/ProfileWhiteHover.png);
+  --light-switch-img: url(../assets/Imgs/SwitchWhite.png);
+  --switch-arrow-img: url(../assets/Imgs/ArrowWhite.png);
 
   /* Volume Control */
   --volume-slider-accent: #d87f0b;
@@ -1022,8 +1022,8 @@ header {
 /* Arrow image masks - original colors at rest */
 .corner-zone.left {
   left: 0;
-  mask-image: url(/Imgs/ArrowBlack.png);
-  -webkit-mask-image: url(/Imgs/ArrowBlack.png);
+  mask-image: url(../assets/Imgs/ArrowBlack.png);
+  -webkit-mask-image: url(../assets/Imgs/ArrowBlack.png);
   /* Dark theme: black arrow; light theme overrides to white */
   color: #1a1917;
   /* Mirror left arrow to point outward (left) */
@@ -1032,23 +1032,23 @@ header {
 
 .corner-zone.right {
   right: 0;
-  mask-image: url(/Imgs/ArrowBlack.png);
-  -webkit-mask-image: url(/Imgs/ArrowBlack.png);
+  mask-image: url(../assets/Imgs/ArrowBlack.png);
+  -webkit-mask-image: url(../assets/Imgs/ArrowBlack.png);
   color: #1a1917;
 }
 
 /* Light theme: white arrows at rest */
 .lightmode .corner-zone.left {
-  mask-image: url(/Imgs/ArrowWhite.png);
-  -webkit-mask-image: url(/Imgs/ArrowWhite.png);
+  mask-image: url(../assets/Imgs/ArrowWhite.png);
+  -webkit-mask-image: url(../assets/Imgs/ArrowWhite.png);
   color: #f9efe4;
   /* Mirror left arrow to point outward (left) */
   transform: scaleX(-1);
 }
 
 .lightmode .corner-zone.right {
-  mask-image: url(/Imgs/ArrowWhite.png);
-  -webkit-mask-image: url(/Imgs/ArrowWhite.png);
+  mask-image: url(../assets/Imgs/ArrowWhite.png);
+  -webkit-mask-image: url(../assets/Imgs/ArrowWhite.png);
   color: #f9efe4;
 }
 

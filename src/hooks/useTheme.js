@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { THEME_IMAGES } from '../data/constants'
+import { THEME_IMAGES } from '../data/themeAssets'
 
 const LIGHT_MODE_CLASS = 'lightmode'
 

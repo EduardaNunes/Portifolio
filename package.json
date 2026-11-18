@@ -9,6 +9,7 @@
     "build": "vite build",
     "prebuild": "npm run validate:content",
     "preview": "vite preview",
+    "test": "node --test",
     "validate:content": "node scripts/validate-content.mjs"
   },
   "dependencies": {

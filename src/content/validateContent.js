@@ -9,6 +9,7 @@
 export const BLOCK_TYPES = ['blocks', 'text', 'positions', 'email', 'links', 'list', 'projectDemo']
 export const LINK_ICONS = ['linkedin', 'github', 'email', 'external']
 export const MARKER_KINDS = ['narrative', 'overview', 'category']
+export const VIDEO_FILE_PATTERN = /\.(mp4|webm|ogg)(?:[?#]|$)/i
 
 const REPEATABLE_TYPES = ['positions', 'list', 'links']
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -16,6 +17,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value)
 const isNonEmptyString = (value) => typeof value === 'string' && value.trim().length > 0
 const isOptionalString = (value) => value === undefined || isNonEmptyString(value)
+const inferredVideo = (image) => image.video ?? (typeof image.src === 'string' && VIDEO_FILE_PATTERN.test(image.src))
 
 function requireString(value, path, errors, label = 'value') {
   if (!isNonEmptyString(value)) errors.push(`${path} must have a non-empty ${label}`)
@@ -386,7 +388,7 @@ function compareBlocks(left, right, path, errors) {
           const other = right.images[index]
           if (!isObject(image) || !isObject(other)) return
           if (image.src !== other.src) errors.push(`${path}.images[${index}].src differs between locales`)
-          if (Boolean(image.video) !== Boolean(other.video)) {
+          if (inferredVideo(image) !== inferredVideo(other)) {
             errors.push(`${path}.images[${index}].video differs between locales`)
           }
         })

@@ -1,6 +1,7 @@
 import React from 'react'
 import Thumbnail from './Thumbnail'
 import ProjectButton from './ProjectButton'
+import { resolveAssetPath } from '../../utils/assetPath'
 
 const LINK_ICON_PATHS = {
   linkedin: [
@@ -173,6 +174,7 @@ export function ListBlock({ block }) {
 
 export function ProjectDemoBlock({ block, labels }) {
   const image = block.images?.[0]
+  const imageSrc = image ? resolveAssetPath(image.src) : undefined
 
   return (
     <div className="project-demo-block">
@@ -180,10 +182,10 @@ export function ProjectDemoBlock({ block, labels }) {
         {image ? (
           <>
             <Thumbnail
-              src={image.src}
+              src={imageSrc}
               alt={image.alt || image.caption || 'Project demo'}
               caption={image.caption}
-              video={Boolean(image.video)}
+              video={image.video}
             />
           </>
         ) : (

@@ -1,6 +1,7 @@
 import { useDraggableSwitch } from '../hooks/useDraggableSwitch'
 import { useAudioManager } from '../context/AudioManagerContext'
 import { SWITCH_SOUND_URL } from '../data/constants'
+import { resolveAssetPath } from '../utils/assetPath'
 import { useEffect, useRef } from 'react'
 
 export default function LightSwitch({ hint, onToggle }) {
@@ -9,7 +10,7 @@ export default function LightSwitch({ hint, onToggle }) {
 
   // Register theme toggle sound effect
   useEffect(() => {
-    playSwitchSoundRef.current = registerSound('theme-toggle', SWITCH_SOUND_URL, 'sfx')
+    playSwitchSoundRef.current = registerSound('theme-toggle', resolveAssetPath(SWITCH_SOUND_URL), 'sfx')
     return () => unregisterSound('theme-toggle')
   }, [registerSound, unregisterSound])
 
