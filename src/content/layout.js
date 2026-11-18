@@ -56,4 +56,65 @@ export const notebookLayout = {
       },
     ],
   },
+  'ai-automation': {
+    pages: [
+      {
+        projectId: 'proj-portfolio',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+    ],
+  },
+  games: {
+    pages: [
+      {
+        projectId: 'proj-programada',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+      {
+        projectId: 'proj-air-sea-battle',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+      {
+        projectId: 'proj-snow-battle',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+      {
+        projectId: 'proj-bubble-trouble',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+    ],
+  },
+  webdev: {
+    pages: [
+      {
+        projectId: 'proj-esbugalhado',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+      {
+        projectId: 'proj-react-tic-tac-toe',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+      {
+        projectId: 'proj-pixel-paint',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+    ],
+  },
+  backend: {
+    pages: [
+      {
+        projectId: 'proj-republikei',
+        left: { sections: [{ section: 'description' }, { section: 'tech' }] },
+        right: { demo: true },
+      },
+    ],
+  },
 }

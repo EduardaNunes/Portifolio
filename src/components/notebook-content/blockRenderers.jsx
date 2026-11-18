@@ -1,4 +1,6 @@
 import React from 'react'
+import Thumbnail from './Thumbnail'
+import ProjectButton from './ProjectButton'
 
 const LINK_ICON_PATHS = {
   linkedin: [
@@ -15,7 +17,7 @@ const LINK_ICON_PATHS = {
   ],
 }
 
-function LinkIcon({ name }) {
+export function LinkIcon({ name }) {
   const paths = LINK_ICON_PATHS[name] ?? LINK_ICON_PATHS.external
   return (
     <svg className="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
@@ -109,25 +111,7 @@ export function EmailBlock({ block, labels }) {
   )
 }
 
-export function LinksBlock({ block, variant }) {
-  const isProjectRepo = variant === 'project-repo'
-
-  if (isProjectRepo && block.items?.[0]) {
-    const item = block.items[0]
-    const isMailto = item.link.startsWith('mailto:')
-    return (
-      <a
-        href={item.link}
-        className={`project-repo-btn page-action ${item.icon}`}
-        aria-label={item.name}
-        {...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-      >
-        <LinkIcon name={item.icon} />
-        <span>{item.name}</span>
-      </a>
-    )
-  }
-
+export function LinksBlock({ block }) {
   return (
     <ul className="social-links-section page-list">
       {(block.items ?? []).map((item, index) => {
@@ -150,6 +134,19 @@ export function LinksBlock({ block, variant }) {
         )
       })}
     </ul>
+  )
+}
+
+export function ProjectRepoBlock({ block, labels }) {
+  const item = block.items?.[0]
+  if (!item) return null
+
+  return (
+    <ProjectButton
+      icon={item.icon}
+      text={item.name}
+      link={item.link}
+    />
   )
 }
 
@@ -176,40 +173,18 @@ export function ListBlock({ block }) {
 
 export function ProjectDemoBlock({ block, labels }) {
   const image = block.images?.[0]
-  const isVideo = Boolean(image?.video)
 
   return (
     <div className="project-demo-block">
       <section className="demo-showcase-section pixel-art-media-frame">
         {image ? (
           <>
-            <div className="thumbnail-container">
-              {isVideo ? (
-                <video
-                  src={image.src}
-                  controls
-                  className="project-thumbnail"
-                  loop
-                  muted
-                />
-              ) : (
-                <img
-                  src={image.src}
-                  alt={image.alt || image.caption || 'Project demo'}
-                  className="project-thumbnail"
-                />
-              )}
-
-              {!isVideo && (
-                <div className="play-overlay">
-                  <svg className="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              )}
-            </div>
-
-            {image.caption && <p className="thumbnail-caption">{image.caption}</p>}
+            <Thumbnail
+              src={image.src}
+              alt={image.alt || image.caption || 'Project demo'}
+              caption={image.caption}
+              video={Boolean(image.video)}
+            />
           </>
         ) : (
           <div className="no-thumbnail-placeholder">
@@ -230,10 +205,6 @@ export function ProjectDemoBlock({ block, labels }) {
           <span>{labels.viewDeploy ?? labels.deploy ?? 'Deploy'}</span>
         </a>
       )}
-
-      {image?.caption && (
-        <p className="thumbnail-caption">{image.caption}</p>
-      )}
     </div>
   )
 }
@@ -246,6 +217,7 @@ const RENDERERS = {
   links: LinksBlock,
   list: ListBlock,
   projectDemo: ProjectDemoBlock,
+  projectRepo: ProjectRepoBlock,
 }
 
 /** Draws a typed content block with the shared paper-page vocabulary. */

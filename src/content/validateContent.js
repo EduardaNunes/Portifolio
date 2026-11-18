@@ -580,6 +580,87 @@ function validateMarkerLayout(markerId, markerContent, markerLayout, path, error
   })
 }
 
+function validateCategoryLayout(markerId, markerContent, markerLayout, path, errors) {
+  if (!isObject(markerLayout)) {
+    errors.push(`${path} must be an object with pages`)
+    return
+  }
+  if (!Array.isArray(markerLayout.pages) || markerLayout.pages.length === 0) {
+    errors.push(`${path}.pages must be a non-empty array`)
+    return
+  }
+
+  const projects = markerContent.projects ?? []
+  const projectById = Object.fromEntries(projects.map((p) => [p.id, p]))
+  const referencedProjectIds = new Set()
+
+  markerLayout.pages.forEach((page, pageIndex) => {
+    const pagePath = `${path}.pages[${pageIndex}]`
+    if (!isObject(page)) {
+      errors.push(`${pagePath} must be an object`)
+      return
+    }
+    if (!isNonEmptyString(page.projectId)) {
+      errors.push(`${pagePath}.projectId must be a non-empty string`)
+      return
+    }
+    if (referencedProjectIds.has(page.projectId)) {
+      errors.push(`${pagePath}.projectId "${page.projectId}" is referenced more than once`)
+      return
+    }
+    referencedProjectIds.add(page.projectId)
+
+    const project = projectById[page.projectId]
+    if (!project) {
+      errors.push(`${pagePath}.projectId "${page.projectId}" does not exist in ${markerId}`)
+      return
+    }
+
+    if (!isObject(page.left)) {
+      errors.push(`${pagePath}.left must be an object`)
+      return
+    }
+    if (!Array.isArray(page.left.sections) || page.left.sections.length === 0) {
+      errors.push(`${pagePath}.left.sections must be a non-empty array`)
+      return
+    }
+
+    page.left.sections.forEach((slice, sliceIndex) => {
+      const slicePath = `${pagePath}.left.sections[${sliceIndex}]`
+      if (!isObject(slice)) {
+        errors.push(`${slicePath} must be an object`)
+        return
+      }
+      if (!isNonEmptyString(slice.section)) {
+        errors.push(`${slicePath}.section must be a non-empty string`)
+        return
+      }
+      const section = project.sections.find((s) => s.id === slice.section)
+      if (!section) {
+        errors.push(`${slicePath}.section "${slice.section}" does not exist in project ${page.projectId}`)
+        return
+      }
+    })
+
+    if (page.right !== undefined) {
+      if (!isObject(page.right)) {
+        errors.push(`${pagePath}.right must be an object`)
+        return
+      }
+      if (page.right.demo !== true) {
+        errors.push(`${pagePath}.right.demo must be true`)
+        return
+      }
+    }
+  })
+
+  projects.forEach((project) => {
+    if (!referencedProjectIds.has(project.id)) {
+      errors.push(`${path}: project "${project.id}" is not referenced by the layout`)
+    }
+  })
+}
+
 function validateLayout(layout, document, registryMap, errors) {
   if (!isObject(layout)) {
     errors.push('layout must be an object')
@@ -587,8 +668,12 @@ function validateLayout(layout, document, registryMap, errors) {
   }
 
   registryMap.forEach((marker) => {
-    if (marker.kind !== 'narrative') return
-    if (layout[marker.id] === undefined) errors.push(`layout.${marker.id} is missing`)
+    if (marker.kind === 'narrative' && layout[marker.id] === undefined) {
+      errors.push(`layout.${marker.id} is missing`)
+    }
+    if (marker.kind === 'category' && layout[marker.id] === undefined) {
+      errors.push(`layout.${marker.id} is missing`)
+    }
   })
 
   Object.keys(layout).forEach((markerId) => {
@@ -597,13 +682,18 @@ function validateLayout(layout, document, registryMap, errors) {
       errors.push(`layout.${markerId} does not match a registered marker`)
       return
     }
-    if (marker.kind !== 'narrative') {
-      errors.push(`layout.${markerId} must not configure a ${marker.kind} marker`)
-      return
-    }
     const markerContent = document[markerId]
     if (!markerContent) return
-    validateMarkerLayout(markerId, markerContent, layout[markerId], `layout.${markerId}`, errors)
+
+    if (marker.kind === 'narrative') {
+      validateMarkerLayout(markerId, markerContent, layout[markerId], `layout.${markerId}`, errors)
+    } else if (marker.kind === 'category') {
+      validateCategoryLayout(markerId, markerContent, layout[markerId], `layout.${markerId}`, errors)
+    } else if (marker.kind === 'overview') {
+      // Overview marker doesn't need layout validation
+    } else {
+      errors.push(`layout.${markerId} has unsupported kind "${marker.kind}"`)
+    }
   })
 }
 

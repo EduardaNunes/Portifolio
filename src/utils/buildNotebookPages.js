@@ -63,30 +63,41 @@ function resolveNarrativePairs(markerId, markerContent, markerLayout, labels) {
   })
 }
 
-function projectPair(project, labels) {
-  const sections = project.sections.map((section) => ({ ...section }))
+function resolveCategoryPairs(categoryId, categoryContent, categoryLayout, labels) {
+  const projects = categoryContent.projects ?? []
+  const projectById = Object.fromEntries(projects.map((p) => [p.id, p]))
 
-  if (project.demo?.repoLink) {
-    sections.push({
-      id: 'source',
-      content: [
-        {
-          type: 'links',
-          variant: 'project-repo',
-          items: [{ icon: 'github', name: labels.viewRepository, link: project.demo.repoLink }],
-        },
-      ],
-    })
-  }
+  return categoryLayout.pages.map((page) => {
+    const project = projectById[page.projectId]
+    if (!project) {
+      throw new Error(`Category layout references unknown projectId "${page.projectId}" in ${categoryId}`)
+    }
 
-  return {
-    id: project.id,
-    left: h(NotebookLeaf, { title: project.title, sections, labels }),
-    right: h(NotebookLeaf, {
-      sections: [{ id: 'demo', content: [project.demo] }],
-      labels,
-    }),
-  }
+    const sections = project.sections
+      .filter((section) => page.left.sections.some((s) => s.section === section.id))
+      .map((section) => ({ ...section }))
+
+    if (project.demo?.repoLink) {
+      sections.push({
+        id: 'source',
+        content: [
+          {
+            type: 'projectRepo',
+            items: [{ icon: 'github', name: labels.viewRepository, link: project.demo.repoLink }],
+          },
+        ],
+      })
+    }
+
+    return {
+      id: project.id,
+      left: h(NotebookLeaf, { title: project.title, sections, labels }),
+      right: h(NotebookLeaf, {
+        sections: [{ id: 'demo', content: [project.demo] }],
+        labels,
+      }),
+    }
+  })
 }
 
 function overviewPair(content, registry, labels) {
@@ -176,9 +187,11 @@ export function buildNotebookPages({
     if (meta.kind === 'overview') {
       marker.pagePairs = [overviewPair(content, registry, labels)]
     } else if (meta.kind === 'category') {
+      const markerLayout = layout[meta.id]
+      if (!markerLayout) throw new Error(`Layout is missing category marker "${meta.id}"`)
       const projects = markerContent.projects ?? []
       marker.pagePairs = projects.length > 0
-        ? projects.map((project) => projectPair(project, labels))
+        ? resolveCategoryPairs(meta.id, markerContent, markerLayout, labels)
         : [emptyCategoryPair(meta.id, markerContent.label, labels)]
     } else {
       const markerLayout = layout[meta.id]
