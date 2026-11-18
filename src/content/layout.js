@@ -22,25 +22,24 @@ export const notebookLayout = {
         left: { sections: [{ section: 'about-me-text' }] },
         right: { sections: [{ section: 'skills' }] },
       },
+      {
+        left: { sections: [{ section: 'languages' }] },
+        right: { sections: [{ section: 'hobbies' }] },
+      },
     ],
   },
   career: {
     pages: [
       {
-        left: {
-          sections: [
-            { section: 'current-role' },
-            { section: 'timeline', items: [0, 1] },
-          ],
-        },
-        right: { sections: [{ section: 'goals' }] },
+        left: { sections: [{ section: 'timeline', items: [0, 1] }] },
+        right: { sections: [{ section: 'timeline', items: [1, 2] }] },
       },
       {
-        left: { sections: [{ section: 'timeline', items: [1, 2] }] },
-        right: null,
+        left: { sections: [{ section: 'timeline', items: [2, 3] }] },
+        right: { sections: [{ section: 'timeline', items: [3, 4] }] },
       },
       {
-        left: { sections: [{ section: 'timeline', items: [2] }] },
+        left: { sections: [{ section: 'timeline', items: [4] }] },
         right: null,
       },
     ],
@@ -49,22 +48,14 @@ export const notebookLayout = {
     pages: [
       {
         left: { sections: [{ section: 'education', items: [0, 1] }] },
-        right: { sections: [{ section: 'courses' }] },
-      },
-      {
-        left: { sections: [{ section: 'education', items: [1] }] },
-        right: { sections: [{ section: 'projects' }] },
-      },
-      {
-        left: { sections: [{ section: 'achieviments' }] },
-        right: null,
+        right: { sections: [{ section: 'education', items: [1] }] },
       },
     ],
   },
   contact: {
     pages: [
       {
-        left: { sections: [{ section: 'email' }] },
+        left: { sections: [{ section: 'email' }, { section: 'info' }] },
         right: { sections: [{ section: 'links' }] },
       },
     ],

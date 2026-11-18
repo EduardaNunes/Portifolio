@@ -4,19 +4,14 @@
     "sections": [
       {
         "id": "about-me-text",
-        "subHeader": "Quem sou eu?",
         "content": [
           {
             "type": "text",
-            "text": "Engenheira de Software dedicada e movida pela excelência, guiada pela convicção de que o desenvolvimento de software envolve identificar e solucionar problemas e não apenas escrever código."
+            "text": "Engenheira de Software movida pela excelência e guiada pela convicção de que desenvolver software é identificar e solucionar problemas reais, não apenas escrever código. Reconhecida pela proatividade, atuo antecipando necessidades e desenvolvendo soluções internas para evitar gargalos, garantindo entregas mais robustas para o usuário final."
           },
           {
             "type": "text",
-            "text": "Reconhecida por ser ativa e proativa, antecipando consistentemente as necessidades da equipe e priorizando a experiência do usuário final para entregar o máximo de satisfação."
-          },
-          {
-            "type": "text",
-            "text": "Pronta para aplicar minhas habilidades técnicas e ideias em um time colaborativo, construindo não só software escalável e de alta qualidade, mas soluções com propósito."
+            "text": "Sempre pronta para encarar novos desafios e dominar novas tecnologias. Atualmente, foco no estudo do uso estruturado de IA Generativa, LLMs e automações, integrando ferramentas como Claude Code, OpenCode, 9Router e n8n, além de abordagens orientadas a especificação como OpenSpec, para escalar a produtividade garantindo a qualidade técnica do produto final."
           }
         ]
       },
@@ -27,27 +22,38 @@
           {
             "type": "blocks",
             "name": "Linguagens",
-            "items": ["JavaScript", "TypeScript", "Python", "Java", "C++", "C#", "GDScript"]
+            "items": ["JavaScript", "Typescript", "HTML5", "CSS3", "C++", "C#", "GDScript", "Java", "Python"]
           },
           {
             "type": "blocks",
-            "name": "Web e Mobile",
-            "items": ["React", "React Native", "Expo", "HTML5", "CSS3"]
+            "name": "Frameworks e Ferramentas",
+            "items": ["Git", "Github", "React", "React Native", "Supabase", "REST APIs", "Expo Go", "Godot", "Unity"]
           },
           {
             "type": "blocks",
-            "name": "Dados e APIs",
-            "items": ["Supabase", "Firebase", "API REST", "Google Maps API", "ViaCEP"]
-          },
+            "name": "IA, LLMs e Automação",
+            "items": ["9Router", "Ollama", "OpenCode", "ClaudeCode", "Gemini", "Claude", "ChatGPT", "OpenSpec", "N8N"]
+          }
+        ]
+      },
+      {
+        "id": "languages",
+        "subHeader": "Idiomas",
+        "content": [
           {
-            "type": "blocks",
-            "name": "Games",
-            "items": ["Unity", "Godot"]
-          },
+            "type": "list",
+            "items": ["Inglês – Avançado", "Espanhol – Iniciante"]
+          }
+        ]
+      },
+      {
+        "id": "hobbies",
+        "subHeader": "Hobbies e Interesses",
+        "content": [
           {
-            "type": "blocks",
-            "name": "Ferramentas",
-            "items": ["Git", "GitHub"]
+            "type": "text",
+            "title": "Desenvolvimento de Jogos",
+            "text": "No meu tempo livre, você vai me encontrar experimentando tecnologia simplesmente pelo prazer de criar. Seja modelando assets, programando jogos na Godot ou participando de Game Jams, me empolgo com o aprendizado prático e a troca colaborativa de ideias."
           }
         ]
       }
@@ -57,63 +63,45 @@
     "label": "Carreira",
     "sections": [
       {
-        "id": "current-role",
-        "content": [
-          {
-            "type": "text",
-            "text": "Engenheira de Software na Levty, atuando em sistema financeiro de alto volume para a Livelo. Foco em código limpo, estabilidade e experiência do usuário."
-          }
-        ]
-      },
-      {
         "id": "timeline",
-        "subHeader": "Trajetória Profissional",
+        "subHeader": "Experiências Profissionais",
         "content": [
           {
             "type": "positions",
             "items": [
               {
-                "position": "Engenheira de Software",
-                "company": "Levty (cliente: Livelo)",
-                "fromDate": "dez 2024",
+                "position": "Software Engineer Trainee",
+                "company": "Levty Sistemas",
+                "fromDate": "Dez 2024",
                 "toDate": "",
-                "description": "Desenvolvo e mantenho features escaláveis, depuro falhas, documento e faço code reviews em ambiente ágil para garantir entregas estáveis."
+                "description": "Trabalho com o desenvolvimento e manutenção de funcionalidades escaláveis para um software interno de gestão financeira de alto volume de dados voltado à Livelo, uma grande empresa nacional. Identifiquei e desenvolvi uma ferramenta interna para solucionar um gargalo existente de geração e padronização de e-mails HTML funcionais. A solução já é utilizada internamente por diversas equipes"
               },
               {
-                "position": "Desenvolvedora e Pesquisadora",
-                "company": "GET — Grupo de Educação Tutorial (UFJF)",
-                "fromDate": "set 2024",
+                "position": "Grupo de Pesquisa, Ensino e Extensão - UFJF",
+                "company": "GET Sistemas de Informação",
+                "fromDate": "Set 2024",
                 "toDate": "",
-                "description": "Crio do zero um app de moradia estudantil (React Native, TypeScript, Expo, Supabase), com Google Maps e ViaCEP para localizar imóveis e preencher endereços sem erro."
+                "description": "Desenvolvo soluções de software sob medida e projeto minicursos técnicos para apoiar o acolhimento de estudantes e o crescimento acadêmico. Responsável pela organização de eventos educacionais e por liderar campanhas de doação de sangue para a comunidade estudantil."
               },
               {
-                "position": "Programadora Líder e Idealizadora",
-                "company": "ProgramADAs (UFJF)",
-                "fromDate": "set 2023",
-                "toDate": "dez 2024",
-                "description": "Arquitetei e programei um RPG educacional em Unity para incentivar mulheres em STEM, com minigames que ensinam algoritmos."
+                "position": "Treinamento Profissional",
+                "company": "ProgramADA",
+                "fromDate": "Set 2023",
+                "toDate": "Dez 2024",
+                "description": "Liderei o design, a arquitetura de sistemas e o desenvolvimento de um jogo educacional RPG universitário em Unity (C#), voltado a incentivar a permanência de mulheres em carreiras STEM."
               },
               {
-                "position": "Fundadora",
-                "company": "Creati Lab — impressão 3D sob medida",
-                "fromDate": "???",
-                "toDate": "???",
-                "description": "Do modelo 3D à calibração da impressora, entrego peças personalizadas ponta a ponta."
+                "position": "Republikei - Aplicativo de Moradia Estudantil",
+                "company": "Projeto Pessoal e TCC",
+                "fromDate": "2025",
+                "toDate": "",
+                "description": "Desde o meu ingresso na faculdade identifiquei a busca por moradias voltadas a estudantes como um problema real e iniciei a elaboração de uma solução. Com isso surgiu o Republikei, um aplicativo mobile que está sendo desenvolvido em React Native com a proposta de centralizar a busca e divulgação de moradias estudantis, trazendo mais padronização e segurança para estudantes e locadores."
+              },
+              {
+                "position": "Impressão 3D",
+                "company": "Creati Lab",
+                "description": "Criada a partir da minha paixão por transformar ideias em realidade. Adoro conectar os mundos digital e físico, cuidando de tudo desde a curadoria de modelos 3D e calibração da impressora à criação de peças personalizadas que levam exclusividade e solução aos clientes."
               }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "goals",
-        "subHeader": "Próximos Passos",
-        "content": [
-          {
-            "type": "list",
-            "items": [
-              "Construir software escalável, de alta qualidade e com propósito",
-              "Aprofundar mobile e back-end (React Native, Supabase, APIs)",
-              "Seguir criando jogos e soluções de gamificação educacional"
             ]
           }
         ]
@@ -125,115 +113,26 @@
     "sections": [
       {
         "id": "education",
-        "subHeader": "Formação Acadêmica",
+        "subHeader": "Educação",
         "content": [
           {
             "type": "positions",
             "items": [
               {
-                "position": "Bacharelado em Sistemas de Informação",
-                "company": "Universidade Federal de Juiz de Fora (UFJF)",
-                "fromDate": "2023",
-                "toDate": "2027",
-                "description": "Média acima de 90%. Atuo em extensão e no GET, ministrando minicursos e mentorando colegas em lógica de programação."
+                "position": "Graduação em Sistemas de Informação",
+                "company": "Universidade Federal de Juiz de Fora - UFJF",
+                "fromDate": "Set 2023",
+                "toDate": "Jul 2027",
+                "description": "Excelência Acadêmica: Mantenho um desempenho acadêmico de destaque com média acima de 90% , demonstrando excelente gestão do tempo, disciplina e dedicação técnica."
               },
               {
-                "position": "Ensino Médio Técnico em Informática para Internet",
-                "company": "Instituto Federal — Paulo de Frontin",
+                "position": "Técnico em Informática Para Internet",
+                "company": "IFRJ - Campus Paulo de Frontin",
                 "fromDate": "2019",
                 "toDate": "2021",
-                "description": "Primeiro contato com programação: HTML, CSS e JavaScript."
+                "description": "Tive meu primeiro contato real com programação durante meu ensino médio quando me formei no curso técnico integrado de informática."
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": "courses",
-        "subHeader": "Conquistas e Cursos",
-        "content": [
-          {
-            "type": "list",
-            "items": [
-              {
-                "text": "1º lugar, Maratona de Programação Jr.",
-                "detail": "UFJF, 2023",
-                "done": true
-              },
-              {
-                "text": "Minicursos de lógica de programação (ministrante)",
-                "detail": "GET / UFJF",
-                "done": true
-              },
-              {
-                "text": "Inglês avançado",
-                "detail": "Fluente na escrita técnica",
-                "done": true
-              },
-              {
-                "text": "100 Days CSS Challenge",
-                "detail": "Autodidata",
-                "done": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "projects",
-        "subHeader": "Projetos Acadêmicos",
-        "content": [
-          {
-            "type": "text",
-            "title": "ProgramADAs",
-            "text": "Jogo educacional em Unity que ensina algoritmos de forma lúdica.",
-            "link": {
-              "label": "Ver playtest",
-              "url": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
-            }
-          },
-          {
-            "type": "text",
-            "title": "Esbugalhado: o Jogo",
-            "text": "Jogo em JavaScript desenvolvido na disciplina DCC202 (UFJF).",
-            "link": {
-              "label": "Ver repositório",
-              "url": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
-            }
-          }
-        ]
-      },
-      {
-        "id": "achieviments",
-        "subHeader": "Conquistas",
-        "content": [
-          {
-            "type": "text",
-            "title": "ProgramADAs",
-            "text": "Liderei o design, a arquitetura de sistemas e o desenvolvimento de um jogo educacional RPG universitário em Unity (C#), voltado a incentivar a permanência de mulheres em carreiras STEM.",
-            "link": {
-              "label": "Ver playtest",
-              "url": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
-            }
-          },
-          {
-            "type": "text",
-            "title": "1º lugar na Maratona Jr. UFJF",
-            "text": "Em 2023, ainda no primeiro período, meu time venceu a Maratona de Programação Júnior da UFJF."
-          },
-          {
-            "type": "text",
-            "title": "Software financeiro em escala",
-            "text": "Na Levty, entrego features, correções e code reviews em um sistema interno de alto volume usado pela Livelo."
-          },
-          {
-            "type": "text",
-            "title": "Excelência acadêmica",
-            "text": "Média acima de 90% em Sistemas de Informação, conciliando estágio, pesquisa e extensão.",
-            "link": {
-              "label": "Ver GitHub",
-              "url": "https://github.com/EduardaNunes"
-            }
           }
         ]
       }
@@ -246,15 +145,15 @@
     "label": "IA e Automações",
     "projects": [
       {
-        "id": "proj-chatbot-whatsapp",
-        "title": "Chatbot para WhatsApp",
+        "id": "proj-portfolio",
+        "title": "Portfólio",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Automação de atendimento via WhatsApp com fluxos conversacionais para organizar mensagens e responder dúvidas recorrentes."
+                "text": "Portfólio construído utilizando o framework OpenSpec e objeto de estudo da aplicação de engenharia assistida por IAs utilizando as tecnologias OpenCode, ClaudeCode, Ollama e 9Router."
               }
             ]
           },
@@ -264,7 +163,7 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "Node.js", "WhatsApp API"]
+                "items": ["OpenSpec", "OpenCode", "ClaudeCode", "Ollama", "9Router"]
               }
             ]
           }
@@ -273,48 +172,12 @@
           "type": "projectDemo",
           "images": [
             {
-              "src": "/images/projects/chatbot-whatsapp.svg",
-              "alt": "Chatbot para WhatsApp demo",
-              "caption": "Chatbot para WhatsApp"
+              "src": "/images/projects/portfolio-web.svg",
+              "alt": "Portfólio demo",
+              "caption": "Portfólio"
             }
           ],
-          "repoLink": "https://github.com/EduardaNunes/chatbot-whatsapp"
-        }
-      },
-      {
-        "id": "proj-automation-spreadsheet",
-        "title": "Automação de Planilhas",
-        "sections": [
-          {
-            "id": "description",
-            "content": [
-              {
-                "type": "text",
-                "text": "Automação de tarefas repetitivas em planilhas para transformar dados, reduzir trabalho manual e manter relatórios atualizados."
-              }
-            ]
-          },
-          {
-            "id": "tech",
-            "content": [
-              {
-                "type": "blocks",
-                "name": "Tech Stack",
-                "items": ["Python", "Pandas", "Automação"]
-              }
-            ]
-          }
-        ],
-        "demo": {
-          "type": "projectDemo",
-          "images": [
-            {
-              "src": "/images/projects/automation-spreadsheet.svg",
-              "alt": "Automação de Planilhas demo",
-              "caption": "Automação de Planilhas"
-            }
-          ],
-          "repoLink": "https://github.com/EduardaNunes/automation-spreadsheet"
+          "repoLink": "https://github.com/EduardaNunes/Portifolio"
         }
       }
     ]
@@ -323,15 +186,15 @@
     "label": "Jogos",
     "projects": [
       {
-        "id": "proj-programadas",
-        "title": "ProgramADAs",
+        "id": "proj-programada",
+        "title": "ProgramADA",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Problema: algoritmos são abstratos para quem começa, e poucas mulheres persistem em computação. Solução: RPG universitário em Unity (C#) com minigames que transformam lógica em mecânicas. Resultado: jogo jogável no navegador (WebGL), liderado por mim da ideia ao código."
+                "text": "Liderei o design, a arquitetura de sistemas e o desenvolvimento de um jogo educacional RPG universitário em Unity (C#), voltado a incentivar a permanência de mulheres em carreiras STEM."
               }
             ]
           },
@@ -341,7 +204,7 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["Unity", "C#", "WebGL", "Game Design"]
+                "items": ["Unity", "C#"]
               }
             ]
           }
@@ -351,8 +214,8 @@
           "images": [
             {
               "src": "/images/projects/programadas.svg",
-              "alt": "ProgramADAs demo",
-              "caption": "ProgramADAs"
+              "alt": "ProgramADA demo",
+              "caption": "ProgramADA"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest",
@@ -360,15 +223,15 @@
         }
       },
       {
-        "id": "proj-esbugalhado",
-        "title": "Esbugalhado: o Jogo",
+        "id": "proj-air-sea-battle",
+        "title": "Air-Sea-Battle-Atari-Clone",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Jogo em JavaScript desenvolvido para a disciplina DCC202 (UFJF). Exercitei estado de jogo, regras e interação no navegador a partir de um repositório-base da turma."
+                "text": "Clone de Air-Sea Battle, do Atari, desenvolvido em Godot e GDScript."
               }
             ]
           },
@@ -378,7 +241,99 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "HTML", "CSS"]
+                "items": ["Godot", "GDScript"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": []
+        }
+      },
+      {
+        "id": "proj-snow-battle",
+        "title": "Snow Battle",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Jogo topdown, multiplayer com conexão de rede local, desenvolvido na Godot com GDScript."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["Godot", "GDScript"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": []
+        }
+      },
+      {
+        "id": "proj-bubble-trouble",
+        "title": "Bubble Trouble",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Jogo mobile desenvolvido na Global Game Jam 2025 seguindo o tema Bubbles, em Unity e C#."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["Unity", "C#"]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": []
+        }
+      }
+    ]
+  },
+  "webdev": {
+    "label": "Desenvolvimento Web",
+    "projects": [
+      {
+        "id": "proj-esbugalhado",
+        "title": "Esbugalhado",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Projeto desenvolvido em JavaScript, CSS e HTML puros. É uma recriação do minigame Knucklebones, presente no jogo Cult of the Lamb."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": ["JavaScript", "CSS", "HTML"]
               }
             ]
           }
@@ -388,28 +343,23 @@
           "images": [
             {
               "src": "/images/projects/esbugalhado.svg",
-              "alt": "Esbugalhado: o Jogo demo",
-              "caption": "Esbugalhado: o Jogo"
+              "alt": "Esbugalhado demo",
+              "caption": "Esbugalhado"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
         }
-      }
-    ]
-  },
-  "webdev": {
-    "label": "WebDev",
-    "projects": [
+      },
       {
-        "id": "proj-productive-tracking",
-        "title": "Productive Tracking",
+        "id": "proj-react-tic-tac-toe",
+        "title": "React Tic Tac Toe",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Problema: listas de tarefas comuns não mostram constância. Solução: To-Do com login, banco em tempo real e calendário de produtividade. Resultado: formulário único de cadastro/login com animação e dados sincronizados automaticamente no Firebase."
+                "text": "Tic tac toe desenvolvido em React e JavaScript."
               }
             ]
           },
@@ -419,22 +369,14 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "HTML", "CSS", "Firebase"]
+                "items": ["React", "JavaScript"]
               }
             ]
           }
         ],
         "demo": {
           "type": "projectDemo",
-          "images": [
-            {
-              "src": "/images/projects/productive-tracking.svg",
-              "alt": "Productive Tracking demo",
-              "caption": "Productive Tracking"
-            }
-          ],
-          "repoLink": "https://github.com/EduardaNunes/Productive-Tracking",
-          "deployLink": "https://eduardanunes.github.io/Productive-Tracking/"
+          "images": []
         }
       },
       {
@@ -446,7 +388,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Editor de pixel art no navegador, feito em JavaScript puro para treinar manipulação do DOM e eventos de interface."
+                "text": "Site desenvolvido em HTML, CSS e JavaScript puros antes da faculdade."
               }
             ]
           },
@@ -456,7 +398,7 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "HTML", "CSS"]
+                "items": ["HTML", "CSS", "JavaScript"]
               }
             ]
           }
@@ -472,58 +414,22 @@
           ],
           "repoLink": "https://github.com/EduardaNunes/Pixel-Paint"
         }
-      },
-      {
-        "id": "proj-portfolio",
-        "title": "Portfólio em Caderno",
-        "sections": [
-          {
-            "id": "description",
-            "content": [
-              {
-                "type": "text",
-                "text": "Portfólio React com tema claro/escuro, PT/EN e navegação em caderno 3D. Aplico acessibilidade (teclado, reduced motion) e design system pixel art próprio."
-              }
-            ]
-          },
-          {
-            "id": "tech",
-            "content": [
-              {
-                "type": "blocks",
-                "name": "Tech Stack",
-                "items": ["React", "Vite", "CSS", "Web Animations API"]
-              }
-            ]
-          }
-        ],
-        "demo": {
-          "type": "projectDemo",
-          "images": [
-            {
-              "src": "/images/projects/portfolio-web.svg",
-              "alt": "Portfólio em Caderno demo",
-              "caption": "Portfólio em Caderno"
-            }
-          ],
-          "repoLink": "https://github.com/EduardaNunes/Portifolio"
-        }
       }
     ]
   },
   "backend": {
-    "label": "BackEnd",
+    "label": "Aplicativos",
     "projects": [
       {
-        "id": "proj-student-housing",
-        "title": "App de Moradia Estudantil",
+        "id": "proj-republikei",
+        "title": "Republikei",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Problema: estudantes têm dificuldade para achar moradia perto da universidade. Solução: app mobile do GET com mapa e preenchimento automático de endereço por CEP. Resultado: autenticação e dados em Supabase, integrados ao Google Maps e ViaCEP."
+                "text": "Aplicativo mobile que está sendo desenvolvido em React Native com a proposta de centralizar a busca e divulgação de moradias estudantis, trazendo mais padronização e segurança para estudantes e locadores."
               }
             ]
           },
@@ -533,7 +439,7 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["React Native", "TypeScript", "Expo", "Supabase"]
+                "items": ["TypeScript", "Expo Go", "React Native", "REST APIs", "Google Maps API", "ViaCEP API", "Supabase"]
               }
             ]
           }
@@ -543,8 +449,8 @@
           "images": [
             {
               "src": "/images/projects/student-housing.svg",
-              "alt": "App de Moradia Estudantil demo",
-              "caption": "App de Moradia Estudantil"
+              "alt": "Republikei demo",
+              "caption": "Republikei"
             }
           ]
         }
@@ -564,6 +470,15 @@
         ]
       },
       {
+        "id": "info",
+        "content": [
+          {
+            "type": "list",
+            "items": ["+55 32 99902-0228", "Minas Gerais, Brazil"]
+          }
+        ]
+      },
+      {
         "id": "links",
         "content": [
           {
@@ -571,17 +486,17 @@
             "items": [
               {
                 "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/eduardapmn"
+                "name": "linkedin.com/in/eduardapmn/",
+                "link": "https://linkedin.com/in/eduardapmn/"
               },
               {
                 "icon": "github",
-                "name": "GitHub",
+                "name": "github.com/EduardaNunes",
                 "link": "https://github.com/EduardaNunes"
               },
               {
                 "icon": "email",
-                "name": "Email",
+                "name": "eduardapmn@gmail.com",
                 "link": "mailto:eduardapmn@gmail.com"
               }
             ]
