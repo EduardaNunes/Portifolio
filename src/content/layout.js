@@ -23,8 +23,8 @@ export const notebookLayout = {
         right: { sections: [{ section: 'skills' }, { section: 'languages' }] },
       },
       {
-        left: { sections: [{ section: 'hobbies' }] },
-        right: { sections: [] },
+        left: { sections: [{ section: 'hobbies', items: [0, 1] }] },
+        right: { sections: [{ section: 'hobbies', items: [1, 2] }] },
       },
     ],
   },

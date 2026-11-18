@@ -22,17 +22,48 @@
           {
             "type": "blocks",
             "name": "Linguagens",
-            "items": ["JavaScript", "Typescript", "HTML5", "CSS3", "C++", "C#", "GDScript", "Java", "Python"]
+            "items": [
+              "JavaScript",
+              "Typescript",
+              "HTML5",
+              "CSS3",
+              "C++",
+              "C#",
+              "GDScript",
+              "Java",
+              "Python"
+            ]
           },
           {
             "type": "blocks",
             "name": "Frameworks e Ferramentas",
-            "items": ["React", "React Native", "Supabase", "REST APIs", "Expo Go", "NodeJS", "Git", "Github", "Godot", "Unity"]
+            "items": [
+              "React",
+              "React Native",
+              "Supabase",
+              "REST APIs",
+              "Expo Go",
+              "NodeJS",
+              "Git",
+              "Github",
+              "Godot",
+              "Unity"
+            ]
           },
           {
             "type": "blocks",
             "name": "IA, LLMs e Automação",
-            "items": ["9Router", "Ollama", "OpenCode", "ClaudeCode", "Gemini", "Claude", "ChatGPT", "OpenSpec", "N8N"]
+            "items": [
+              "9Router",
+              "Ollama",
+              "OpenCode",
+              "ClaudeCode",
+              "Gemini",
+              "Claude",
+              "ChatGPT",
+              "OpenSpec",
+              "N8N"
+            ]
           }
         ]
       },
@@ -42,7 +73,11 @@
         "content": [
           {
             "type": "list",
-            "items": ["Português - Nativo", "Inglês – Avançado", "Espanhol – Iniciante"]
+            "items": [
+              "Português - Nativo",
+              "Inglês – Avançado",
+              "Espanhol – Iniciante"
+            ]
           }
         ]
       },
@@ -51,14 +86,11 @@
         "subHeader": "Hobbies e Interesses",
         "content": [
           {
-            "type": "text",
-            "title": "Desenvolvimento de Jogos",
-            "text": "No meu tempo livre, você vai me encontrar experimentando tecnologia simplesmente pelo prazer de criar. Seja modelando assets, programando jogos na Godot ou participando de Game Jams, me empolgo com o aprendizado prático e a troca colaborativa de ideias."
-          },
-          {
-            "type": "text",
-            "title": "Impressão 3D - Creati Lab",
-            "text": "Criada a partir da minha paixão por transformar ideias em realidade. Adoro conectar os mundos digital e físico, cuidando de tudo desde a curadoria de modelos 3D e calibração da impressora à criação de peças personalizadas que levam exclusividade e solução aos clientes."
+            "type": "list",
+            "items": [
+              "Desenvolvimento de Jogos: Experimentando tecnologia pelo prazer de criar — modelando assets, programando jogos na Godot e participando de Game Jams.",
+              "Impressão 3D - Creati Lab: Transformando ideias em realidade, conectando mundos digital e físico — da curadoria de modelos 3D e calibração de impressoras à criação de peças personalizadas para clientes."
+            ]
           }
         ]
       }
@@ -153,7 +185,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Portfólio construído utilizando o framework OpenSpec e objeto de estudo da aplicação de engenharia assistida por IAs utilizando as tecnologias OpenCode, ClaudeCode, Ollama e 9Router."
+                "text": "Nesse projeto foi continuado o desenvolvimento de um portfólio pessoal com o intuito de servir como laboratório prático para explorar e aplicar inteligências artificiais na engenharia de software estruturada."
+              },
+              {
+                "type": "text",
+                "text": "Mais do que apresentar projetos, trajetórias e experiências, a iniciativa explora fluxos de trabalho orientados a especificações, roteamento de modelos e assistência por agentes para transformar requisitos em código organizado, testável e documentado, mantendo critérios claros de arquitetura, revisão técnica e manutenibilidade."
+              },
+              {
+                "type": "text",
+                "text": "A proposta busca equilibrar produtividade com rigor de engenharia, documentando como ferramentas de IA apoiam desde o planejamento de tarefas e prototipagem de interface até a consolidação de artefatos técnicos."
               }
             ]
           },
@@ -163,7 +203,14 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["OpenSpec", "OpenCode", "ClaudeCode", "Ollama", "9Router"]
+                "items": [
+                  "OpenCode CLI",
+                  "9router",
+                  "OpenSpec",
+                  "TypeScript",
+                  "React",
+                  "Git"
+                ]
               }
             ]
           }
@@ -194,7 +241,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Liderei o design, a arquitetura de sistemas e o desenvolvimento de um jogo educacional RPG universitário em Unity (C#), voltado a incentivar a permanência de mulheres em carreiras STEM."
+                "text": "Jogo desenvolvido em parceria com o Projeto de Treinamento Profissional ProgramADA da UFJF."
+              },
+              {
+                "type": "text",
+                "text": "Esse projeto tinha como objetivo o desenvolvimento de um jogo de RPG ambientado no campus da universidade. Você joga como a ADA, uma estudante caloura do curso de Ciência da Computação. Durante a gameplay você descobre mais sobre as aulas, explora o campus, consulta anotações sobre as aulas de algoritmos e testa seus conhecimentos sobre o curso de forma lúdica por meio de minigames. A proposta é incentivar as mulheres do curso a não desistirem da graduação e se sentirem representadas na faculdade."
+              },
+              {
+                "type": "text",
+                "text": "Liderei o desenvolvimento técnico do projeto, participando ativamente desde a concepção das ideias até a definição da arquitetura e das decisões de projeto."
               }
             ]
           },
@@ -204,7 +259,12 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["Unity", "C#"]
+                "items": [
+                  "Unity",
+                  "C#",
+                  "Git",
+                  "Aseprite"
+                ]
               }
             ]
           }
@@ -224,14 +284,14 @@
       },
       {
         "id": "proj-air-sea-battle",
-        "title": "Air-Sea-Battle-Atari-Clone",
+        "title": "Mage Battle",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Clone de Air-Sea Battle, do Atari, desenvolvido em Godot e GDScript."
+                "text": "Projeto de jogo 2D baseado no clássico Air Sea Battle, do Atari, com foco na aplicação prática dos fundamentos vistos na disciplina de desenvolvimento de jogos. Assumi o processo de ponta a ponta, da concepção inicial à organização dos scripts, construção das mecânicas e refinamento do jogo."
               }
             ]
           },
@@ -241,7 +301,12 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["Godot", "GDScript"]
+                "items": [
+                  "Godot",
+                  "GDScript",
+                  "Git",
+                  "Aseprite"
+                ]
               }
             ]
           }
@@ -260,7 +325,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Jogo topdown, multiplayer com conexão de rede local, desenvolvido na Godot com GDScript."
+                "text": "Desenvolvido a partir de uma proposta mais aberta da disciplina de Desenvolvimento de Jogos, este projeto partiu da iniciativa de explorar tópicos além da ementa tradicional, com foco experimental em multiplayer 2D via conexão local (LAN) por IP. Na Godot com GDScript, o protótipo investiga a estruturação de sessões em rede, sincronização de estado e movimentação entre jogadores, aplicando conceitos fundamentais de arquitetura multiplayer como distinção entre host e client, replicação de entidades e troca de mensagens remotas."
               }
             ]
           },
@@ -270,7 +335,12 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["Godot", "GDScript"]
+                "items": [
+                  "Godot",
+                  "GDScript",
+                  "Git",
+                  "Aseprite"
+                ]
               }
             ]
           }
@@ -299,7 +369,10 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["Unity", "C#"]
+                "items": [
+                  "Unity",
+                  "C#"
+                ]
               }
             ]
           }
@@ -333,7 +406,11 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "CSS", "HTML"]
+                "items": [
+                  "JavaScript",
+                  "CSS",
+                  "HTML"
+                ]
               }
             ]
           }
@@ -369,7 +446,10 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["React", "JavaScript"]
+                "items": [
+                  "React",
+                  "JavaScript"
+                ]
               }
             ]
           }
@@ -398,7 +478,11 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["HTML", "CSS", "JavaScript"]
+                "items": [
+                  "HTML",
+                  "CSS",
+                  "JavaScript"
+                ]
               }
             ]
           }
@@ -439,7 +523,15 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["TypeScript", "Expo Go", "React Native", "REST APIs", "Google Maps API", "ViaCEP API", "Supabase"]
+                "items": [
+                  "TypeScript",
+                  "Expo Go",
+                  "React Native",
+                  "REST APIs",
+                  "Google Maps API",
+                  "ViaCEP API",
+                  "Supabase"
+                ]
               }
             ]
           }
@@ -474,7 +566,10 @@
         "content": [
           {
             "type": "list",
-            "items": ["+55 32 99902-0228", "Minas Gerais, Brazil"]
+            "items": [
+              "+55 32 99902-0228",
+              "Minas Gerais, Brazil"
+            ]
           }
         ]
       },

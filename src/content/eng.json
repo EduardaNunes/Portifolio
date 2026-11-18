@@ -4,19 +4,14 @@
     "sections": [
       {
         "id": "about-me-text",
-        "subHeader": "Who am I?",
         "content": [
           {
             "type": "text",
-            "text": "Dedicated Software Engineer driven by excellence, guided by the conviction that software development means identifying and solving problems, not just writing code."
+            "text": "Software Engineer driven by excellence and guided by the conviction that developing software means identifying and solving real problems, not just writing code. Recognized for proactivity, I act by anticipating needs and building internal solutions to prevent bottlenecks, ensuring more robust deliverables for the end user."
           },
           {
             "type": "text",
-            "text": "Recognized for being active and proactive, consistently anticipating team needs and prioritizing the end-user experience to deliver maximum satisfaction."
-          },
-          {
-            "type": "text",
-            "text": "Ready to apply my technical skills and ideas in a collaborative team, building not only scalable, high-quality software but solutions with purpose."
+            "text": "Always ready to take on new challenges and master new technologies. Currently, I focus on studying the structured use of Generative AI, LLMs, and automations, integrating tools such as Claude Code, OpenCode, 9Router, and n8n, as well as specification-driven approaches like OpenSpec, to scale productivity while ensuring technical quality in the final product."
           }
         ]
       },
@@ -27,27 +22,75 @@
           {
             "type": "blocks",
             "name": "Languages",
-            "items": ["JavaScript", "TypeScript", "Python", "Java", "C++", "C#", "GDScript"]
+            "items": [
+              "JavaScript",
+              "Typescript",
+              "HTML5",
+              "CSS3",
+              "C++",
+              "C#",
+              "GDScript",
+              "Java",
+              "Python"
+            ]
           },
           {
             "type": "blocks",
-            "name": "Web and Mobile",
-            "items": ["React", "React Native", "Expo", "HTML5", "CSS3"]
+            "name": "Frameworks and Tools",
+            "items": [
+              "React",
+              "React Native",
+              "Supabase",
+              "REST APIs",
+              "Expo Go",
+              "NodeJS",
+              "Git",
+              "Github",
+              "Godot",
+              "Unity"
+            ]
           },
           {
             "type": "blocks",
-            "name": "Data and APIs",
-            "items": ["Supabase", "Firebase", "REST API", "Google Maps API", "ViaCEP"]
-          },
+            "name": "AI, LLMs and Automation",
+            "items": [
+              "9Router",
+              "Ollama",
+              "OpenCode",
+              "ClaudeCode",
+              "Gemini",
+              "Claude",
+              "ChatGPT",
+              "OpenSpec",
+              "N8N"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "languages",
+        "subHeader": "Languages",
+        "content": [
           {
-            "type": "blocks",
-            "name": "Games",
-            "items": ["Unity", "Godot"]
-          },
+            "type": "list",
+            "items": [
+              "Portuguese - Native",
+              "English – Advanced",
+              "Spanish – Beginner"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hobbies",
+        "subHeader": "Hobbies and Interests",
+        "content": [
           {
-            "type": "blocks",
-            "name": "Tools",
-            "items": ["Git", "GitHub"]
+            "type": "list",
+            "items": [
+              "Game Development: Experimenting with technology for the joy of creating — modeling assets, programming games in Godot, and participating in Game Jams.",
+              "3D Printing - Creati Lab: Turning ideas into reality by connecting digital and physical worlds — from curating 3D models and calibrating printers to creating custom pieces for clients."
+            ]
           }
         ]
       }
@@ -57,63 +100,40 @@
     "label": "Career",
     "sections": [
       {
-        "id": "current-role",
-        "content": [
-          {
-            "type": "text",
-            "text": "Software Engineer at Levty, working on a high-volume financial system for Livelo. Focused on clean code, stability and user experience."
-          }
-        ]
-      },
-      {
         "id": "timeline",
-        "subHeader": "Professional Timeline",
+        "subHeader": "Work Experience",
         "content": [
           {
             "type": "positions",
             "items": [
               {
-                "position": "Software Engineer",
-                "company": "Levty (client: Livelo)",
+                "position": "Software Engineer Trainee",
+                "company": "Levty Sistemas",
                 "fromDate": "Dec 2024",
                 "toDate": "",
-                "description": "I build and maintain scalable features, debug failures, write documentation and review code in an agile environment to keep deliveries stable."
+                "description": "I work on developing and maintaining scalable features for a high-volume internal financial management software built for Livelo, a major national company. I identified and developed an internal tool to solve an existing bottleneck in generating and standardizing functional HTML emails. The solution is already used internally by several teams"
               },
               {
-                "position": "Software Developer and Researcher",
-                "company": "GET — Tutorial Education Group (UFJF)",
+                "position": "Research, Teaching and Extension Group - UFJF",
+                "company": "GET Sistemas de Informação",
                 "fromDate": "Sep 2024",
                 "toDate": "",
-                "description": "Building a student-housing app from scratch (React Native, TypeScript, Expo, Supabase), with Google Maps and ViaCEP to locate listings and autofill addresses."
+                "description": "I develop tailored software solutions and design technical short courses to support student onboarding and academic growth. Responsible for organizing educational events and leading blood donation campaigns for the student community."
               },
               {
-                "position": "Lead Programmer and Idealizer",
-                "company": "ProgramADAs (UFJF)",
+                "position": "Professional Training",
+                "company": "ProgramADA",
                 "fromDate": "Sep 2023",
                 "toDate": "Dec 2024",
-                "description": "Designed the architecture and built an educational RPG in Unity to encourage women in STEM, with mini-games that teach algorithms."
+                "description": "I led the design, systems architecture, and development of a university RPG educational game in Unity (C#), aimed at encouraging women's retention in STEM careers."
               },
               {
-                "position": "Founder",
-                "company": "Creati Lab — custom 3D printing",
-                "fromDate": "???",
-                "toDate": "???",
-                "description": "From 3D modeling to printer calibration, I deliver custom pieces end to end."
+                "position": "Republikei - Student Housing App",
+                "company": "Personal Project and Capstone (TCC)",
+                "fromDate": "2025",
+                "toDate": "",
+                "description": "Since starting college, I identified searching for student-oriented housing as a real problem and began designing a solution. That led to Republikei, a mobile app being developed in React Native with the goal of centralizing the search and listing of student housing, bringing greater standardization and safety for students and landlords."
               }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "goals",
-        "subHeader": "Next Steps",
-        "content": [
-          {
-            "type": "list",
-            "items": [
-              "Build scalable, high-quality software with purpose",
-              "Go deeper into mobile and back-end (React Native, Supabase, APIs)",
-              "Keep creating games and educational gamification solutions"
             ]
           }
         ]
@@ -125,115 +145,26 @@
     "sections": [
       {
         "id": "education",
-        "subHeader": "Academic Background",
+        "subHeader": "Education",
         "content": [
           {
             "type": "positions",
             "items": [
               {
-                "position": "B.Sc. in Information Systems",
-                "company": "Federal University of Juiz de Fora (UFJF)",
-                "fromDate": "2023",
-                "toDate": "2027",
-                "description": "Average above 90%. Active in outreach and in GET, teaching mini-courses and mentoring peers in programming logic."
+                "position": "Bachelor's Degree in Information Systems",
+                "company": "Federal University of Juiz de Fora - UFJF",
+                "fromDate": "Sep 2023",
+                "toDate": "Jul 2027",
+                "description": "Academic Excellence: I maintain an outstanding academic record with an average above 90%, demonstrating strong time management, discipline, and technical dedication."
               },
               {
-                "position": "Technical High School in Internet Informatics",
-                "company": "Federal Institute — Paulo de Frontin",
+                "position": "Technical Degree in Internet Informatics",
+                "company": "IFRJ - Paulo de Frontin Campus",
                 "fromDate": "2019",
                 "toDate": "2021",
-                "description": "My first contact with programming: HTML, CSS and JavaScript."
+                "description": "I had my first real contact with programming during high school when I graduated from the integrated technical informatics program."
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": "courses",
-        "subHeader": "Achievements and Courses",
-        "content": [
-          {
-            "type": "list",
-            "items": [
-              {
-                "text": "1st place, Junior Programming Marathon",
-                "detail": "UFJF, 2023",
-                "done": true
-              },
-              {
-                "text": "Programming logic mini-courses (instructor)",
-                "detail": "GET / UFJF",
-                "done": true
-              },
-              {
-                "text": "Advanced English",
-                "detail": "Fluent in technical writing",
-                "done": true
-              },
-              {
-                "text": "100 Days CSS Challenge",
-                "detail": "Self-taught",
-                "done": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "projects",
-        "subHeader": "Academic Projects",
-        "content": [
-          {
-            "type": "text",
-            "title": "ProgramADAs",
-            "text": "Educational Unity game that teaches algorithms in a playful way.",
-            "link": {
-              "label": "View playtest",
-              "url": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
-            }
-          },
-          {
-            "type": "text",
-            "title": "Esbugalhado: the Game",
-            "text": "JavaScript game built for the DCC202 course (UFJF).",
-            "link": {
-              "label": "View repository",
-              "url": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
-            }
-          }
-        ]
-      },
-      {
-        "id": "achieviments",
-        "subHeader": "Achievements",
-        "content": [
-          {
-            "type": "text",
-            "title": "ProgramADAs",
-            "text": "Led the design, systems architecture, and development of a university RPG educational game in Unity (C#), aimed at encouraging women to stay in STEM careers.",
-            "link": {
-              "label": "View playtest",
-              "url": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
-            }
-          },
-          {
-            "type": "text",
-            "title": "1st place, UFJF Junior Marathon",
-            "text": "In 2023, still in my first semester, my team won the UFJF Junior Programming Marathon."
-          },
-          {
-            "type": "text",
-            "title": "Financial software at scale",
-            "text": "At Levty, I deliver features, fixes, and code reviews in a high-volume internal system used by Livelo."
-          },
-          {
-            "type": "text",
-            "title": "Academic excellence",
-            "text": "Average above 90% in Information Systems, balancing internship, research, and outreach.",
-            "link": {
-              "label": "View GitHub",
-              "url": "https://github.com/EduardaNunes"
-            }
           }
         ]
       }
@@ -243,18 +174,26 @@
     "label": "Projects"
   },
   "ai-automation": {
-    "label": "AI & Automations",
+    "label": "AI and Automations",
     "projects": [
       {
-        "id": "proj-chatbot-whatsapp",
-        "title": "Chatbot for WhatsApp",
+        "id": "proj-portfolio",
+        "title": "Portfolio",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "WhatsApp support automation with conversational flows to organize messages and answer recurring questions."
+                "text": "In this project, development of a personal portfolio was continued with the aim of serving as a practical laboratory to explore and apply artificial intelligence in structured software engineering."
+              },
+              {
+                "type": "text",
+                "text": "More than presenting projects, career paths, and experiences, the initiative explores specification-driven workflows, model routing, and agent assistance to turn requirements into organized, testable, and documented code, maintaining clear criteria for architecture, technical review, and maintainability."
+              },
+              {
+                "type": "text",
+                "text": "The proposal seeks to balance productivity with engineering rigor, documenting how AI tools support everything from task planning and UI prototyping to consolidating technical artifacts."
               }
             ]
           },
@@ -264,7 +203,14 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "Node.js", "WhatsApp API"]
+                "items": [
+                  "OpenCode CLI",
+                  "9router",
+                  "OpenSpec",
+                  "TypeScript",
+                  "React",
+                  "Git"
+                ]
               }
             ]
           }
@@ -273,48 +219,12 @@
           "type": "projectDemo",
           "images": [
             {
-              "src": "/images/projects/chatbot-whatsapp.svg",
-              "alt": "Chatbot for WhatsApp demo",
-              "caption": "Chatbot for WhatsApp"
+              "src": "/images/projects/portfolio-web.svg",
+              "alt": "Portfolio demo",
+              "caption": "Portfolio"
             }
           ],
-          "repoLink": "https://github.com/EduardaNunes/chatbot-whatsapp"
-        }
-      },
-      {
-        "id": "proj-automation-spreadsheet",
-        "title": "Spreadsheet Automation",
-        "sections": [
-          {
-            "id": "description",
-            "content": [
-              {
-                "type": "text",
-                "text": "Automation of repetitive spreadsheet tasks to transform data, reduce manual work and keep reports up to date."
-              }
-            ]
-          },
-          {
-            "id": "tech",
-            "content": [
-              {
-                "type": "blocks",
-                "name": "Tech Stack",
-                "items": ["Python", "Pandas", "Automation"]
-              }
-            ]
-          }
-        ],
-        "demo": {
-          "type": "projectDemo",
-          "images": [
-            {
-              "src": "/images/projects/automation-spreadsheet.svg",
-              "alt": "Spreadsheet Automation demo",
-              "caption": "Spreadsheet Automation"
-            }
-          ],
-          "repoLink": "https://github.com/EduardaNunes/automation-spreadsheet"
+          "repoLink": "https://github.com/EduardaNunes/Portifolio"
         }
       }
     ]
@@ -323,15 +233,23 @@
     "label": "Games",
     "projects": [
       {
-        "id": "proj-programadas",
-        "title": "ProgramADAs",
+        "id": "proj-programada",
+        "title": "ProgramADA",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Problem: algorithms feel abstract to beginners, and few women persist in computing. Solution: a university RPG in Unity (C#) with mini-games that turn logic into mechanics. Result: a browser-playable game (WebGL), led by me from idea to code."
+                "text": "Game developed in partnership with UFJF's ProgramADA Professional Training Project."
+              },
+              {
+                "type": "text",
+                "text": "This project aimed to develop an RPG game set on the university campus. You play as ADA, a freshman student in the Computer Science program. During gameplay, you learn more about classes, explore the campus, consult notes from algorithm classes, and test your knowledge about the degree in a playful way through minigames. The goal is to encourage women in the program not to drop out of college and to feel represented at the university."
+              },
+              {
+                "type": "text",
+                "text": "I led the technical development of the project, actively participating from initial ideation through architecture definition and design decisions."
               }
             ]
           },
@@ -341,7 +259,12 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["Unity", "C#", "WebGL", "Game Design"]
+                "items": [
+                  "Unity",
+                  "C#",
+                  "Git",
+                  "Aseprite"
+                ]
               }
             ]
           }
@@ -351,8 +274,8 @@
           "images": [
             {
               "src": "/images/projects/programadas.svg",
-              "alt": "ProgramADAs demo",
-              "caption": "ProgramADAs"
+              "alt": "ProgramADA demo",
+              "caption": "ProgramADA"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest",
@@ -360,15 +283,15 @@
         }
       },
       {
-        "id": "proj-esbugalhado",
-        "title": "Esbugalhado: the Game",
+        "id": "proj-air-sea-battle",
+        "title": "Mage Battle",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "JavaScript game built for the DCC202 course (UFJF). I practiced game state, rules and browser interaction starting from the class's base repository."
+                "text": "2D game project based on the classic Atari Air Sea Battle, focused on the practical application of fundamentals covered in the game development course. I took ownership of the end-to-end process, from initial conception to script organization, mechanics building, and game polishing."
               }
             ]
           },
@@ -378,7 +301,116 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "HTML", "CSS"]
+                "items": [
+                  "Godot",
+                  "GDScript",
+                  "Git",
+                  "Aseprite"
+                ]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": []
+        }
+      },
+      {
+        "id": "proj-snow-battle",
+        "title": "Snow Battle",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Developed from a more open-ended prompt in the Game Development course, this project came from the initiative to explore topics beyond the traditional syllabus, with an experimental focus on 2D multiplayer over a local network (LAN) via IP. In Godot with GDScript, the prototype investigates structuring network sessions, state synchronization, and player movement, applying core multiplayer architecture concepts such as host vs. client distinction, entity replication, and remote message exchange."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": [
+                  "Godot",
+                  "GDScript",
+                  "Git",
+                  "Aseprite"
+                ]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": []
+        }
+      },
+      {
+        "id": "proj-bubble-trouble",
+        "title": "Bubble Trouble",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Mobile game developed for Global Game Jam 2025 following the Bubbles theme, in Unity and C#."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": [
+                  "Unity",
+                  "C#"
+                ]
+              }
+            ]
+          }
+        ],
+        "demo": {
+          "type": "projectDemo",
+          "images": []
+        }
+      }
+    ]
+  },
+  "webdev": {
+    "label": "Web Development",
+    "projects": [
+      {
+        "id": "proj-esbugalhado",
+        "title": "Esbugalhado",
+        "sections": [
+          {
+            "id": "description",
+            "content": [
+              {
+                "type": "text",
+                "text": "Project developed in vanilla JavaScript, CSS, and HTML. It is a recreation of the Knucklebones minigame featured in the game Cult of the Lamb."
+              }
+            ]
+          },
+          {
+            "id": "tech",
+            "content": [
+              {
+                "type": "blocks",
+                "name": "Tech Stack",
+                "items": [
+                  "JavaScript",
+                  "CSS",
+                  "HTML"
+                ]
               }
             ]
           }
@@ -388,28 +420,23 @@
           "images": [
             {
               "src": "/images/projects/esbugalhado.svg",
-              "alt": "Esbugalhado: the Game demo",
-              "caption": "Esbugalhado: the Game"
+              "alt": "Esbugalhado demo",
+              "caption": "Esbugalhado"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/esbugalhado-o-jogo"
         }
-      }
-    ]
-  },
-  "webdev": {
-    "label": "WebDev",
-    "projects": [
+      },
       {
-        "id": "proj-productive-tracking",
-        "title": "Productive Tracking",
+        "id": "proj-react-tic-tac-toe",
+        "title": "React Tic Tac Toe",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Problem: ordinary task lists do not show consistency. Solution: a to-do app with login, real-time database and a productivity calendar. Result: a single signup/login form with animation and data synced automatically in Firebase."
+                "text": "Tic tac toe developed in React and JavaScript."
               }
             ]
           },
@@ -419,22 +446,17 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "HTML", "CSS", "Firebase"]
+                "items": [
+                  "React",
+                  "JavaScript"
+                ]
               }
             ]
           }
         ],
         "demo": {
           "type": "projectDemo",
-          "images": [
-            {
-              "src": "/images/projects/productive-tracking.svg",
-              "alt": "Productive Tracking demo",
-              "caption": "Productive Tracking"
-            }
-          ],
-          "repoLink": "https://github.com/EduardaNunes/Productive-Tracking",
-          "deployLink": "https://eduardanunes.github.io/Productive-Tracking/"
+          "images": []
         }
       },
       {
@@ -446,7 +468,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Browser pixel-art editor built in plain JavaScript to practice DOM manipulation and interface events."
+                "text": "Website developed in vanilla HTML, CSS, and JavaScript before college."
               }
             ]
           },
@@ -456,7 +478,11 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["JavaScript", "HTML", "CSS"]
+                "items": [
+                  "HTML",
+                  "CSS",
+                  "JavaScript"
+                ]
               }
             ]
           }
@@ -472,58 +498,22 @@
           ],
           "repoLink": "https://github.com/EduardaNunes/Pixel-Paint"
         }
-      },
-      {
-        "id": "proj-portfolio",
-        "title": "Notebook Portfolio",
-        "sections": [
-          {
-            "id": "description",
-            "content": [
-              {
-                "type": "text",
-                "text": "React portfolio with light/dark theme, PT/EN and 3D notebook navigation. I applied accessibility (keyboard, reduced motion) and a custom pixel-art design system."
-              }
-            ]
-          },
-          {
-            "id": "tech",
-            "content": [
-              {
-                "type": "blocks",
-                "name": "Tech Stack",
-                "items": ["React", "Vite", "CSS", "Web Animations API"]
-              }
-            ]
-          }
-        ],
-        "demo": {
-          "type": "projectDemo",
-          "images": [
-            {
-              "src": "/images/projects/portfolio-web.svg",
-              "alt": "Notebook Portfolio demo",
-              "caption": "Notebook Portfolio"
-            }
-          ],
-          "repoLink": "https://github.com/EduardaNunes/Portifolio"
-        }
       }
     ]
   },
   "backend": {
-    "label": "BackEnd",
+    "label": "Apps",
     "projects": [
       {
-        "id": "proj-student-housing",
-        "title": "Student Housing App",
+        "id": "proj-republikei",
+        "title": "Republikei",
         "sections": [
           {
             "id": "description",
             "content": [
               {
                 "type": "text",
-                "text": "Problem: students struggle to find housing near the university. Solution: a GET mobile app with a map and address autofill by postal code. Result: authentication and data in Supabase, integrated with Google Maps and ViaCEP."
+                "text": "Mobile app being developed in React Native aiming to centralize the search and listing of student housing, bringing greater standardization and safety for students and landlords."
               }
             ]
           },
@@ -533,7 +523,15 @@
               {
                 "type": "blocks",
                 "name": "Tech Stack",
-                "items": ["React Native", "TypeScript", "Expo", "Supabase"]
+                "items": [
+                  "TypeScript",
+                  "Expo Go",
+                  "React Native",
+                  "REST APIs",
+                  "Google Maps API",
+                  "ViaCEP API",
+                  "Supabase"
+                ]
               }
             ]
           }
@@ -543,8 +541,8 @@
           "images": [
             {
               "src": "/images/projects/student-housing.svg",
-              "alt": "Student Housing App demo",
-              "caption": "Student Housing App"
+              "alt": "Republikei demo",
+              "caption": "Republikei"
             }
           ]
         }
@@ -564,6 +562,18 @@
         ]
       },
       {
+        "id": "info",
+        "content": [
+          {
+            "type": "list",
+            "items": [
+              "+55 32 99902-0228",
+              "Minas Gerais, Brazil"
+            ]
+          }
+        ]
+      },
+      {
         "id": "links",
         "content": [
           {
@@ -571,17 +581,17 @@
             "items": [
               {
                 "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/eduardapmn"
+                "name": "linkedin.com/in/eduardapmn/",
+                "link": "https://linkedin.com/in/eduardapmn/"
               },
               {
                 "icon": "github",
-                "name": "GitHub",
+                "name": "github.com/EduardaNunes",
                 "link": "https://github.com/EduardaNunes"
               },
               {
                 "icon": "email",
-                "name": "Email",
+                "name": "eduardapmn@gmail.com",
                 "link": "mailto:eduardapmn@gmail.com"
               }
             ]
