@@ -72,7 +72,8 @@ function projectPair(project, labels) {
       content: [
         {
           type: 'links',
-          items: [{ icon: 'github', name: labels.viewSource, link: project.demo.repoLink }],
+          variant: 'project-repo',
+          items: [{ icon: 'github', name: labels.viewRepository, link: project.demo.repoLink }],
         },
       ],
     })

@@ -77,15 +77,19 @@ export function PositionsBlock({ block, labels }) {
         const dates = formatDates(item, labels)
         return (
           <li key={index} className="position-item">
-            <div className="position-title">
+            <div className="page-field">
               <span className="field-value">{item.position}</span>
             </div>
-
-            <div className="position-meta">
-              <span className="position-company">{item.company}</span>
-              {dates && <span className="position-dates">{dates}</span>}
+            <div className="page-field-pair">
+              <div className="page-field">
+                <span className="field-value">{item.company}</span>
+              </div>
+              {dates && (
+                <div className="page-field">
+                  <span className="field-value">{dates}</span>
+                </div>
+              )}
             </div>
-
             {item.description && <p className="position-desc">{item.description}</p>}
           </li>
         )
@@ -109,7 +113,25 @@ export function EmailBlock({ block, labels }) {
   )
 }
 
-export function LinksBlock({ block }) {
+export function LinksBlock({ block, variant }) {
+  const isProjectRepo = variant === 'project-repo'
+
+  if (isProjectRepo && block.items?.[0]) {
+    const item = block.items[0]
+    const isMailto = item.link.startsWith('mailto:')
+    return (
+      <a
+        href={item.link}
+        className={`project-repo-btn page-action ${item.icon}`}
+        aria-label={item.name}
+        {...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+      >
+        <LinkIcon name={item.icon} />
+        <span>{item.name}</span>
+      </a>
+    )
+  }
+
   return (
     <ul className="social-links-section page-list">
       {(block.items ?? []).map((item, index) => {
@@ -162,19 +184,6 @@ export function ProjectDemoBlock({ block, labels }) {
 
   return (
     <div className="project-demo-block">
-      {block.deployLink && (
-        <a
-          href={block.deployLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="deploy-link prominent-deploy-btn page-action"
-          aria-label={`${labels.deploy ?? 'Deploy'}: ${image?.caption ?? ''}`}
-        >
-          <LinkIcon name="external" />
-          <span className="deploy-link-text">→</span>
-        </a>
-      )}
-
       <section className="demo-showcase-section pixel-art-media-frame">
         {image ? (
           <>
@@ -213,13 +222,21 @@ export function ProjectDemoBlock({ block, labels }) {
         )}
       </section>
 
+      {block.deployLink && (
+        <a
+          href={block.deployLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project-deploy-btn page-action"
+          aria-label={`${labels.viewDeploy ?? labels.deploy ?? 'Deploy'}: ${image?.caption ?? ''}`}
+        >
+          <LinkIcon name="external" />
+          <span>{labels.viewDeploy ?? labels.deploy ?? 'Deploy'}</span>
+        </a>
+      )}
+
       {image?.caption && (
-        <section className="additional-info-section">
-          <div className="page-field">
-            <span className="field-label">{labels.demo}</span>
-            <span className="field-value">{image.caption}</span>
-          </div>
-        </section>
+        <p className="thumbnail-caption">{image.caption}</p>
       )}
     </div>
   )
@@ -239,5 +256,5 @@ const RENDERERS = {
 export default function BlockRenderer({ block, labels = {} }) {
   const Renderer = RENDERERS[block?.type]
   if (!Renderer) return null
-  return <Renderer block={block} labels={labels} />
+  return <Renderer block={block} labels={labels} variant={block.variant} />
 }

@@ -1211,24 +1211,6 @@ header {
   text-decoration: none;
 }
 
-/* ---------- Deploy Link Styling ---------- */
-
-/* Positioning only: the visual style comes from .page-action. */
-.prominent-deploy-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  max-width: calc(100% - 0.5rem);
-  z-index: 10;
-}
-
-.prominent-deploy-btn .icon {
-  width: 11px;
-  height: 11px;
-  vertical-align: middle;
-  margin-right: 3px;
-}
-
 .notebook-leaf .thumbnail-caption {
   margin-top: 0.5rem;
   text-align: center;
@@ -1334,7 +1316,7 @@ header {
 }
 
 /* ---------- Paper-like page text presentation (page-* vocabulary) ---------- */
-/* Foco em leitura: texto em caixa normal, poucos separadores, mais respiro. */
+/* Less frames, more lines: the text rests on dotted rules like a real pad. */
 
 .notebook-leaf .page-title {
   margin: 0 0 0.9rem;
@@ -1349,7 +1331,7 @@ header {
 }
 
 .notebook-leaf .page-label {
-  margin: 1rem 0 0.6rem;
+  margin: 0.9rem 0 0.5rem;
   padding: 0;
   border: 0;
   background: none;
@@ -1372,23 +1354,20 @@ header {
     linear-gradient(var(--page-line), var(--page-line)) 25% 2px / 50% 2px no-repeat;
 }
 
-/* ----- Campos (label: valor) ----- */
-
 .notebook-leaf .page-field {
   display: block;
   margin: 0;
-  padding: 0.25rem 0;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--paper-text);
-  background: none;
+  padding: 0.3rem 0 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--page-ink);
+  background:
+    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
+    left bottom / 100% 1px no-repeat;
 }
 
 .notebook-leaf .page-field > .field-label {
   color: var(--page-ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.85em;
 }
 
 .notebook-leaf .page-field > .field-label::after {
@@ -1397,7 +1376,7 @@ header {
 }
 
 .notebook-leaf .page-field > .field-value {
-  color: var(--paper-text);
+  color: var(--page-ink);
   overflow-wrap: anywhere;
 }
 
@@ -1412,90 +1391,27 @@ header {
   min-width: 0;
 }
 
-/* ----- Cargos / formação ----- */
-/* ----- Cargos / formação -----
-   Nome -> linha pontilhada -> datas -> linha pontilhada -> descrição */
-
-.notebook-leaf .positions-list .position-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0.55rem 0 0.7rem;
-  border-bottom: 1px solid var(--paper-border);
-}
-
-.notebook-leaf .positions-list .position-item:first-child {
-  padding-top: 0.2rem;
-}
-
-.notebook-leaf .positions-list .position-item:last-child {
-  border-bottom: 0;
-}
-
-.notebook-leaf .position-title {
-  padding: 0 0 0.35rem;
-}
-
-.notebook-leaf .position-title .field-value {
-  color: var(--page-ink);
-  overflow-wrap: anywhere;
-}
-
-/* Faixa de datas, delimitada por duas linhas pontilhadas (em cima e embaixo) */
-.notebook-leaf .position-meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.1rem 0.9rem;
-  padding: 0.3rem 0;
-  color: var(--paper-muted);
-  font-size: 0.92em;
-  background:
-    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
-      left top / 100% 1px no-repeat,
-    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
-      left bottom / 100% 1px no-repeat;
-}
-
-.notebook-leaf .position-company,
-.notebook-leaf .position-dates {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.notebook-leaf .position-dates {
-  margin-left: auto;
-}
-
-.notebook-leaf .position-desc {
-  margin: 0;
-  padding-top: 0.4rem;
-  line-height: 1.6;
-  color: var(--paper-text);
-}
-
-/* ----- Listas ----- */
-
 .notebook-leaf .page-list {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0;
 }
 
 .notebook-leaf .page-list-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.55rem;
-  padding: 0.3rem 0;
-  background: none;
-  color: var(--paper-text);
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  background:
+    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
+    left bottom / 100% 1px no-repeat;
 }
 
 .notebook-leaf .page-marker {
   flex: none;
   width: 0.65rem;
   height: 0.65rem;
-  margin-top: 0.2em;
+  margin-top: 0.15em;
   border: 2px solid var(--page-ink);
   border-radius: 50%;
   background: transparent;
@@ -1503,33 +1419,17 @@ header {
 
 .notebook-leaf .page-marker.is-done {
   background: var(--page-ink);
-  /* "check" por anel interno, sem cor nova */
+  /* "check" by inner ring, no new color */
   box-shadow: inset 0 0 0 2px var(--paper-bg);
 }
-
-.notebook-leaf .list-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  min-width: 0;
-}
-
-.notebook-leaf .list-detail {
-  color: var(--paper-muted);
-  font-size: 0.92em;
-  overflow-wrap: anywhere;
-}
-
-/* ----- Caixa de texto: borda escalonada, sem linhas internas ----- */
 
 .notebook-leaf .page-note {
   --note-step: 3px;
   position: relative;
   margin: 0.6rem 0;
-  padding: 0.5rem 0.65rem;
+  padding: 0.32rem 0.6rem;
   border: 1px solid var(--page-ink);
-  line-height: 1.65;
-  background: none;
+  line-height: 1.6;
   clip-path: polygon(
     var(--note-step) 0,
     calc(100% - var(--note-step)) 0,
@@ -1544,23 +1444,27 @@ header {
     0 var(--note-step),
     var(--note-step) var(--note-step)
   );
+  /* Internal pad: each text line rests on a dotted rule. The 1.6em stop
+     MUST stay equal to this box's line-height (1.6). */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 calc(1.6em - 1px),
+    var(--page-line) calc(1.6em - 1px) 1.6em
+  );
+  background-origin: content-box;
 }
 
 .notebook-leaf .page-note > .note-title {
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   color: var(--page-ink);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.85em;
 }
 
 .notebook-leaf .page-note > p {
   margin: 0;
   color: var(--paper-text);
 }
-
-/* ----- Ações ----- */
 
 .notebook-leaf .page-action {
   display: inline-flex;
@@ -1588,6 +1492,129 @@ header {
   outline-offset: 2px;
 }
 
+/* ----- Project Repository Button ----- */
+
+.notebook-leaf .project-repo-btn {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  /* Dark theme: border always orange */
+  border-color: var(--notebook-highlight-color);
+}
+
+/* Higher specificity to override .page-action:hover */
+/* Dark theme: button background becomes orange on hover, border stays orange */
+.notebook-leaf a.project-repo-btn:hover {
+  background: var(--notebook-highlight-color);
+  border-color: var(--notebook-highlight-color);
+}
+
+/* Text and icon color only (transparent background) */
+.notebook-leaf a.project-repo-btn:hover,
+.notebook-leaf a.project-repo-btn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+/* Explicitly ensure text/icon elements have no background */
+.notebook-leaf a.project-repo-btn:hover span,
+.notebook-leaf a.project-repo-btn:hover svg,
+.notebook-leaf a.project-repo-btn:hover .icon {
+  background: transparent !important;
+}
+
+.notebook-leaf .project-repo-btn:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+/* Light theme override for project repo button hover */
+/* Light theme: default border uses --paper-accent (blue), on hover background+border become blue */
+.lightmode .notebook-leaf .project-repo-btn {
+  border-color: var(--paper-accent);
+}
+
+.lightmode .notebook-leaf a.project-repo-btn:hover {
+  background: var(--paper-accent);
+  border-color: var(--paper-accent);
+}
+
+/* Text and icon color only (transparent background) */
+.lightmode .notebook-leaf a.project-repo-btn:hover,
+.lightmode .notebook-leaf a.project-repo-btn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+/* Explicitly ensure text/icon elements have no background */
+.lightmode .notebook-leaf a.project-repo-btn:hover span,
+.lightmode .notebook-leaf a.project-repo-btn:hover svg,
+.lightmode .notebook-leaf a.project-repo-btn:hover .icon {
+  background: transparent !important;
+}
+
+/* ----- Project Deploy Button ----- */
+
+.notebook-leaf .project-deploy-btn {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  /* Dark theme: border always orange */
+  border-color: var(--notebook-highlight-color);
+  margin-top: 0.7rem;
+}
+
+/* Higher specificity to override .page-action:hover */
+/* Dark theme: button background becomes orange on hover, border stays orange */
+.notebook-leaf a.project-deploy-btn:hover {
+  background: var(--notebook-highlight-color);
+  border-color: var(--notebook-highlight-color);
+}
+
+/* Text and icon color only (transparent background) */
+.notebook-leaf a.project-deploy-btn:hover,
+.notebook-leaf a.project-deploy-btn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+/* Explicitly ensure text/icon elements have no background */
+.notebook-leaf a.project-deploy-btn:hover span,
+.notebook-leaf a.project-deploy-btn:hover svg,
+.notebook-leaf a.project-deploy-btn:hover .icon {
+  background: transparent !important;
+}
+
+.notebook-leaf .project-deploy-btn:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+/* Light theme override for project deploy button hover */
+/* Light theme: default border uses --paper-accent (blue), on hover background+border become blue */
+.lightmode .notebook-leaf .project-deploy-btn {
+  border-color: var(--paper-accent);
+}
+
+.lightmode .notebook-leaf a.project-deploy-btn:hover {
+  background: var(--paper-accent);
+  border-color: var(--paper-accent);
+}
+
+/* Text and icon color only (transparent background) */
+.lightmode .notebook-leaf a.project-deploy-btn:hover,
+.lightmode .notebook-leaf a.project-deploy-btn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+/* Explicitly ensure text/icon elements have no background */
+.lightmode .notebook-leaf a.project-deploy-btn:hover span,
+.lightmode .notebook-leaf a.project-deploy-btn:hover svg,
+.lightmode .notebook-leaf a.project-deploy-btn:hover .icon {
+  background: transparent !important;
+}
+
 .notebook-leaf .page-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1596,31 +1623,26 @@ header {
   margin-top: 0.7rem;
 }
 
-/* ----- Chips ----- */
-
 .notebook-leaf .page-chip {
   display: inline-flex;
   max-width: 100%;
-  padding: 0.18rem 0.4rem;
+  padding: 0.16rem 0.35rem;
   border: 1px solid var(--page-ink);
   border-radius: 0;
   background: var(--paper-bg);
   color: var(--page-ink);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-size: 0.52rem;
+  font-size: 0.5rem;
   overflow-wrap: anywhere;
 }
 
 .notebook-leaf .page-field > .field-value .page-chip {
-  margin: 0.2rem 0.25rem 0.1rem 0;
+  margin: 0 0.25rem 0.2rem 0;
 }
 
 .notebook-leaf .page-field:last-child .page-chip:last-child {
   margin-bottom: 0;
 }
-
-/* ----- Outros ----- */
 
 .notebook-leaf .course-body,
 .notebook-leaf .academic-project-body {
@@ -1637,12 +1659,31 @@ header {
   min-width: 0;
 }
 
-/* Seções separadas por espaço, não por linhas */
+/* Generic content sections keep the same rhythm as `h3.page-label`. */
 .notebook-leaf .notebook-content-section + .notebook-content-section {
-  margin-top: 0.9rem;
+  margin-top: 0.55rem;
 }
 
-/* Ancora a ação de deploy à folha da demo */
+.notebook-leaf .positions-list .position-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.notebook-leaf .list-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.notebook-leaf .list-detail {
+  color: var(--paper-muted);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+}
+
+/* Anchors the deploy action to the demo leaf, like the old right page. */
 .notebook-leaf .project-demo-block {
   position: relative;
   min-height: 100%;
