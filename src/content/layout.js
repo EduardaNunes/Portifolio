@@ -20,11 +20,11 @@ export const notebookLayout = {
     pages: [
       {
         left: { sections: [{ section: 'about-me-text' }] },
-        right: { sections: [{ section: 'skills' }] },
+        right: { sections: [{ section: 'skills' }, { section: 'languages' }] },
       },
       {
-        left: { sections: [{ section: 'languages' }] },
-        right: { sections: [{ section: 'hobbies' }] },
+        left: { sections: [{ section: 'hobbies' }] },
+        right: { sections: [] },
       },
     ],
   },
@@ -37,11 +37,7 @@ export const notebookLayout = {
       {
         left: { sections: [{ section: 'timeline', items: [2, 3] }] },
         right: { sections: [{ section: 'timeline', items: [3, 4] }] },
-      },
-      {
-        left: { sections: [{ section: 'timeline', items: [4] }] },
-        right: null,
-      },
+      }
     ],
   },
   studies: {

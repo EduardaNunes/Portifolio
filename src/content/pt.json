@@ -27,7 +27,7 @@
           {
             "type": "blocks",
             "name": "Frameworks e Ferramentas",
-            "items": ["Git", "Github", "React", "React Native", "Supabase", "REST APIs", "Expo Go", "Godot", "Unity"]
+            "items": ["React", "React Native", "Supabase", "REST APIs", "Expo Go", "NodeJS", "Git", "Github", "Godot", "Unity"]
           },
           {
             "type": "blocks",
@@ -42,7 +42,7 @@
         "content": [
           {
             "type": "list",
-            "items": ["Inglês – Avançado", "Espanhol – Iniciante"]
+            "items": ["Português - Nativo", "Inglês – Avançado", "Espanhol – Iniciante"]
           }
         ]
       },
@@ -54,6 +54,11 @@
             "type": "text",
             "title": "Desenvolvimento de Jogos",
             "text": "No meu tempo livre, você vai me encontrar experimentando tecnologia simplesmente pelo prazer de criar. Seja modelando assets, programando jogos na Godot ou participando de Game Jams, me empolgo com o aprendizado prático e a troca colaborativa de ideias."
+          },
+          {
+            "type": "text",
+            "title": "Impressão 3D - Creati Lab",
+            "text": "Criada a partir da minha paixão por transformar ideias em realidade. Adoro conectar os mundos digital e físico, cuidando de tudo desde a curadoria de modelos 3D e calibração da impressora à criação de peças personalizadas que levam exclusividade e solução aos clientes."
           }
         ]
       }
@@ -96,11 +101,6 @@
                 "fromDate": "2025",
                 "toDate": "",
                 "description": "Desde o meu ingresso na faculdade identifiquei a busca por moradias voltadas a estudantes como um problema real e iniciei a elaboração de uma solução. Com isso surgiu o Republikei, um aplicativo mobile que está sendo desenvolvido em React Native com a proposta de centralizar a busca e divulgação de moradias estudantis, trazendo mais padronização e segurança para estudantes e locadores."
-              },
-              {
-                "position": "Impressão 3D",
-                "company": "Creati Lab",
-                "description": "Criada a partir da minha paixão por transformar ideias em realidade. Adoro conectar os mundos digital e físico, cuidando de tudo desde a curadoria de modelos 3D e calibração da impressora à criação de peças personalizadas que levam exclusividade e solução aos clientes."
               }
             ]
           }
