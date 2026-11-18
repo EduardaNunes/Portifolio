@@ -6,9 +6,9 @@ The institution name "Universidade Federal de Juiz de Fora - UFJF" is too long a
 
 ## What Changes
 
-- Modify the CSS `.position-meta` flex container to allocate 80% width to the company name and 20% width to the dates
+- Modify the CSS `.position-meta` flex container to allocate 65% width to the company name and 35% width to the dates
 - Add `overflow-wrap: anywhere` and appropriate width constraints to ensure text wrapping when content exceeds the allocated space
-- Ensure the `.position-company` and `.position-dates` elements respect the 80/20 width split and wrap gracefully on narrow screens
+- Ensure the `.position-company` and `.position-dates` elements respect the 65/35 width split and wrap gracefully on narrow screens, without vertical gap when stacked. Padding removed from `.position-meta` to eliminate white spaces.
 
 ## Capabilities
 
