@@ -1334,7 +1334,7 @@ header {
 }
 
 /* ---------- Paper-like page text presentation (page-* vocabulary) ---------- */
-/* Less frames, more lines: the text rests on dotted rules like a real pad. */
+/* Foco em leitura: texto em caixa normal, poucos separadores, mais respiro. */
 
 .notebook-leaf .page-title {
   margin: 0 0 0.9rem;
@@ -1349,7 +1349,7 @@ header {
 }
 
 .notebook-leaf .page-label {
-  margin: 0.9rem 0 0.5rem;
+  margin: 1rem 0 0.6rem;
   padding: 0;
   border: 0;
   background: none;
@@ -1372,20 +1372,23 @@ header {
     linear-gradient(var(--page-line), var(--page-line)) 25% 2px / 50% 2px no-repeat;
 }
 
+/* ----- Campos (label: valor) ----- */
+
 .notebook-leaf .page-field {
   display: block;
   margin: 0;
-  padding: 0.3rem 0 0.3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: var(--page-ink);
-  background:
-    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
-    left bottom / 100% 1px no-repeat;
+  padding: 0.25rem 0;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--paper-text);
+  background: none;
 }
 
 .notebook-leaf .page-field > .field-label {
   color: var(--page-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85em;
 }
 
 .notebook-leaf .page-field > .field-label::after {
@@ -1394,7 +1397,7 @@ header {
 }
 
 .notebook-leaf .page-field > .field-value {
-  color: var(--page-ink);
+  color: var(--paper-text);
   overflow-wrap: anywhere;
 }
 
@@ -1409,27 +1412,61 @@ header {
   min-width: 0;
 }
 
+/* ----- Cargos / formação ----- */
+
+.notebook-leaf .positions-list .position-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--paper-border);
+}
+
+.notebook-leaf .positions-list .position-item:first-child {
+  padding-top: 0.2rem;
+}
+
+.notebook-leaf .positions-list .position-item:last-child {
+  border-bottom: 0;
+}
+
+.notebook-leaf .position-item > .page-field:first-child .field-value {
+  color: var(--page-ink);
+}
+
+.notebook-leaf .position-item .page-field-pair .field-value {
+  color: var(--paper-muted);
+  font-size: 0.92em;
+}
+
+.notebook-leaf .position-desc {
+  margin: 0.15rem 0 0;
+  line-height: 1.6;
+  color: var(--paper-text);
+}
+
+/* ----- Listas ----- */
+
 .notebook-leaf .page-list {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 0.15rem;
 }
 
 .notebook-leaf .page-list-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  padding: 0.35rem 0;
-  background:
-    repeating-linear-gradient(to right, var(--page-line) 0 2px, transparent 2px 4px)
-    left bottom / 100% 1px no-repeat;
+  gap: 0.55rem;
+  padding: 0.3rem 0;
+  background: none;
+  color: var(--paper-text);
 }
 
 .notebook-leaf .page-marker {
   flex: none;
   width: 0.65rem;
   height: 0.65rem;
-  margin-top: 0.15em;
+  margin-top: 0.2em;
   border: 2px solid var(--page-ink);
   border-radius: 50%;
   background: transparent;
@@ -1437,17 +1474,33 @@ header {
 
 .notebook-leaf .page-marker.is-done {
   background: var(--page-ink);
-  /* "check" by inner ring, no new color */
+  /* "check" por anel interno, sem cor nova */
   box-shadow: inset 0 0 0 2px var(--paper-bg);
 }
+
+.notebook-leaf .list-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.notebook-leaf .list-detail {
+  color: var(--paper-muted);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+}
+
+/* ----- Caixa de texto: borda escalonada, sem linhas internas ----- */
 
 .notebook-leaf .page-note {
   --note-step: 3px;
   position: relative;
   margin: 0.6rem 0;
-  padding: 0.32rem 0.6rem;
+  padding: 0.5rem 0.65rem;
   border: 1px solid var(--page-ink);
-  line-height: 1.6;
+  line-height: 1.65;
+  background: none;
   clip-path: polygon(
     var(--note-step) 0,
     calc(100% - var(--note-step)) 0,
@@ -1462,27 +1515,23 @@ header {
     0 var(--note-step),
     var(--note-step) var(--note-step)
   );
-  /* Internal pad: each text line rests on a dotted rule. The 1.6em stop
-     MUST stay equal to this box's line-height (1.6). */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0 calc(1.6em - 1px),
-    var(--page-line) calc(1.6em - 1px) 1.6em
-  );
-  background-origin: content-box;
 }
 
 .notebook-leaf .page-note > .note-title {
   display: block;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   color: var(--page-ink);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85em;
 }
 
 .notebook-leaf .page-note > p {
   margin: 0;
   color: var(--paper-text);
 }
+
+/* ----- Ações ----- */
 
 .notebook-leaf .page-action {
   display: inline-flex;
@@ -1518,26 +1567,31 @@ header {
   margin-top: 0.7rem;
 }
 
+/* ----- Chips ----- */
+
 .notebook-leaf .page-chip {
   display: inline-flex;
   max-width: 100%;
-  padding: 0.16rem 0.35rem;
+  padding: 0.18rem 0.4rem;
   border: 1px solid var(--page-ink);
   border-radius: 0;
   background: var(--paper-bg);
   color: var(--page-ink);
   text-transform: uppercase;
-  font-size: 0.5rem;
+  letter-spacing: 0.03em;
+  font-size: 0.52rem;
   overflow-wrap: anywhere;
 }
 
 .notebook-leaf .page-field > .field-value .page-chip {
-  margin: 0 0.25rem 0.2rem 0;
+  margin: 0.2rem 0.25rem 0.1rem 0;
 }
 
 .notebook-leaf .page-field:last-child .page-chip:last-child {
   margin-bottom: 0;
 }
+
+/* ----- Outros ----- */
 
 .notebook-leaf .course-body,
 .notebook-leaf .academic-project-body {
@@ -1554,31 +1608,12 @@ header {
   min-width: 0;
 }
 
-/* Generic content sections keep the same rhythm as `h3.page-label`. */
+/* Seções separadas por espaço, não por linhas */
 .notebook-leaf .notebook-content-section + .notebook-content-section {
-  margin-top: 0.55rem;
+  margin-top: 0.9rem;
 }
 
-.notebook-leaf .positions-list .position-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.notebook-leaf .list-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.08rem;
-  min-width: 0;
-}
-
-.notebook-leaf .list-detail {
-  color: var(--paper-muted);
-  font-size: 0.92em;
-  overflow-wrap: anywhere;
-}
-
-/* Anchors the deploy action to the demo leaf, like the old right page. */
+/* Ancora a ação de deploy à folha da demo */
 .notebook-leaf .project-demo-block {
   position: relative;
   min-height: 100%;
