@@ -1,0 +1,105 @@
+.projectDemoBlock {
+  position: relative;
+  min-height: 100%;
+  padding-top: 1.7rem;
+}
+
+.demoShowcaseSection {
+  position: relative;
+  max-width: 100%;
+  margin: 0.55rem 0;
+  padding: 0.45rem;
+  box-sizing: border-box;
+}
+
+.videoDemoEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.videoDemoEntry:last-child {
+  margin-bottom: 0;
+}
+
+.videoDemoEntry .thumbnailContainer {
+  flex-shrink: 0;
+}
+
+.projectDeployBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 1.9rem;
+  padding: 0.25rem 0.6rem;
+  border: 2px solid var(--notebook-highlight-color);
+  border-radius: 0;
+  background: var(--paper-bg);
+  color: var(--notebook-highlight-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.7rem;
+}
+
+.projectDeployBtn:hover {
+  background: var(--notebook-highlight-color);
+  border-color: var(--notebook-highlight-color);
+}
+
+.projectDeployBtn:hover,
+.projectDeployBtn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+.projectDeployBtn:hover span,
+.projectDeployBtn:hover svg,
+.projectDeployBtn:hover .icon {
+  background: transparent !important;
+}
+
+.projectDeployBtn:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+.lightmode .projectDeployBtn {
+  border-color: var(--paper-accent);
+}
+
+.lightmode .projectDeployBtn:hover {
+  background: var(--paper-accent);
+  border-color: var(--paper-accent);
+}
+
+.lightmode .projectDeployBtn:hover,
+.lightmode .projectDeployBtn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+.lightmode .projectDeployBtn:hover span,
+.lightmode .projectDeployBtn:hover svg,
+.lightmode .projectDeployBtn:hover .icon {
+  background: transparent !important;
+}
+
+.thumbnailCaption {
+  margin-top: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--page-ink-soft);
+}
+
+.noThumbnailPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--paper-muted);
+}

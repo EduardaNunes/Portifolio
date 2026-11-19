@@ -1,0 +1,71 @@
+.pageNote {
+  --note-step: 3px;
+  position: relative;
+  margin: 0.6rem 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--page-ink);
+  line-height: 1.65;
+  background: none;
+  clip-path: polygon(
+    var(--note-step) 0,
+    calc(100% - var(--note-step)) 0,
+    calc(100% - var(--note-step)) var(--note-step),
+    100% var(--note-step),
+    100% calc(100% - var(--note-step)),
+    calc(100% - var(--note-step)) calc(100% - var(--note-step)),
+    calc(100% - var(--note-step)) 100%,
+    var(--note-step) 100%,
+    var(--note-step) calc(100% - var(--note-step)),
+    0 calc(100% - var(--note-step)),
+    0 var(--note-step),
+    var(--note-step) var(--note-step)
+  );
+}
+
+.noteTitle {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--page-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85em;
+}
+
+.pageNote > p {
+  margin: 0;
+  color: var(--paper-text);
+}
+
+.pageActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.pageAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 1.9rem;
+  padding: 0.25rem 0.6rem;
+  border: 2px solid var(--page-ink);
+  border-radius: 0;
+  background: var(--paper-bg);
+  color: var(--page-ink);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.pageAction:hover {
+  background: var(--page-ink);
+  color: var(--paper-bg);
+}
+
+.pageAction:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}

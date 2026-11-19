@@ -1,0 +1,48 @@
+.pageField {
+  display: block;
+  margin: 0;
+  padding: 0.25rem 0;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--paper-text);
+  background: none;
+}
+
+.fieldLabel {
+  color: var(--page-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85em;
+}
+
+.fieldLabel::after {
+  content: ':';
+  margin-right: 0.35em;
+}
+
+.fieldValue {
+  color: var(--paper-text);
+  overflow-wrap: anywhere;
+}
+
+.pageChip {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 0.18rem 0.4rem;
+  border: 1px solid var(--page-ink);
+  border-radius: 0;
+  background: var(--paper-bg);
+  color: var(--page-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.52rem;
+  overflow-wrap: anywhere;
+}
+
+.fieldValue .pageChip {
+  margin: 0.2rem 0.25rem 0.1rem 0;
+}
+
+.fieldValue .pageChip:last-child {
+  margin-bottom: 0;
+}

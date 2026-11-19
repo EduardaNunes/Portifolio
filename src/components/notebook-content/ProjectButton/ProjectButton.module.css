@@ -1,0 +1,58 @@
+.repoBtn {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  /* Dark theme: border always orange */
+  border-color: var(--notebook-highlight-color);
+}
+
+/* Higher specificity to override .page-action:hover */
+/* Dark theme: button background becomes orange on hover, border stays orange */
+.repoBtn:hover {
+  background: var(--notebook-highlight-color);
+  border-color: var(--notebook-highlight-color);
+}
+
+/* Text and icon color only (transparent background) */
+.repoBtn:hover,
+.repoBtn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+/* Explicitly ensure text/icon elements have no background */
+.repoBtn:hover span,
+.repoBtn:hover svg,
+.repoBtn:hover .icon {
+  background: transparent !important;
+}
+
+.repoBtn:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+/* Light theme override for project repo button hover */
+/* Light theme: default border uses --paper-accent (blue), on hover background+border become blue */
+.lightmode .repoBtn {
+  border-color: var(--paper-accent);
+}
+
+.lightmode .repoBtn:hover {
+  background: var(--paper-accent);
+  border-color: var(--paper-accent);
+}
+
+/* Text and icon color only (transparent background) */
+.lightmode .repoBtn:hover,
+.lightmode .repoBtn:hover * {
+  color: var(--paper-bg) !important;
+  fill: var(--paper-bg) !important;
+}
+
+/* Explicitly ensure text/icon elements have no background */
+.lightmode .repoBtn:hover span,
+.lightmode .repoBtn:hover svg,
+.lightmode .repoBtn:hover .icon {
+  background: transparent !important;
+}

@@ -1,0 +1,37 @@
+.emailBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contactEmail {
+  word-break: break-word;
+}
+
+.contactActions {
+  margin-top: 0.9rem;
+}
+
+.contactBtn {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--paper-accent);
+  border-radius: 999px;
+  color: var(--paper-accent);
+  text-decoration: none;
+}
+
+.contactBtn:hover {
+  background: var(--paper-accent);
+  color: var(--paper-bg);
+}
+
+.contactBtn:focus-visible {
+  outline: 2px solid var(--paper-text);
+  outline-offset: 2px;
+}
+
+.fieldValue {
+  color: var(--paper-text);
+  overflow-wrap: anywhere;
+}
