@@ -217,11 +217,20 @@
         ],
         "demo": {
           "type": "projectDemo",
-          "images": [
+          "videoDemos": [
             {
-              "src": "/images/projects/portfolio-web.svg",
+              "src": "/Videos/Portfolio.mp4",
               "alt": "Portfólio demo",
-              "caption": "Portfólio"
+              "caption": "Portfólio",
+              "deployLink": "https://eduardanunes.github.io/Portifolio/",
+              "buttonLabel": "Ver Projeto"
+            },
+            {
+              "src": "/images/openspec.jpg",
+              "alt": "framework",
+              "caption": "Framework",
+              "deployLink": "https://openspec.dev",
+              "buttonLabel": "Conhecer Framework"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/Portifolio"
@@ -323,9 +332,14 @@
           "type": "projectDemo",
           "videoDemos": [
             {
-              "src": "/Videos/MageBattle.mp4",
+              "src": "/Videos/MageBattleAir.mp4",
               "alt": "Mage Battle demo",
-              "caption": "Mage Battle"
+              "caption": "Air Mode"
+            },
+            {
+              "src": "/Videos/MageBattleWater.mp4",
+              "alt": "Mage Battle demo",
+              "caption": "Water Mode"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/Godot-Air-Sea-Battle-Atari-Clone"
@@ -365,6 +379,11 @@
           "videoDemos": [
             {
               "src": "/Videos/SnowBattle.mp4",
+              "alt": "Snow Battle demo",
+              "caption": "Snow Battle"
+            },
+            {
+              "src": "/Videos/SnowBattleSolo.mp4",
               "alt": "Snow Battle demo",
               "caption": "Snow Battle"
             }
