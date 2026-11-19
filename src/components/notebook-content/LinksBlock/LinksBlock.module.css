@@ -1,0 +1,45 @@
+.socialLinksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.socialLinkRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.3rem 0;
+  background: none;
+  color: var(--paper-text);
+}
+
+.socialLinkField {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.fieldLabel {
+  color: var(--page-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85em;
+}
+
+.fieldLabel::after {
+  content: ':';
+  margin-right: 0.35em;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
