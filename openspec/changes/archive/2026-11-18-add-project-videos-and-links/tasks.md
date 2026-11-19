@@ -14,13 +14,13 @@
 
 ## 3. Content Population - Portuguese (pt.json)
 
-- [x] 3.1 Update ProgramADA project (`proj-programada`) in `pt.json`: replace `demo.images` with `demo.videoDemos` containing two entries: (1) Sala de Aula video + deploy link, (2) Minigame Café video + deploy link. Keep `repoLink` for GitHub. Verify by checking JSON structure.
+- [x] 3.1 Update ProgramADA project (`proj-programada`) in `pt.json`: replace `demo.images` with `demo.videoDemos` containing two entries: (1) Sala de Aula video + deploy link, (2) MiniGame Cafe video + deploy link. Keep `repoLink` for GitHub. Verify by checking JSON structure.
 - [x] 3.2 Update Mage Battle project (`proj-air-sea-battle`) in `pt.json`: add `demo.videoDemos` with one entry (MageBattle.mp4), add `repoLink` (https://github.com/EduardaNunes/Godot-Air-Sea-Battle-Atari-Clone). Verify.
 - [x] 3.3 Update Snow Battle project (`proj-snow-battle`) in `pt.json`: add `demo.videoDemos` with one entry (SnowBattle.mp4), add `repoLink` (https://github.com/EduardaNunes/Godot-2D-Multiplayer). Verify.
 - [x] 3.4 Update Pixel Paint project (`proj-pixel-paint`) in `pt.json`: add `demo.videoDemos` with one entry (PixelPaint.mp4), add `deployLink` (https://eduardanunes.github.io/Pixel-Paint/), keep existing `repoLink`. Verify.
 - [x] 3.5 Update Esbugalhado project (`proj-esbugalhado`) in `pt.json`: add `demo.videoDemos` with one entry (Esbugalhado.mp4), add `deployLink` (https://eduardanunes.github.io/esbugalhado-o-jogo/), keep existing `repoLink`. Verify.
 - [x] 3.6 Update React Tic Tac Toe project (`proj-react-tic-tac-toe`) in `pt.json`: add `demo.videoDemos` with one entry (TicTacToe.mp4), add `repoLink` (https://github.com/EduardaNunes/React-Tic-Tac-Toe), add `deployLink` (https://eduardanunes.github.io/React-Tic-Tac-Toe/). Verify.
-- [x] 3.7 Update Bubble Trouble project (`proj-bubble-trouble`) in `pt.json`: add `repoLink` (no video file available), keep empty `images` array for backward compatibility. Verify.
+- [x] 3.7 Update Bubble Trouble project (`proj-bubble-trouble`) in `pt.json`: add `repoLink` (no video file available). Verify.
 - [x] 3.8 Verify all `pt.json` project entries have consistent structure and validation passes.
 
 ## 4. Content Population - English (eng.json)
@@ -31,14 +31,14 @@
 - [x] 4.4 Update Pixel Paint project (`proj-pixel-paint`) in `eng.json` with `videoDemos`, `deployLink`, `repoLink`. Verify.
 - [x] 4.5 Update Esbugalhado project (`proj-esbugalhado`) in `eng.json` with `videoDemos`, `deployLink`, `repoLink`. Verify.
 - [x] 4.6 Update React Tic Tac Toe project (`proj-react-tic-tac-toe`) in `eng.json` with `videoDemos`, `repoLink`, `deployLink`. Verify.
-- [x] 4.7 Update Bubble Trouble project (`proj-bubble-trouble`) in `eng.json` with `repoLink`, keep empty `images` array for backward compatibility. Verify.
+- [x] 4.7 Update Bubble Trouble project (`proj-bubble-trouble`) in `eng.json` with `repoLink`. Verify.
 - [x] 4.8 Verify all `eng.json` project entries have consistent structure and validation passes.
 
 ## 5. Verification & Integration Testing
 
-- [x] 5.1 Run content validation script (`npm run validate:content`) and confirm zero errors. Verify validation passes.
+- [x] 5.1 Run content validation script (`npm run validate` or equivalent) and confirm zero errors. Verify validation passes.
 - [x] 5.2 Build passes (`npm run build`) and validation passes - confirms all content structure is correct.
-- [x] 5.3 ProgramADA project has `videoDemos` array with two entries in correct vertical order (Sala de Aula → Minigame Café) each with deploy links.
+- [x] 5.3 ProgramADA project has `videoDemos` array with two entries in correct vertical order (Sala de Aula → MiniGame Cafe) each with deploy links.
 - [x] 5.4 Both pt.json and eng.json have identical structure with localized captions/alt text.
 - [x] 5.5 No regressions in other sections (validated by content validation passing for all markers).
 
@@ -50,5 +50,5 @@
 
 ## Workflow follow-up
 
-- [ ] Archive the change after implementation is complete and verified.
-- [ ] Verify the archived result.
+- Archive the change after implementation is complete and verified.
+- Verify the archived result.
