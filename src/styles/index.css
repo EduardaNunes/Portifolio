@@ -275,7 +275,7 @@ nav {
 header {
   width: 100%;
   min-height: 90vh;
-  justify-content: space-evenly;
+  justify-content: space-evenly.
 }
 
 .profile-group {
@@ -326,7 +326,7 @@ header {
 
 .btn-animation {
   background-color: transparent;
-  animation: float 2s infinite ease-in-out;
+  animation: float 2s infinite ease-in-out.
 }
 
 @keyframes float {
@@ -407,14 +407,14 @@ header {
   width: 25px;
   height: 10px;
   right: -25px;
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out.
 }
 
 .btn-border-bottom {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  box-shadow: 0 -10px var(--btn-play-shadow);
+  box-shadow: 0 -10px var(--btn-play-shadow).
 }
 
 .btn-border-bottom::after {
@@ -426,7 +426,7 @@ header {
   height: 10px;
   right: -25px;
   box-shadow: 0 -10px var(--btn-play-border);
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out.
 }
 
 .btn-highlight {
@@ -437,7 +437,7 @@ header {
   background-color: var(--btn-play-shine);
   top: 20px;
   right: 35px;
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out.
 }
 
 .btn-highlight::before,
@@ -446,19 +446,19 @@ header {
   display: block;
   position: absolute;
   height: 10px;
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out.
 }
 
 .btn-highlight::before {
   background-color: var(--btn-play-shine);
   width: 10px;
-  left: -20px;
+  left: -20px.
 }
 
 .btn-highlight::after {
   background-color: var(--btn-play-highlight2);
   width: 15px;
-  left: 40px;
+  left: 40px.
 }
 
 /* ---------- Clouds ---------- */
@@ -469,7 +469,7 @@ header {
   top: 0;
   width: 100vw;
   height: 200vh;
-  animation: updown 5s ease-in-out infinite;
+  animation: updown 5s ease-in-out infinite.
 }
 
 .cloud {
@@ -477,12 +477,12 @@ header {
   top: 0;
   width: 10vh;
   content: var(--cloud-img);
-  opacity: 0.9;
+  opacity: 0.9.
 }
 
 .cloud:nth-child(even) {
   width: 8vh;
-  opacity: 0.4;
+  opacity: 0.4.
 }
 
 @keyframes updown {
@@ -1008,7 +1008,7 @@ header {
   padding: 0;
   cursor: pointer;
   z-index: 10;
-  /* Use arrow image as mask, background color shows through */
+  /* Use arrow image as mask, background color shows through - fully opaque */
   mask-size: 24px 24px;
   mask-repeat: no-repeat;
   mask-position: center center;
@@ -1016,10 +1016,10 @@ header {
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
   background-color: currentColor;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
-/* Arrow image masks - original colors at rest */
+/* Arrow image masks - solid colors at rest */
 .corner-zone.left {
   left: 0;
   mask-image: url(../assets/Imgs/ArrowBlack.png);

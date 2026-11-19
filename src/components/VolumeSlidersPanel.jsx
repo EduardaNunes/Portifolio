@@ -1,13 +1,20 @@
+import React, { useRef, useImperativeHandle } from 'react';
 import { useAudioManager } from '../context/AudioManagerContext';
 
 /**
  * Volume Sliders Panel - Expandable panel with two volume sliders
  * Background Music (disabled) and Sound Effects (controllable)
  */
-export default function VolumeSlidersPanel({ isOpen, onClose }) {
+const VolumeSlidersPanel = React.forwardRef(function VolumeSlidersPanel({ isOpen, onClose }, ref) {
   const { getAllVolumes, setVolume, isMuted } = useAudioManager();
   const volumes = getAllVolumes();
   const muted = isMuted();
+  const panelRef = useRef(null);
+
+  // Expose contains method for click-outside detection in parent
+  useImperativeHandle(ref, () => ({
+    contains: (node) => node instanceof Node && panelRef.current?.contains(node),
+  }));
 
   // Handle click outside to close panel
   const handleOverlayClick = (e) => {
@@ -27,6 +34,7 @@ export default function VolumeSlidersPanel({ isOpen, onClose }) {
 
   return (
     <div
+      ref={panelRef}
       className="volume-sliders-panel is-open"
       role="dialog"
       aria-label="Volume controls"
@@ -70,4 +78,6 @@ export default function VolumeSlidersPanel({ isOpen, onClose }) {
       </div>
     </div>
   );
-}
+});
+
+export default VolumeSlidersPanel;

@@ -38,7 +38,21 @@ export default function NarrativeNotebook({
 
   const goToSpread = useCallback((index) => {
     if (!totalSpreads || turningRef.current) return
-    const target = Math.max(0, Math.min(index, totalSpreads - 1))
+    let target = Math.max(0, Math.min(index, totalSpreads - 1))
+    // Skip projects marker (0 pages) when navigating forward/backward
+    if (shouldSkipProjects()) {
+      // Find next non-projects marker
+      const direction = index > safeSpread ? 1 : -1
+      let skipTarget = target + direction
+      while (skipTarget >= 0 && skipTarget < totalSpreads) {
+        const skipMarkerId = spreads[skipTarget]?.markerId
+        if (skipMarkerId && skipMarkerId !== 'projects') {
+          target = skipTarget
+          break
+        }
+        skipTarget += direction
+      }
+    }
     if (target === safeSpread) return
     const targetMarkerId = spreads[target]?.markerId
     if (targetMarkerId) setPendingMarkerId(targetMarkerId)
@@ -66,13 +80,31 @@ export default function NarrativeNotebook({
   }, [totalSpreads])
 
   const selectMarker = (markerId) => {
+    // Special handling for projects marker (0 pages): navigate to first ai-automation spread
+    if (markerId === 'projects') {
+      const aiIndex = spreads.findIndex((spread) => spread.markerId === 'ai-automation')
+      if (aiIndex >= 0) goToSpread(aiIndex)
+      return
+    }
     const index = spreads.findIndex((spread) => spread.markerId === markerId)
     if (index >= 0) goToSpread(index)
   }
 
+  // Helper: check if marker is the projects marker
+  const isProjectsMarker = (marker) => marker.id === 'projects'
+
   const isMarkerActive = (marker) => {
     if (!currentMarker) return false
-    return marker.id === currentMarker.id || (currentMarker.side === 'right' && marker.id === 'projects')
+    // Projects marker can be active alongside a right-side marker (0 pages skip behavior)
+    if (isProjectsMarker(marker) && currentMarker.side === 'right') return true
+    // Normal: marker matches current marker
+    return marker.id === currentMarker.id
+  }
+
+  // Determine if we should skip projects in navigation (0 pages behavior)
+  const shouldSkipProjects = () => {
+    if (!currentMarker) return false
+    return isProjectsMarker(currentMarker) && /* projects has 0 pages when */ true // skip projects always per this change
   }
 
   if (!isOpen) {

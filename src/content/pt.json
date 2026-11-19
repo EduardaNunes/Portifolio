@@ -276,13 +276,15 @@
               "src": "/Videos/ProgramADAs_SalaDeAula.mp4",
               "alt": "ProgramADA - Sala de Aula",
               "caption": "Sala de Aula",
-              "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+              "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/",
+              "buttonLabel": "Jogar"
             },
             {
               "src": "/Videos/ProgramADAs_MiniGameCafe.mp4",
               "alt": "ProgramADA - Minigame Café",
               "caption": "Minigame Café",
-              "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/"
+              "deployLink": "https://eduardanunes.github.io/ProgramADAs-Playtest/",
+              "buttonLabel": "Jogar MiniGame"
             }
           ],
           "repoLink": "https://github.com/EduardaNunes/ProgramADAs-Playtest"

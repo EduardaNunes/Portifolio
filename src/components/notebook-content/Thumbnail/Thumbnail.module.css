@@ -30,6 +30,16 @@
   );
 }
 
+/* Hover color variables - use existing theme tokens */
+.frame {
+  /* Light theme: blue (--paper-accent = #145053) */
+  /* Dark theme: orange (--notebook-highlight-color = #d87f0b) */
+  /* Preview only: project black (#1a1917) */
+  --thumbnail-hover-deploy-light: var(--paper-accent);
+  --thumbnail-hover-deploy-dark: var(--notebook-highlight-color);
+  --thumbnail-hover-preview: #1a1917;
+}
+
 .frame video {
   width: 100%;
   height: 100%;
@@ -67,6 +77,95 @@
 .playText {
   color: #fff;
   font-size: 0.6rem;
+}
+
+/* Clickable frame wrapper */
+.clickableFrame {
+  display: block;
+  width: 100%;
+}
+
+/* Modifier for when deploy link exists */
+.clickableFrame.hasDeployLink {
+  /* This class is added via JSX when deployLink exists */
+}
+
+/* Hover overlay for deploy/preview - text only, no icon */
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.5rem;
+  /* Use clip-path to respect stepped corners */
+  clip-path: polygon(
+    var(--frame-step) 0,
+    calc(100% - var(--frame-step)) 0,
+    calc(100% - var(--frame-step)) var(--frame-step),
+    100% var(--frame-step),
+    100% calc(100% - var(--frame-step)),
+    calc(100% - var(--frame-step)) calc(100% - var(--frame-step)),
+    calc(100% - var(--frame-step)) 100%,
+    var(--frame-step) 100%,
+    var(--frame-step) calc(100% - var(--frame-step)),
+    0 calc(100% - var(--frame-step)),
+    0 var(--frame-step),
+    var(--frame-step) var(--frame-step)
+  );
+}
+
+.hoverText {
+  color: #fff;
+}
+
+/* Hover state - show overlay only (no scale) */
+.clickableFrame:hover .hoverOverlay,
+.clickableFrame:focus-visible .hoverOverlay {
+  opacity: 1;
+}
+
+/* Deploy link hover colors - using modifier class */
+.clickableFrame.hasDeployLink:hover .hoverOverlay,
+.clickableFrame.hasDeployLink:focus-visible .hoverOverlay {
+  /* Default (dark theme): orange with 70% opacity */
+  background: color-mix(in srgb, var(--thumbnail-hover-deploy-dark) 70%, transparent);
+}
+
+/* Light theme override for deploy link */
+:global(.lightmode) .clickableFrame.hasDeployLink:hover .hoverOverlay,
+:global(.lightmode) .clickableFrame.hasDeployLink:focus-visible .hoverOverlay {
+  /* Light theme: blue with 70% opacity */
+  background: color-mix(in srgb, var(--thumbnail-hover-deploy-light) 70%, transparent);
+}
+
+/* Preview only (no deploy link) - gray overlay, theme independent */
+.clickableFrame:not(.hasDeployLink):hover .hoverOverlay,
+.clickableFrame:not(.hasDeployLink):focus-visible .hoverOverlay {
+  background: color-mix(in srgb, var(--thumbnail-hover-preview) 70%, transparent);
+}
+
+/* Focus visible styles for keyboard navigation */
+.clickableFrame:focus-visible {
+  outline: none;
+}
+
+.clickableFrame:focus-visible .frame {
+  outline: 2px solid var(--h1-color);
+  outline-offset: 2px;
+}
+
+/* Active state for touch devices - no scale, just show overlay */
+.clickableFrame:active .hoverOverlay {
+  opacity: 1;
 }
 
 /* For video demo entries */

@@ -89,11 +89,54 @@ function resolveCategoryPairs(categoryId, categoryContent, categoryLayout, label
       })
     }
 
+    // Build deploy links for thumbnails (instead of deploy buttons on left page)
+    const deployLinks = []
+    if (project.demo?.videoDemos) {
+      project.demo.videoDemos.forEach((demo) => {
+        if (demo.deployLink) {
+          deployLinks.push({
+            deployLink: demo.deployLink,
+            deployHoverText: demo.buttonLabel ?? labels.viewDeploy ?? labels.deploy ?? 'Deploy',
+            caption: demo.caption,
+          })
+        } else {
+          // Video demo without deploy link - preview only
+          deployLinks.push({
+            deployLink: null,
+            deployHoverText: labels.previewOnly ?? 'Apenas Visualização :)',
+            caption: demo.caption,
+            isPreviewOnly: true,
+          })
+        }
+      })
+    } else if (project.demo?.deployLink) {
+      // Legacy single deployLink
+      deployLinks.push({
+        deployLink: project.demo.deployLink,
+        deployHoverText: labels.viewDeploy ?? labels.deploy ?? 'Deploy',
+        caption: project.demo.caption ?? project.title,
+      })
+    } else if (project.demo?.images?.length > 0) {
+      // Legacy images without deploy link - preview only
+      deployLinks.push({
+        deployLink: null,
+        deployHoverText: labels.previewOnly ?? 'Apenas Visualização :)',
+        caption: project.demo.caption ?? project.title,
+        isPreviewOnly: true,
+      })
+    }
+
+    // Attach deployLinks to demo object for ProjectDemoBlock
+    const demoWithDeploy = project.demo ? {
+      ...project.demo,
+      deployLinks,
+    } : undefined
+
     return {
       id: project.id,
       left: h(NotebookLeaf, { title: project.title, sections, labels }),
       right: h(NotebookLeaf, {
-        sections: [{ id: 'demo', content: [project.demo] }],
+        sections: [{ id: 'demo', content: [demoWithDeploy] }],
         labels,
       }),
     }
@@ -185,7 +228,8 @@ export function buildNotebookPages({
     }
 
     if (meta.kind === 'overview') {
-      marker.pagePairs = [overviewPair(content, registry, labels)]
+      // Projects marker has 0 pages - skips directly to next marker (ai-automation)
+      marker.pagePairs = []
     } else if (meta.kind === 'category') {
       const markerLayout = layout[meta.id]
       if (!markerLayout) throw new Error(`Layout is missing category marker "${meta.id}"`)
